@@ -1,0 +1,40 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+out/
+bin/
+target/
+
+# Java
+*.class
+*.jar
+!SOURCE/hw_proj/library-fa25/*.jar
+
+# Logs
+*.log
+
+# Temp
+*.tmp
+*.bak
+*.swp
+*~
+
+# Python (if any)
+__pycache__/
+*.pyc
+.venv/
+
+# Node
+node_modules/
+
+# Large binary data
+*.mp4
+*.mov
+*.zip
