@@ -1,0 +1,684 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="../../assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="../../assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    .site-nav > ul.nav-list:first-child > li > a,
+    
+    .site-nav > ul.nav-list:first-child > li > ul > li:not(:nth-child(7)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(5) > ul > li:nth-child(7) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(5) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(5) > ul > li:nth-child(7) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(5) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(5) > ul.nav-list > li.nav-list-item:nth-child(7) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="../../assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="../../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>HW07: Comparables, Comparators | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="HW07: Comparables, Comparators" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Structures at UC Berkeley" />
+<meta property="og:description" content="Data Structures at UC Berkeley" />
+<link rel="canonical" href="../hw07.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/homeworks/hw07/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="HW07: Comparables, Comparators" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Data Structures at UC Berkeley","headline":"HW07: Comparables, Comparators","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/homeworks/hw07/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="../../assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="../../assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="../../assets/katex/katex.min.css"
+>
+<script defer src="../../assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="../../assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="../hw07.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="../../index.html" class="site-title lh-tight">
+
+
+  <img src="../../assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="../../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="../../policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="../../policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="../../policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="../../policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="../../resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="../../resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="../../resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="../../resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="../../resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="../../resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="../../resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="../../resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="../../resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="../../resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="../../resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="../../resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="../../resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="../../staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="../hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="../hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="../hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="../hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="../hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="../hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="../hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="../hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="../hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="../hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="../../projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="../../projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="../../projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="../../proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="../../proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="../../proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="../../proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="../../proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../proj5/index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="../../proj5/landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="../../proj5/proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="../../proj5/proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="../../proj5/proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="../../proj5/ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="../../proj5/checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="../../proj5/bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="../../troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="../../troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="../hw07.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="../index.html">Homeworks</a></li>
+    <li class="breadcrumb-nav-list-item"><span>HW07: Comparables, Comparators</span></li>
+  </ol>
+</nav>
+
+
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item"><a href="../hw07.html#setup" class="nav-list-link">Setup</a></li><li class="nav-list-item"><a href="../hw07.html#task-1-comparable-stars" class="nav-list-link">Task 1: Comparable Stars</a><ul class="nav-list"><li class="nav-list-item"><a href="../hw07.html#star-comparable" class="nav-list-link">Star Comparable</a></li><li class="nav-list-item"><a href="../hw07.html#main" class="nav-list-link">Main</a></li></ul></li><li class="nav-list-item"><a href="../hw07.html#task-2-word-comparators" class="nav-list-link">Task 2: Word Comparators</a><ul class="nav-list"><li class="nav-list-item"><a href="../hw07.html#xcomparator" class="nav-list-link">xComparator</a></li><li class="nav-list-item"><a href="../hw07.html#charcomparator" class="nav-list-link">charComparator</a></li><li class="nav-list-item"><a href="../hw07.html#charlistcomparator" class="nav-list-link">charListComparator</a></li></ul></li><li class="nav-list-item"><a href="../hw07.html#task-3-word-finder" class="nav-list-link">Task 3: Word Finder</a><ul class="nav-list"><li class="nav-list-item"><a href="../hw07.html#findmax" class="nav-list-link">findMax</a></li><li class="nav-list-item"><a href="../hw07.html#moby-dick" class="nav-list-link">Moby Dick</a></li><li class="nav-list-item"><a href="../hw07.html#optional-ungraded" class="nav-list-link">Optional (ungraded)</a></li></ul></li><li class="nav-list-item"><a href="../hw07.html#submission" class="nav-list-link">Submission</a></li></ul>
+    </nav>
+  <div class="content">
+<h1 id="homework-7-comparables-comparators">
+  
+  
+    <a href="../hw07.html#homework-7-comparables-comparators" class="anchor-heading" aria-labelledby="homework-7-comparables-comparators"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Homework 7: Comparables, Comparators
+  
+  
+</h1>
+    
+
+<p><em>Lectures needed for this homework:</em> Lecture 10 (Comparators, Comparables), or <a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/10.-inheritance-ii-extends-casting-higher-order-functions/10.2-encapsulation">Chapter 10.2</a>.</p>
+
+<p>Reminder that you must follow the <a href="../../resources/style-guide.html">style guide</a>, and that you can check style yourself in IntelliJ as many times as you want.</p>
+<h2 id="setup">
+  
+  
+    <a href="../hw07.html#setup" class="anchor-heading" aria-labelledby="setup"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Setup
+  
+  
+</h2>
+    
+
+<p>Follow the <a href="../../resources/assignment-workflow/index.html">Assignment Workflow Guide</a> to get started with this assignment. This starter code is in the <code class="language-plaintext highlighter-rouge">hw07</code> folder.</p>
+
+<blockquote class="WARNING">
+  <p>Before starting this assignment, you should update your <code class="language-plaintext highlighter-rouge">library-fa25</code> folder. To do this:</p>
+  <ol>
+    <li>Open a terminal.</li>
+    <li>Navigate to your <code class="language-plaintext highlighter-rouge">library-fa25</code> folder. For example:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">cd</span> ~/Desktop/cs61b/library-fa25
+</code></pre></div>      </div>
+      <p>(Change the command if your folder is elsewhere.)</p>
+    </li>
+    <li>From the <code class="language-plaintext highlighter-rouge">library-fa25</code> folder, run:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git pull
+</code></pre></div>      </div>
+    </li>
+    <li>You should see a new file called <code class="language-plaintext highlighter-rouge">jsoup-1.21.2.jar</code> appear in your <code class="language-plaintext highlighter-rouge">library-fa25</code> folder.</li>
+  </ol>
+</blockquote>
+<h2 id="task-1-comparable-stars">
+  
+  
+    <a href="../hw07.html#task-1-comparable-stars" class="anchor-heading" aria-labelledby="task-1-comparable-stars"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 1: Comparable Stars
+  
+  
+</h2>
+    
+
+<p>The file <code class="language-plaintext highlighter-rouge">Star.java</code> reads in a list of all stars within 20 light years of earth. Try running it and you should see the first five stars in the file. For each star, the name, distance, mass, and apparent magnitude are given.</p>
+<h3 id="star-comparable">
+  
+  
+    <a href="../hw07.html#star-comparable" class="anchor-heading" aria-labelledby="star-comparable"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Star Comparable
+  
+  
+</h3>
+    
+
+<p>Stars should be comparable based on their mass. The mass of each star is given in units of solar mass, e.g. if <code class="language-plaintext highlighter-rouge">massMsun</code> is 2.5, then the mass of the star is 2.5 times that of the sun.</p>
+
+<blockquote class="TASK">
+  <p>Modify the <code class="language-plaintext highlighter-rouge">Star</code> class so that it is <code class="language-plaintext highlighter-rouge">Comparable</code> with other star objects.</p>
+
+  <p>Run <code class="language-plaintext highlighter-rouge">TestStar</code> to verify your <code class="language-plaintext highlighter-rouge">compareTo</code> method. You’ll need to uncomment the tests.</p>
+</blockquote>
+<h3 id="main">
+  
+  
+    <a href="../hw07.html#main" class="anchor-heading" aria-labelledby="main"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Main
+  
+  
+</h3>
+    
+
+<p class="TASK">Modify the main method so that only the star with the greatest mass is printed out.</p>
+
+<p>Use <code class="language-plaintext highlighter-rouge">Collections.max</code>. For an example, <a href="https://chatgpt.com/s/t_68d1a703c028819188b98597389fdb35">see this chat</a>.</p>
+
+<p>Your main method should print out the entire string for the star. For example, the string for the sun is <code class="language-plaintext highlighter-rouge">Star{name='Sun', distanceLy=0.000016, massMsun=1.000, mV=-26.74}</code>.</p>
+
+<p>This will only take one line of code. Don’t forget to comment out the code that prints the first five stars in the file.</p>
+<h2 id="task-2-word-comparators">
+  
+  
+    <a href="../hw07.html#task-2-word-comparators" class="anchor-heading" aria-labelledby="task-2-word-comparators"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 2: Word Comparators
+  
+  
+</h2>
+    
+
+<p>In this task, you’ll edit <code class="language-plaintext highlighter-rouge">WordComparators.java</code>.</p>
+<h3 id="xcomparator">
+  
+  
+    <a href="../hw07.html#xcomparator" class="anchor-heading" aria-labelledby="xcomparator"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> xComparator
+  
+  
+</h3>
+    
+
+<p>Fill in <code class="language-plaintext highlighter-rouge">public static Comparator&lt;String&gt; getxComparator()</code>.</p>
+
+<p>An xComparator should compare strings based on the number of lowercase x’s that appear in the string. For example, “xelha” should be considered less than “xoxocotla”, because “xelha” has one x and “xoxocotla” has two.</p>
+<h3 id="charcomparator">
+  
+  
+    <a href="../hw07.html#charcomparator" class="anchor-heading" aria-labelledby="charcomparator"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> charComparator
+  
+  
+</h3>
+    
+
+<p>Fill in <code class="language-plaintext highlighter-rouge">public static Comparator&lt;String&gt; getCharComparator(char c)</code>.</p>
+
+<p>A charComparator should compare strings based on the number of instances of <code class="language-plaintext highlighter-rouge">c</code> that occur, where <code class="language-plaintext highlighter-rouge">c</code> is the character specified when the Comparator is created. For example, the Comparator returned by <code class="language-plaintext highlighter-rouge">getCharComparator('a')</code> should consider “xelha” to be equal to “xoxocotla”, because they both have one ‘a’.</p>
+<h3 id="charlistcomparator">
+  
+  
+    <a href="../hw07.html#charlistcomparator" class="anchor-heading" aria-labelledby="charlistcomparator"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> charListComparator
+  
+  
+</h3>
+    
+
+<p>Fill in <code class="language-plaintext highlighter-rouge">public static Comparator&lt;String&gt; getCharListComparator(List&lt;Character&gt; chars)</code>.</p>
+
+<p>A charListComparator should compare strings based on the number of times any of the characters in the list appear in the string. For example, <code class="language-plaintext highlighter-rouge">getCharListComparator(List.of('a', 'e', 'i', 'o', 'u'))</code> should return a comparator that compares based on the number of lowercase vowels in the string.</p>
+
+<blockquote class="TASK">
+  <p>Implement the three comparators in the <code class="language-plaintext highlighter-rouge">WordComparators</code> class.</p>
+
+  <p>Run <code class="language-plaintext highlighter-rouge">TestWordComparators.java</code> to test your implementation.</p>
+</blockquote>
+
+<p>Note: Each comparator is likely to share logic with the others. You can use private helper methods as appropriate to avoid re-writing code.</p>
+<h2 id="task-3-word-finder">
+  
+  
+    <a href="../hw07.html#task-3-word-finder" class="anchor-heading" aria-labelledby="task-3-word-finder"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 3: Word Finder
+  
+  
+</h2>
+    
+<h3 id="findmax">
+  
+  
+    <a href="../hw07.html#findmax" class="anchor-heading" aria-labelledby="findmax"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> findMax
+  
+  
+</h3>
+    
+
+<p>In <code class="language-plaintext highlighter-rouge">WordFinder.java</code>, <code class="language-plaintext highlighter-rouge">findMax</code> should return the <code class="language-plaintext highlighter-rouge">String</code> in the array with the maximum value, as defined by the comparator <code class="language-plaintext highlighter-rouge">c</code>.</p>
+
+<p>If there are multiple strings that are the maximum value, return the first one you find.</p>
+
+<p class="TASK">Implement <code class="language-plaintext highlighter-rouge">findMax</code>, and run <code class="language-plaintext highlighter-rouge">TestWordFinder.java</code> to test your implementation.</p>
+
+<p>Use a loop. Don’t use <code class="language-plaintext highlighter-rouge">Arrays.sort</code> or similar.</p>
+
+<p>This is a straightforward task. We just wanted you to have a chance to actually use a <code class="language-plaintext highlighter-rouge">Comparator</code>.</p>
+<h3 id="moby-dick">
+  
+  
+    <a href="../hw07.html#moby-dick" class="anchor-heading" aria-labelledby="moby-dick"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Moby Dick
+  
+  
+</h3>
+    
+
+<p>The text of the first chapter of Moby Dick is available in the file <code class="language-plaintext highlighter-rouge">mobydick.txt</code>.</p>
+
+<p class="TASK">Fill in the main method so that only the word with the most lowercase vowels is printed out.</p>
+
+<p>You’ll want to use your <code class="language-plaintext highlighter-rouge">findMax</code> method.</p>
+<h3 id="optional-ungraded">
+  
+  
+    <a href="../hw07.html#optional-ungraded" class="anchor-heading" aria-labelledby="optional-ungraded"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Optional (ungraded)
+  
+  
+</h3>
+    
+
+<p>Optionally, uncomment the code in <code class="language-plaintext highlighter-rouge">main</code> and use your tool to find the word with the most vowels in the wikipedia article on <code class="language-plaintext highlighter-rouge">Zebra</code>. Feel free to explore other articles.</p>
+<h2 id="submission">
+  
+  
+    <a href="../hw07.html#submission" class="anchor-heading" aria-labelledby="submission"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Submission
+  
+  
+</h2>
+    
+
+<p>Graded files that you need to modify:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Star.java</code></li>
+  <li><code class="language-plaintext highlighter-rouge">WordComparators.java</code></li>
+  <li><code class="language-plaintext highlighter-rouge">WordFinder.java</code></li>
+</ul>
+
+<p>You must follow the <a href="../../resources/style-guide.html">style guide</a> for all three of these files. You can check style yourself in IntelliJ as many times as you want.</p>
+
+<p>Follow the <a href="../../resources/assignment-workflow/index.html#submitting-to-gradescope">Assignment Workflow Guide</a> to submit. You can submit as many times as you want. The score you see on Gradescope is your final score for this homework.</p>
+
+  </div>
+</div>
+
+          
+
+          
+            
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="../../assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

@@ -1,0 +1,774 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    .site-nav > ul.nav-list:first-child > li > a,
+    
+    .site-nav > ul.nav-list:first-child > li > ul > li:not(:nth-child(6)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(8) > ul > li:nth-child(6) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(8) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(8) > ul > li:nth-child(6) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(8) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(8) > ul.nav-list > li.nav-list-item:nth-child(6) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="../assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>BYOW: Checkoffs | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="BYOW: Checkoffs" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Project 5 Checkoffs." />
+<meta property="og:description" content="Project 5 Checkoffs." />
+<link rel="canonical" href="checkoff.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/proj5/checkoff/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="BYOW: Checkoffs" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Project 5 Checkoffs.","headline":"BYOW: Checkoffs","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/proj5/checkoff/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="../assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="../assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="../assets/katex/katex.min.css"
+>
+<script defer src="../assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="../assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="checkoff.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="../index.html" class="site-title lh-tight">
+
+
+  <img src="../assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="../policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="../policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="../policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="../policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="../resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="../resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="../resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="../resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="../resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="../resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="../resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="../resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="../resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="../resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="../resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="../resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="../resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="../staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="../homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="../homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="../homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="../homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="../homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="../homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="../homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="../homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="../homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="../homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="../projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="../projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="../projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="../proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="../proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="../proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="../proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="../proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="../troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="../troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="checkoff.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="index.html">Project 5</a></li>
+    <li class="breadcrumb-nav-list-item"><span>BYOW: Checkoffs</span></li>
+  </ol>
+</nav>
+
+
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item"><a href="checkoff.html#deadlines" class="nav-list-link">Deadlines</a></li><li class="nav-list-item"><a href="checkoff.html#policies" class="nav-list-link">Policies</a></li><li class="nav-list-item"><a href="checkoff.html#attendance" class="nav-list-link">Attendance</a></li><li class="nav-list-item"><a href="checkoff.html#setup" class="nav-list-link">Setup</a></li><li class="nav-list-item"><a href="checkoff.html#checkoff-script" class="nav-list-link">Checkoff Script</a></li><li class="nav-list-item"><a href="checkoff.html#point-allocation" class="nav-list-link">Point Allocation</a><ul class="nav-list"><li class="nav-list-item"><a href="checkoff.html#basic-world-functionality-75-points-total" class="nav-list-link">Basic World Functionality (75 points total)</a></li><li class="nav-list-item"><a href="checkoff.html#randomness-30-points-total" class="nav-list-link">Randomness (30 points total)</a></li><li class="nav-list-item"><a href="checkoff.html#ambition-points-45-points-total" class="nav-list-link">Ambition Points (45 points total)</a></li></ul></li></ul>
+    </nav>
+  <div class="content">
+<h2 id="deadlines">
+  
+  
+    <a href="checkoff.html#deadlines" class="anchor-heading" aria-labelledby="deadlines"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Deadlines
+  
+  
+</h2>
+    
+
+<div>
+
+<style type="text/css">
+
+.proj5-table {
+  all: revert;
+  border-collapse: collapse !important;
+}
+
+.proj5-header-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+}
+
+.proj5a-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+  border-bottom: 2px solid !important;
+  background-color:rgba(114,83,237,0.2);
+}
+
+.proj5b-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+  border-bottom: 2px solid !important;
+  background-color:rgba(44,132,250,0.15);
+}
+
+.proj5c-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+  border-bottom: 2px solid !important;
+  background-color:rgba(65,214,147,0.15);
+}
+
+</style>
+
+<!-- how many deadlines??-->
+Warning: There are <b>3 deadlines</b> for this project, and some deadlines require you to submit <b>multiple deliverables</b>. Please double-check that you submitted everything!
+
+<div class="table-wrapper"><table class="proj5-table"><thead>
+  <tr>
+    <th class="proj5-header-cell">Assignment</th>
+    <th class="proj5-header-cell">Tasks</th>
+    <th class="proj5-header-cell">Deliverable</th>
+    <th class="proj5-header-cell">Points</th>
+    <th class="proj5-header-cell">Due Date</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="proj5a-cell" rowspan="2">Project 5A</td>
+    <td class="proj5a-cell" rowspan="2">- Partnerships<br />- Setup<br />- Design Document</td>
+    <td class="proj5a-cell">Pre-Project <b>Google Form</b></td>
+    <td class="proj5a-cell">5</td>
+    <td class="proj5a-cell" rowspan="2">Mon, Nov 17<br />11:59pm PT</td>
+  </tr>
+  <tr>
+    <td class="proj5a-cell">Design Document</td>
+    <td class="proj5a-cell">20</td>
+  </tr>
+  <tr>
+    <td class="proj5b-cell" rowspan="1">Project 5B</td>
+    <td class="proj5b-cell" rowspan="1">- World Generation</td>
+    <td class="proj5b-cell">World Screenshots on <b>Gradescope</b></td>
+    <td class="proj5b-cell">20</td>
+    <td class="proj5b-cell" rowspan="1">Mon, Nov 24<br />11:59pm PT</td>
+  </tr>
+  <tr>
+    <td class="proj5c-cell" rowspan="3">Project 5C</td>
+    <td class="proj5c-cell" rowspan="3">- Task 1: Main Menu<br />- Task 2: Interactivity<br />- Task 3: HUD<br />- Task 4: Saving and Loading<br />- Task 5: Ambition Features</td>
+    <td class="proj5c-cell">Code on <b>Gradescope</b><br />(0 pts, but required for checkoff)<br /></td>
+    <td class="proj5c-cell">0</td>
+    <td class="proj5c-cell" rowspan="3">Mon, Dec 1<br />11:59pm PT</td>
+  </tr>
+  <tr>
+    <td class="proj5c-cell"><b>Live Checkoff</b> with TA<br />(Checkoffs will happen 12/01 – 12/05)</td>
+    <td class="proj5c-cell">150</td>
+  </tr>
+  <tr>
+    <td class="proj5c-cell">Post-Project <b>Google Form</b></td>
+    <td class="proj5c-cell">5</td>
+  </tr>
+</tbody>
+</table></div>
+
+To request extensions on Project 5, <b>both partners</b> need to submit separate extension requests on Beacon.
+
+</div>
+<h2 id="policies">
+  
+  
+    <a href="checkoff.html#policies" class="anchor-heading" aria-labelledby="policies"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Policies
+  
+  
+</h2>
+    
+
+<p>Project 5 demos will be conducted during assignment sections from Wednesday to Friday (12/3-12/5).</p>
+
+<blockquote class="TASK">
+  <p>Sign up for a check off slot in an assignment section and complete it at your assigned time.</p>
+  <ul>
+    <li>See the Ed announcement for more details.</li>
+    <li>Make sure to prepare accordingly to avoid any last-minute emergencies!</li>
+  </ul>
+</blockquote>
+
+<p>The code that you present during your demo should be the code that you submitted to the Project 5C assignment on Gradescope. In other words, the Project 5C due date (plus any extensions you requested) is the deadline for making any changes to your code. Even if your checkoff doesn’t happen until later, you can’t make any changes after your Project 5C due date.</p>
+
+<p class="WARNING">The following is what the TA will exactly do when checking you off: we recommend you do a dry-run of this to ensure you didn’t miss anything. You can clone your repository in some random destination on your computer (like your home directory) if you want to follow along and simulate your checkoff.</p>
+<h2 id="attendance">
+  
+  
+    <a href="checkoff.html#attendance" class="anchor-heading" aria-labelledby="attendance"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Attendance
+  
+  
+</h2>
+    
+
+<p>Both partners should be present <strong>in person</strong> for the checkoff.</p>
+
+<blockquote class="NOTE">
+  <p>Please fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLSc7zbWs7Nv3lRTa2Vqc_30dzkrNnQ73o6ktJ_dn9-o6WGdPGA/viewform?usp=dialog">Project 5 Checkoff Extenuating Circumstances Form</a> if you are experiencing <a href="../policies/extensions.html#extenuating-circumstances">extenuating circumstances</a> and need accommodations for the following:</p>
+  <ul>
+    <li>I can checkoff live, but will need to be on Zoom</li>
+    <li>I cannot checkoff live during the provided times</li>
+    <li>I wasn’t able to get checked off at the time I signed up for</li>
+  </ul>
+
+  <p><strong>The deadline for this form is Friday, December 5th at 11:59 PM.</strong> We cannot guarantee any accommodations if you do not submit this form by then.</p>
+</blockquote>
+<h2 id="setup">
+  
+  
+    <a href="checkoff.html#setup" class="anchor-heading" aria-labelledby="setup"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Setup
+  
+  
+</h2>
+    
+
+<p>Designate one partner to be the presenter; this should be the partner who signed up for the demo slot. They should make sure to already have the following set up:</p>
+<ul>
+  <li>IntelliJ open with your Project 5 code (doesn’t matter what class)</li>
+  <li>The program running with the BYOW main menu displayed</li>
+  <li>The state of your repo should be the commit containing the version of your project you want to demo. The code you demo should be the same as the code you submitted to Gradescope. If this is your most recent commit, just make sure your Git status is clean. If it is a past commit, you can get to this state by running <code class="language-plaintext highlighter-rouge">git switch --detach &lt;commit id&gt;</code>. (To get your repo back to normal, run <code class="language-plaintext highlighter-rouge">git switch main</code>.)</li>
+  <li>If you choose to demo a version of your project that is past the deadline (for a percentage penalty, per the syllabus), make sure to let the TA know.</li>
+  <li>Your Git status should be clean (no changes to commit)</li>
+</ul>
+<h2 id="checkoff-script">
+  
+  
+    <a href="checkoff.html#checkoff-script" class="anchor-heading" aria-labelledby="checkoff-script"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Checkoff Script
+  
+  
+</h2>
+    
+
+<ol>
+  <li>The grader will ask for everyone’s personal repo ID (fa25-s***)</li>
+  <li>One partner should designate their laptop as the “check-in laptop”, and already have a terminal window in their <code class="language-plaintext highlighter-rouge">fa25-proj5-g***/proj5</code>. Their Git should be in a clean state (git status should be clean), IntelliJ should be open, and the Project 5 main menu should be running.
+    <ul>
+      <li>If any of these requirements are not fulfilled, you may not receive a grade for Proj5 checkoff.</li>
+    </ul>
+  </li>
+  <li>Run “git log” and make sure that the HEAD commit is a commit from before the deadline. Run “pwd”. Make sure the path
+matches that of the open IntelliJ window.</li>
+  <li>Check for main menu with New Game/World, Load, and Quit options.</li>
+  <li>Check that hitting “n” on the main menu lets player type in a seed.</li>
+  <li>Check that typing numbers and hitting “s” starts the world.</li>
+  <li>Check that the floor and walls are distinguishable.</li>
+  <li>Check that there are at least 2 structures which can be considered hallways. (1 wide, kinda long)</li>
+  <li>Check that the world contains a turning hallway. If the current world doesn’t have a turning hallway, ask the students to generate a world that has a turning hallway.</li>
+  <li>Check that there are a few rectangular structures which can be considered rooms, which are connected via hallways</li>
+  <li>Check WASD moves the player up, left, down, right.</li>
+  <li>Check that hovering over three tiles displays three different names (it is OK if a key press is needed for the mouse hover text to update).</li>
+  <li>Check that the HUD does not flicker.</li>
+  <li>Check that moving into walls stops the player without errors.</li>
+  <li>Check that typing in “:Q” in “world mode” stops the game. At this point, memorize how the state of the world looks like. You can ask the student to take a screenshot or take one yourself.</li>
+  <li>After restarting the program, test the load/save feature: Check that pressing “L” on the main menu starts a world with no additional input.</li>
+  <li>Check that the world layout is exactly the same as it was before closing the world.</li>
+  <li>Check that the basic commands (WASD, etc.) still work.</li>
+  <li>Quit the world by typing in “:Q” and reload the world again using “L” on the main menu. Make sure basic commands still work.</li>
+  <li>Check that “q” alone in “world mode” doesn’t terminate the game.</li>
+  <li>Generate 3-5 worlds and look for how varied they are. Select one tier based on how much variety you feel their worlds have.
+    <ul>
+      <li>Full credit - each world generated looks significantly different and you feel like you’d see something new when you generate a new world</li>
+      <li>50% credit - the worlds are not identical, but there are only small shifts or changes which do not really change the experience of moving around the world (e.g. rooms are always in the same spot but just slightly different size)</li>
+      <li>No credit - Worlds are identical most of the time or the changes in the room have no effect on the player experience/how they explore the world. (e.g. the world is the same each time, with only changes in the color of the floor)</li>
+    </ul>
+  </li>
+  <li>The grader will then ask you to show all the ambition points you’ve attempted, and will determine whether you receive full or half credit for those items.</li>
+  <li>The grader will tell you which items you received/did not receive credit for. They will ask if you agree with your score: if you do not, you will be given the opportunity to request a regrade.</li>
+</ol>
+<h2 id="point-allocation">
+  
+  
+    <a href="checkoff.html#point-allocation" class="anchor-heading" aria-labelledby="point-allocation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Point Allocation
+  
+  
+</h2>
+    
+
+<p>They will then grade each requirement of the game. Each requirement can either be evaluated as full points, half points,
+or zero points.</p>
+<h3 id="basic-world-functionality-75-points-total">
+  
+  
+    <a href="checkoff.html#basic-world-functionality-75-points-total" class="anchor-heading" aria-labelledby="basic-world-functionality-75-points-total"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Basic World Functionality (75 points total)
+  
+  
+</h3>
+    
+
+<p>The TA will run your project and will check for the following features:</p>
+
+<ul>
+  <li>The world has a main menu screen with a New World, Load, and Quit option (3 points)</li>
+  <li>The TA will hit “n” or “N” (they may do either) and check that the world prompts for a seed (3 points)</li>
+  <li>The TA should type in a few random numbers and hit “s” or “S” (they may do either) which should immediately start the world. The TA should also be able to see the numbers you are typing on the screen. (4.5 points)</li>
+</ul>
+
+<p>At this point, the program should be running and there should be a visible world.</p>
+
+<ul>
+  <li>World has visually distinct walls and floors (6 points)</li>
+  <li>World has at least two hallways which are 1 tile wide (1.5 point)</li>
+  <li>World has at least 1 hallway containing a turn in it. If current world doesn’t, ask students to generate a world that has a turning hallway. (3 points)</li>
+  <li>World has some number of rooms that are connected via hallways (10.5 points)</li>
+</ul>
+
+<p>The TA will now try the basic commands that should be available during gameplay.</p>
+
+<ul>
+  <li>TA should hit the W, A, S, and D keys randomly and check the player movement is consistent with the key pressed (6 points)</li>
+  <li>TA should hover over 3 different tiles and make sure their names show up somewhere on screen and that the names make sense (6 points)</li>
+  <li>TA should verify that the HUD does not flicker (4.5 points)</li>
+  <li>TA should move into a wall and make sure the player stops at the wall instead of moving into it (1.5 points)</li>
+  <li>TA should type “:q” or “:Q” (they may do either) in “world mode” which should quit the world and close the program. TA should remember the world layout at this point (4.5 points)</li>
+</ul>
+
+<p>The program is now closed, and we will test the load feature.</p>
+
+<p>The TA will run the world again after it has been closed and the main menu should appear again.</p>
+
+<ul>
+  <li>TA should hit “l” or “L” and the world should immediately start (4.5 points)</li>
+  <li>TA should check that the world layout is exactly as it was before closing the world (4.5 points)</li>
+  <li>TA will run through the basic commands again (listed above) to make sure the world still works (4.5 points)</li>
+  <li>TA will quit and load again and make sure that the basic commands work (4.5 points).</li>
+  <li>TA will check that “q” or “Q” alone in “world mode” does not quit the game (1.5 points).</li>
+</ul>
+<h3 id="randomness-30-points-total">
+  
+  
+    <a href="checkoff.html#randomness-30-points-total" class="anchor-heading" aria-labelledby="randomness-30-points-total"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Randomness (30 points total)
+  
+  
+</h3>
+    
+
+<ul>
+  <li>The TA should close the world again and will begin testing to see if worlds are randomly generated.</li>
+  <li>The student pair should’ve explained to the TA where they are making use of randomness and make mention of any pieces of their world which is consistent across all seeds</li>
+  <li>TA should check that the use of randomness does not lead to a severe limitation on the variety of worlds (ie. randomly choosing a world layout from a finite set of worlds)</li>
+  <li>The TA should open the world 3-5 times, making sure to use a different seed each time</li>
+  <li>The TA will be looking for your world’s ability to generate variety in both world structure and player experience while exploring that world. What this means is when two different seeds are used to generatge new worlds, these worlds should not feel identical (or close to identical).</li>
+</ul>
+
+<p>The grading breakdown is as follows:</p>
+<ul>
+  <li>30 points: The worlds are mainly random, as described by the above section.</li>
+  <li>15 points: The worlds exhibit a few random elements, but generally look the same</li>
+  <li>0 points: The worlds contain no random elements.</li>
+</ul>
+<h3 id="ambition-points-45-points-total">
+  
+  
+    <a href="checkoff.html#ambition-points-45-points-total" class="anchor-heading" aria-labelledby="ambition-points-45-points-total"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Ambition Points (45 points total)
+  
+  
+</h3>
+    
+
+<ul>
+  <li>The student should state and demonstrate the features that are in the Ambition category. You should be very explicit about how to “activate” or use that feature.</li>
+  <li>The TA will write in the features the student successfully demonstrated and their point values based on the spec, awarding either Full, Half, or Zero credit for each item.</li>
+</ul>
+
+  </div>
+</div>
+
+          
+
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="../assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

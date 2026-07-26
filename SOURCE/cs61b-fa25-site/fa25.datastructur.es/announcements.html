@@ -1,0 +1,984 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+    .site-nav ul li a {
+      background-image: none;
+    }
+
+  </style>
+
+  
+
+  
+    <script src="assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Announcements | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Announcements" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A feed containing all of the class announcements." />
+<meta property="og:description" content="A feed containing all of the class announcements." />
+<link rel="canonical" href="announcements.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/announcements/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Announcements" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A feed containing all of the class announcements.","headline":"Announcements","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/announcements/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="assets/katex/katex.min.css"
+>
+<script defer src="assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="announcements.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="index.html" class="site-title lh-tight">
+
+
+  <img src="assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="proj5/index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="proj5/landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="proj5/proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="proj5/proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="proj5/proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="proj5/ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="proj5/checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="proj5/bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="announcements.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item">Week 14 Announcements</li><li class="nav-list-item">Week 13 Announcements</li><li class="nav-list-item">Week 12 Announcements</li><li class="nav-list-item">Week 11 Announcements</li><li class="nav-list-item">Week 10 Announcements</li><li class="nav-list-item">Week 9 Announcements</li><li class="nav-list-item">Week 8 Announcements</li><li class="nav-list-item">Week 7 Announcements</li><li class="nav-list-item">Week 6 Announcements</li><li class="nav-list-item">Week 5 Announcements</li><li class="nav-list-item">Week 4 Announcements</li><li class="nav-list-item">Week 3 Announcements</li><li class="nav-list-item">Week 2 Announcements</li><li class="nav-list-item">Week 1 Announcements</li></ul>
+    </nav>
+  <div class="content">
+<h1 id="announcements">
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Announcements
+  
+  
+</h1>
+    
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 14 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Nov 24
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScnCcJUDY0OIEGfgIkC5iDvqrzSSk4fVZZ0GmM7fQGNhnxnZA/viewform">Week 13 Survey</a>: due <strong>Mon Nov 24</strong> at 11:59pm PT</li>
+      <li>Project 5B: BYOW (World Generation): due Monday (11/24) at 11:59 PT</li>
+      <li>Project 5C: BYOW (Ambition Features): due Monday (12/1) at 11:59 PT</li>
+    </ul>
+  </li>
+  <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfQTUhIxIfNSxdjp8Aqv0eBFDtLQ4MLKC5Knt8WtYHzeoW4uw/viewform">Final Exam Alterations Form</a> due Thursday, December 4th</li>
+  <li>Office Hours are available Monday-Tuesday virtually</li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/7326769">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 13 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Nov 19
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdxVNlUyUJY1Delg4Np_kRFhekP58ChUyhlJgrWSN8BuiDIkw/viewform">Week 12 Survey</a>: due <strong>Mon Nov 17</strong> at 11:59pm PT</li>
+      <li>Project 5A: BYOW (Design): due Monday (11/17) at 11:59 PT</li>
+      <li>Project 5B: BYOW (World Generation): due Monday (11/24) at 11:59 PT</li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScnCcJUDY0OIEGfgIkC5iDvqrzSSk4fVZZ0GmM7fQGNhnxnZA/viewform">Week 13 Survey</a>: due <strong>Mon Nov 24</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>Final Exam Review Session is this Friday, 10 am to 1pm in Soda 271 and 275</li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/7326769">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 12 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Nov 10
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://forms.gle/h4CxaLFtwBup8atf7">Week 11 Survey</a>: due Monday, 11/10 at 11:59 PT</li>
+      <li>Homework 12: due <strong>Friday, 11/14</strong> at 11:59 PT</li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdxVNlUyUJY1Delg4Np_kRFhekP58ChUyhlJgrWSN8BuiDIkw/viewform">Week 12 Survey</a>: due <strong>Mon Nov 17</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>Project 5 has been released!
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeMM8jC0pn4cCJ3Idmr_cr8TpCze_Il_JJRSwQxDB97lMszVQ/viewform">CS61B Partnership Form</a></li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdDRHlqu08AdhFnKG-tAinLcT6V636NIAg-UkreHE3IVqeZtg/viewform">CS47B Partnership Form</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/7275397">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 11 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Nov  3
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeffN-LWyjRmPc_3AYFz9sDBcREVbpVWSGlNcp9gtRPm74VLg/viewform">Week 10 Survey</a>: due <strong>Mon Nov 3</strong> at 11:59pm PT</li>
+      <li>Project 4D: due <strong>Monday, 11/3</strong> at 11:59 PT</li>
+      <li>Homework 11: due <strong>Wednesday, 11/5</strong> at 11:59 PT</li>
+      <li><a href="https://forms.gle/h4CxaLFtwBup8atf7">Week 11 Survey</a>: due Monday, 11/10 at 11:59 PT</li>
+    </ul>
+  </li>
+  <li>Midterm 2 this <strong>Thursday, 8-10pm</strong></li>
+  <li>Midterm 2 Alterations
+    <ul>
+      <li>If you need special accommodations for midterm 2, please fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLSfobyLbz5nd5WBpZxIlt3MfuTDZtRmPg9puEDqcDrWXxEmjYQ/viewform">Midterm 2 Alterations Form</a></li>
+    </ul>
+  </li>
+  <li>Thursday OH and Friday assignment section canceled this week in light of the midterm</li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/7248672">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 10 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Oct 27
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSe3T7ANmL-5CEYq_3mInBcNvBvsuS68gFEB2iLt21VX0osA3Q/viewform">Week 9 Survey</a>: due <strong>Mon Oct 27</strong> at 11:59pm PT</li>
+      <li>Project 4C: due <strong>Monday, 10/27</strong> at 11:59 PT</li>
+      <li>Project 4D: due <strong>Friday, 10/31</strong> at 11:59 PT</li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeffN-LWyjRmPc_3AYFz9sDBcREVbpVWSGlNcp9gtRPm74VLg/viewform">Week 10 Survey</a>: due <strong>Mon Nov 3</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>Midterm 2 Alterations
+    <ul>
+      <li>If you need special accommodations for midterm 2, please fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLSfobyLbz5nd5WBpZxIlt3MfuTDZtRmPg9puEDqcDrWXxEmjYQ/viewform">Midterm 2 Alterations Form</a> by <strong>Friday, 10/24, at 11:59PT. Late requests will not be accommodated.</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/7210240">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 9 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Oct 20
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdzvLw2EGUR5n-zDTlSLjDnWJjYtOta5iW2t9hVdG0M0y9tzA/viewform">Week 8 Survey</a>: due <strong>Mon Oct 20</strong> at 11:59pm PT</li>
+      <li><a href="proj4/proj4b.html">Project 4B</a>: due <strong>Wed Oct 22</strong> at 11:59pm PT</li>
+      <li><a href="proj4/proj4c.html">Project 4C</a>: due <strong>Mon Oct 27</strong> at 11:59pm PT</li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSe3T7ANmL-5CEYq_3mInBcNvBvsuS68gFEB2iLt21VX0osA3Q/viewform">Week 9 Survey</a>: due <strong>Mon Oct 27</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>Midterm 2 Alterations
+    <ul>
+      <li>If you need special accommodations for midterm 2, please fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLSfobyLbz5nd5WBpZxIlt3MfuTDZtRmPg9puEDqcDrWXxEmjYQ/viewform">Midterm 2 Alterations Form</a> by <strong>Friday, 10/24, at 11:59PT. Late requests will not be accommodated.</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/7165215">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 8 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Oct 13
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://forms.gle/8FFrxP91cRKwtN1p6">Week 7 Survey</a>: due <strong>Mon Oct 13</strong> at 11:59pm PT</li>
+      <li><a href="proj4/proj4a.html">Project 4A</a>: due <strong>Mon Oct 13</strong> at 11:59pm PT</li>
+      <li><a href="proj4/proj4b.html">Project 4B</a>: due <strong>Mon Oct 20</strong> at 11:59pm PT</li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdzvLw2EGUR5n-zDTlSLjDnWJjYtOta5iW2t9hVdG0M0y9tzA/viewform">Week 8 Survey</a>: due <strong>Mon Oct 20</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>Midterm 2 Alterations
+    <ul>
+      <li>If you need special accommodations for midterm 2, please fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLSfobyLbz5nd5WBpZxIlt3MfuTDZtRmPg9puEDqcDrWXxEmjYQ/viewform">Midterm 2 Alterations Form</a> by <strong>Friday, 10/24, at 11:59PT. Late requests will not be accommodated.</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/7123754">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 7 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Oct  6
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfC79nQ5ALJGJWDisEco-RSWrQsMLVtUXzYH7sOgUugP-NnXw/viewform">Week 6 Survey</a> (includes <a href="policies.html#lecture-attendance-opt-in">lecture attendance</a> opt-in/opt-out choice): due <strong>Mon Oct 06</strong> at 11:59pm PT</li>
+      <li><a href="projects/proj3.html">Mini-Project 3</a>: due <strong>Mon Oct 06</strong> at 11:59pm PT</li>
+      <li><a href="homeworks/hw09.html">Homework 9</a>: due <strong>Fri Oct 10</strong> at 11:59pm PT</li>
+      <li><a href="https://forms.gle/8FFrxP91cRKwtN1p6">Week 7 Survey</a>: due <strong>Mon Oct 13</strong> at 11:59pm PT</li>
+      <li><a href="proj4/proj4a.html">Project 4A</a>: due <strong>Mon Oct 13</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>Midterm 1 grades released. <a href="https://edstem.org/us/courses/83254/discussion/7087177">See the Ed post for more details.</a></li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/7083698">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 6 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Sep 29
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScvXcYXS7S_EAdWkfsbgothhUL_i5ZDH0uM_M8uVF93sJgbRQ/viewform">Week 5 Survey</a>: due <strong>Mon Sep 29</strong> at 11:59pm PT</li>
+      <li><a href="https://www.gradescope.com/courses/1104518/assignments/6841210">Homework 8</a>: due <strong>Fri Oct 03</strong> at 11:59pm PT (extended from Wed Oct 01)</li>
+      <li><a href="projects/proj3.html">Mini-Project 3</a>: due <strong>Mon Oct 06</strong> at 11:59pm PT</li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfC79nQ5ALJGJWDisEco-RSWrQsMLVtUXzYH7sOgUugP-NnXw/viewform">Week 6 Survey</a> (includes <a href="policies.html#lecture-attendance-opt-in">lecture attendance</a> opt-in/opt-out choice): due <strong>Mon Oct 06</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>Midterm 1 Grades
+    <ul>
+      <li>We’re working on getting grades released as soon as possible, so please hold tight for that! They will be released no earlier than Thu, Oct 2 (and maybe later). In the meantime, you can take a look at the <a href="https://edstem.org/us/courses/83254/discussion/7026165">Midterm 1 Solutions (Beta) in this thread</a>.</li>
+    </ul>
+  </li>
+  <li>We’ll be holding a Mini-Project 3 Intro Section during this week’s assignment sections!</li>
+  <li>Office hours on Mon Sep 26 will be held online due to building closures. Please check out our <a href="calendar.html">calendar</a> for the most up-to-date changes!</li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/7038640">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 5 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Sep 22
+    
+  </span>
+  <div>
+    <ul>
+  <li>Lecture on <strong>Wed Sep 24, 4–5pm</strong> will be an ask me anything session. This is a great way to get last-minute questions answered.</li>
+  <li>Key Dates
+    <ul>
+      <li>Midterm 1: <strong>Thu Sep 25, 8–10pm</strong> PT</li>
+      <li><a href="projects/proj2.html">Mini-Project 2</a>: due <strong>Mon Sep 22</strong> at 11:59pm PT</li>
+      <li><a href="homeworks/hw07.html">Homework 7</a>: due <strong>Mon Sep 29</strong> at 11:59pm PT (extended from Fri Sep 26)</li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScvXcYXS7S_EAdWkfsbgothhUL_i5ZDH0uM_M8uVF93sJgbRQ/viewform">Week 5 Survey</a>: due <strong>Mon Sep 29</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>Midterm 1 Resources
+    <ul>
+      <li>Seating assignments have been released in your emails.</li>
+      <li>Midterm resources, logistics, and study tips can all be found under our <a href="https://edstem.org/us/courses/83254/discussion/6972567">Midterm 1 Post</a>.</li>
+      <li>CSM and HKN are both hosting a MT1 review session <strong>Mon Sep 22</strong> from 6–8pm!</li>
+      <li><a href="https://edstem.org/us/courses/83254/discussion/6983199">HKN Review Session</a></li>
+      <li><a href="https://edstem.org/us/courses/83254/discussion/6994236">CSM Review Session</a></li>
+      <li>Please remember that cheatsheets are NOT allowed this semester.</li>
+      <li>Please check out our <a href="https://edstem.org/us/courses/83254/discussion/6966333">midterm review slides</a>. The walkthrough video and solutions have been posted.</li>
+    </ul>
+  </li>
+  <li>Section Changes: There will be no assignment sections this week in light of the midterm. Discussions will continue as normal.</li>
+  <li>OH Changes: There is no OH on Thursday this week because of the midterm.</li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/6998926">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 4 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Sep 15
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdua41R4UYaXlkzMBZqatjyfyFXKyfy8B6NlAVd6ZIizZRfoQ/viewform">Week 4 Survey</a>: due <strong>Mon Sep 22</strong> at 11:59pm PT</li>
+      <li><a href="projects/proj2.html">Mini-Project 2</a>: due <strong>Mon Sep 22</strong> at 11:59pm PT</li>
+      <li>Midterm 1: <strong>Thu Sep 25, 8–10pm</strong> PT</li>
+      <li>Midterm 1 Review Session: <strong>Fri Sep 19, 10am–1pm</strong> in Soda 273</li>
+    </ul>
+  </li>
+  <li>Both the <a href="https://docs.google.com/forms/d/e/1FAIpQLSetM2C_Kx5jKhmkHtf8blwGXI10T_D0miWNuXqkD9yqv6gPfg/viewform">student support meeting intake form</a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGPMetM2IM2_Ow6rXSzT81iI16qiM6nO-Kz35t2giLuC_H7A/viewform">extenuating circumstances form</a> are open!</li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/6966051">See Ed for the full announcements.</a></p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 3 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Sep  8
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key dates:
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdw8Wl-WsGVX7Ljso2YSSkAxHzm8blDEx6NwURoZqLfK3KpAw/viewform">Week 2 Survey</a>: due <strong>Mon Sep 08</strong> at 11:59pm PT</li>
+      <li><a href="homeworks/hw05.html">Homework 5</a>: due <strong>Mon Sep 08</strong> at 11:59pm PT</li>
+      <li><a href="homeworks/hw06.html">Homework 6</a>: due <strong>Fri Sep 12</strong> at 11:59pm PT</li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdhkzo3WMZsYIFuo4JD5kc0FrayHZkUUXaYCH_l65dLqst6ww/viewform">Week 3 Survey</a>: due <strong>Mon Sep 15</strong> at 11:59pm PT</li>
+      <li><a href="projects/proj1.html">Mini-Project 1</a>: due <strong>Mon Sep 15</strong> at 11:59pm PT</li>
+      <li><a href="https://forms.gle/aZzktGceehQmV7qLA">Midterm 1 Alterations Form</a>: due <strong>Fri Sep 12</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>If you need to request midterm alterations (left-handed desk, DSP accommodations, alternate exam), <a href="https://edstem.org/us/courses/83254/discussion/6912424">read through this Ed post</a> and fill out <a href="https://forms.gle/aZzktGceehQmV7qLA">the alterations form</a>.</li>
+  <li>Project 1 party on Wed Sep 10 5-6pm in Soda 271, during our regularly scheduled office hours.</li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/6928273">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 2 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Sep  2
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key dates:
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdtzkiv0GjiUIjsSPn5OE1c90w0jUq_KBKuvqkKYJdfPC7N7g/viewform">Pre-semester survey</a>: due <strong>Tue Sep 02</strong> at 11:59pm PT</li>
+      <li><a href="homeworks/hw03.html">Homework 3 (Lists, Sets, Maps, Classes)</a>: due <strong>Tue Sep 02</strong> at 11:59pm PT</li>
+      <li><a href="homeworks/hw04.html">Homework 4 (IntLists)</a>: due <strong>Fri Sep 05</strong> at 11:59pm PT</li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdw8Wl-WsGVX7Ljso2YSSkAxHzm8blDEx6NwURoZqLfK3KpAw/viewform">Week 2 Survey</a>: due <strong>Mon Sep 08</strong> at 11:59pm PT</li>
+      <li>Homework 5: due <strong>Mon Sep 08</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>Discussion
+    <ul>
+      <li>Sections begin this week. See <a href="calendar.html">the calendar</a> for the schedule.</li>
+      <li>There are no signups, and you can attend any discussion section. You are not required to attend a discussion section.</li>
+    </ul>
+  </li>
+  <li>Both the <a href="https://docs.google.com/forms/d/e/1FAIpQLSetM2C_Kx5jKhmkHtf8blwGXI10T_D0miWNuXqkD9yqv6gPfg/viewform">student support meeting intake form</a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGPMetM2IM2_Ow6rXSzT81iI16qiM6nO-Kz35t2giLuC_H7A/viewform">extenuating circumstances form</a> are open!
+    <ul>
+      <li>If you would like to reach out to a staff member to chat one-on-one, you can sign up for a student support meeting through the student support intake form.</li>
+      <li>If anything comes up and you’re experiencing extenuating circumstances that are impacting your progress in the course, please fill out the extenuating circumstances form.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/6898980">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div><hr />
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="announcements.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 1 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Aug 27
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key dates:
+    <ul>
+      <li><a href="homeworks/hw01.html">Homework 1 (Setup)</a>: due <strong>Friday, Aug 29</strong> at 11:59pm PT</li>
+      <li><a href="homeworks/hw02.html">Homework 2 (Java Intro)</a>: due <strong>Friday, Aug 29</strong> at 11:59pm PT</li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdtzkiv0GjiUIjsSPn5OE1c90w0jUq_KBKuvqkKYJdfPC7N7g/viewform">Pre-semester survey</a>: due <strong>Tuesday, Sep 02</strong> at 11:59pm PT</li>
+    </ul>
+  </li>
+  <li>Enrollment
+    <ul>
+      <li>We’re still waiting on the department to process concurrent enrollment applications. If you’re a concurrent enrollment student, you’ll be manually added to the course (Gradescope, bCourses, EdStem, etc). In the meantime, please don’t ask about your pending application—we won’t have updates.</li>
+      <li>If you plan to enroll late, fill out the <a href="https://forms.gle/urHELgJSGsDpFq68A">Late Add Intent Form</a> so we can give you access to course platforms. More information on catching up and extension policies is available in the “Late Adding CS 61B” section of the course policy page.</li>
+    </ul>
+  </li>
+  <li>Lecture
+    <ul>
+      <li>Zoom link: <a href="https://berkeley.zoom.us/j/94670723177">https://berkeley.zoom.us/j/94670723177</a></li>
+      <li>If you did not reserve a seat, <strong>please attend over Zoom</strong>. We will only admit students into the lecture hall if they reserved a seat.</li>
+    </ul>
+  </li>
+  <li>Discussion
+    <ul>
+      <li>Sections begin next week (Sep 02).</li>
+      <li>There are no signups, and you can attend any discussion section. You are not required to attend a discussion section.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/6880632">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div>
+
+
+  </div>
+</div>
+
+          
+
+          
+            
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

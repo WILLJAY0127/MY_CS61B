@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="../../assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="../../assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    .site-nav > ul.nav-list:first-child > li > a,
+    
+    .site-nav > ul.nav-list:first-child > li > ul > li:not(:nth-child(1)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(3) > ul > li:nth-child(1) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(3) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(3) > ul > li:nth-child(1) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(3) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(3) > ul.nav-list > li.nav-list-item:nth-child(1) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="../../assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="../../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>61B Assignment Workflow | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="61B Assignment Workflow" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Structures at UC Berkeley" />
+<meta property="og:description" content="Data Structures at UC Berkeley" />
+<link rel="canonical" href="index.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/resources/assignment-workflow/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="61B Assignment Workflow" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Data Structures at UC Berkeley","headline":"61B Assignment Workflow","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/resources/assignment-workflow/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="../../assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="../../assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="../../assets/katex/katex.min.css"
+>
+<script defer src="../../assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="../../assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="index.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="../../index.html" class="site-title lh-tight">
+
+
+  <img src="../../assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="../../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="../../policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="../../policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="../../policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="../../policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="../style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="../exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="../exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="../example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="../partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="../using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="../using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="../using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="../using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="../using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="../using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="../using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="../../staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="../../homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="../../homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="../../homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="../../homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="../../homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="../../homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="../../homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="../../homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="../../homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="../../homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="../../projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="../../projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="../../projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="../../proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="../../proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="../../proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="../../proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="../../proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../proj5/index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="../../proj5/landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="../../proj5/proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="../../proj5/proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="../../proj5/proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="../../proj5/ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="../../proj5/checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="../../proj5/bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="../../troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="../../troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="index.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="../../resources.html">Resources</a></li>
+    <li class="breadcrumb-nav-list-item"><span>61B Assignment Workflow</span></li>
+  </ol>
+</nav>
+
+
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item"><a href="index.html#getting-the-skeleton" class="nav-list-link">Getting the Skeleton</a></li><li class="nav-list-item"><a href="index.html#opening-in-intellij" class="nav-list-link">Opening in IntelliJ</a></li><li class="nav-list-item"><a href="index.html#submitting-to-gradescope" class="nav-list-link">Submitting to Gradescope</a></li></ul>
+    </nav>
+  <div class="content">
+<h1 id="61b-assignment-workflow">
+  
+  
+    <a href="index.html#61b-assignment-workflow" class="anchor-heading" aria-labelledby="61b-assignment-workflow"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> 61B Assignment Workflow
+  
+  
+</h1>
+    
+
+<p>Author: Ethan Ordentlich</p>
+
+<p>This guide describes how to set up an assignment in CS 61B.</p>
+
+<p>Here is a video demo of this guide:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tABtNcN5y0A?si=h46RTr6yVPbLnB59" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+<p class="WARNING">If you get some sort of error, <em>stop</em> and either figure it out by carefully reading the <a href="../../troubleshooting/git-wtfs.html">Git WTFs</a> or seek help at office hours or on Ed. You’ll potentially save yourself a lot of trouble vs. guess-and-check with git commands. If you find yourself trying to use commands recommended by Google like <code class="language-plaintext highlighter-rouge">force push</code>, don’t run them, even if a post you found on Stack Overflow says to do it!</p>
+<h2 id="getting-the-skeleton">
+  
+  
+    <a href="index.html#getting-the-skeleton" class="anchor-heading" aria-labelledby="getting-the-skeleton"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Getting the Skeleton
+  
+  
+</h2>
+    
+
+<p>The <code class="language-plaintext highlighter-rouge">skeleton</code> remote repository contains the skeleton code for all assignments. Whenever a new assignment is released, or if we need to update an assignment, you will pull from the skeleton. First use <code class="language-plaintext highlighter-rouge">cd</code> to navigate to your <code class="language-plaintext highlighter-rouge">fa25-s12345</code> repository directory, then run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull skeleton main
+</code></pre></div></div>
+
+<p>This fetches all remote files from the repo named <code class="language-plaintext highlighter-rouge">skeleton</code> (which is located at <code class="language-plaintext highlighter-rouge">https://github.com/Berkeley-CS61B/skeleton-fa25.git</code>) and copies them into your current folder.</p>
+
+<p>If you get an error similar to <code class="language-plaintext highlighter-rouge">fatal: refusing to merge unrelated histories</code>, you can fix this each time by using</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull <span class="nt">--no-rebase</span> <span class="nt">--allow-unrelated-histories</span> skeleton main
+</code></pre></div></div>
+<h2 id="opening-in-intellij">
+  
+  
+    <a href="index.html#opening-in-intellij" class="anchor-heading" aria-labelledby="opening-in-intellij"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Opening in IntelliJ
+  
+  
+</h2>
+    
+
+<p>The following instructions apply for every assignment. <strong>For every assignment</strong>, after pulling from <code class="language-plaintext highlighter-rouge">skeleton</code> to get new lab or project files, you will need to run through the following steps again.</p>
+
+<ol>
+  <li>
+    <p>Start up IntelliJ. If you have no projects open, click the “Open” button. If you have a project currently open, navigate to <strong>“File –&gt; Open”</strong>.</p>
+  </li>
+  <li>
+    <p>Find and choose the directory of your current assignment. For example, for Homework 1, you would select the <code class="language-plaintext highlighter-rouge">hw01</code> directory inside your <code class="language-plaintext highlighter-rouge">fa25-s12345</code> repo.</p>
+
+    <p>Make sure that you open only the assignment folder, and not the entire <code class="language-plaintext highlighter-rouge">fa25-s12345</code> repo.</p>
+
+    <p><img src="../../assets/resources/assignment-workflow-img/open_folder.webp" alt="Open Folder" /></p>
+  </li>
+  <li>
+    <p>Navigate to the <strong>“File -&gt; Project Structure”</strong> menu, and make sure you are in the <strong>Project</strong> tab. Set your project SDK to your installed Java version. If 21 or higher isn’t available in the dropdown, make sure you downloaded and installed Java completely.</p>
+  </li>
+  <li>
+    <p>Still in the <strong>Project</strong> tab, set the Project Language Level to “SDK default”.</p>
+
+    <p>At this point, the Project tab should look something like this:</p>
+
+    <p><img src="../../assets/resources/assignment-workflow-img/select_jdk.webp" alt="select-jdk" /></p>
+
+    <ul>
+      <li>The SDK is set to Java 21 or higher.</li>
+      <li>The Language level is “SDK default.”</li>
+      <li>The Compiler output is filled in, and is set to the assignment directory, followed by <code class="language-plaintext highlighter-rouge">out</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>Still in Project Structure, go to the <strong>Libraries</strong> tab. Click the “<strong>+ -&gt; Java</strong>” button, then navigate to <code class="language-plaintext highlighter-rouge">library-fa25</code>, select the folder, and click “Ok”.</p>
+
+    <p><img src="../../assets/resources/assignment-workflow-img/library1.webp" alt="Libraries step 1" /></p>
+
+    <p><img src="../../assets/resources/assignment-workflow-img/library2.webp" alt="Libraries step 2" /></p>
+
+    <p><img src="../../assets/resources/assignment-workflow-img/library3.webp" alt="Libraries step 3" /></p>
+  </li>
+  <li>
+    <p>Click “Ok” to apply your settings and leave Project Structure.</p>
+  </li>
+</ol>
+
+<p>At this point, if things have been configured correctly:</p>
+
+<ul>
+  <li>Each Java file should have a blue circle next to its name.</li>
+  <li>When you open any file, none of the code should be highlighted in red.</li>
+</ul>
+<h2 id="submitting-to-gradescope">
+  
+  
+    <a href="index.html#submitting-to-gradescope" class="anchor-heading" aria-labelledby="submitting-to-gradescope"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Submitting to Gradescope
+  
+  
+</h2>
+    
+
+<ol>
+  <li>
+    <p>Use <code class="language-plaintext highlighter-rouge">cd</code> to navigate to your repository, and add your assignment directory using <code class="language-plaintext highlighter-rouge">git add</code>.</p>
+
+    <p>For example, for Homework 1, you can use <code class="language-plaintext highlighter-rouge">cd</code> to navigate to <code class="language-plaintext highlighter-rouge">fa25-s12345</code>, then run <code class="language-plaintext highlighter-rouge">git add hw01</code>.</p>
+
+    <p>Or, you could use <code class="language-plaintext highlighter-rouge">cd</code> to navigate to <code class="language-plaintext highlighter-rouge">fa25-s12345/hw01</code>, and then run <code class="language-plaintext highlighter-rouge">git add .</code> (where <code class="language-plaintext highlighter-rouge">.</code> is shorthand for “the current folder”).</p>
+  </li>
+  <li>
+    <p>Commit the files using <code class="language-plaintext highlighter-rouge">git commit -m "&lt;commit message here&gt;"</code>. The commit message is required.</p>
+
+    <p>For example, <code class="language-plaintext highlighter-rouge">git commit -m "Finished Homework 1"</code>.</p>
+  </li>
+  <li>Push your code to your remote repository with <code class="language-plaintext highlighter-rouge">git push origin main</code>.</li>
+  <li>
+    <p>Open the assignment on Gradescope. Select Github, then your <code class="language-plaintext highlighter-rouge">fa25-s12345</code> repository and the <code class="language-plaintext highlighter-rouge">main</code> branch, then submit your assignment. You will receive a confirmation email, and the autograder will run automatically.</p>
+
+    <p><img src="../../assets/resources/assignment-workflow-img/gradescope_submit.webp" alt="Gradescope submission screenshot" style="max-height: 400px;" /></p>
+
+    <p>If Gradescope doesn’t let you choose the correct repository/branch, try <a href="https://guides.gradescope.com/hc/en-us/articles/21587275611533-Linking-and-Unlinking-Accounts">unlinking and relinking your GitHub account</a>.</p>
+  </li>
+</ol>
+
+<p>Gradescope will use the latest version of your code from Github. If you think that Gradescope isn’t grading the right code, check that you have added, committed, and pushed by running <code class="language-plaintext highlighter-rouge">git status</code>.</p>
+
+<p>If you’ve gotten yourself into a situation where you’re unable to push for some reason, see <a href="../../troubleshooting/git-wtfs.html">Git WTFS</a>.</p>
+
+  </div>
+</div>
+
+          
+
+          
+            
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="../../assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

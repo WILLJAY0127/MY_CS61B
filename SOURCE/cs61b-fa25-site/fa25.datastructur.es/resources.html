@@ -1,0 +1,719 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    
+    .site-nav > ul.nav-list:first-child > li:not(:nth-child(3)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(3) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(3) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(3) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Resources | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Resources" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Structures at UC Berkeley" />
+<meta property="og:description" content="Data Structures at UC Berkeley" />
+<link rel="canonical" href="resources.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/resources/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Resources" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Data Structures at UC Berkeley","headline":"Resources","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/resources/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="assets/katex/katex.min.css"
+>
+<script defer src="assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="resources.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="index.html" class="site-title lh-tight">
+
+
+  <img src="assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="proj5/index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="proj5/landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="proj5/proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="proj5/proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="proj5/proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="proj5/ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="proj5/checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="proj5/bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="resources.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item"><a href="resources.html#study-resources" class="nav-list-link">Study Resources</a></li><li class="nav-list-item"><a href="resources.html#campus-resources" class="nav-list-link">Campus Resources</a></li><li class="nav-list-item"><a href="resources.html#student-support-resources" class="nav-list-link">Student Support Resources</a></li><li class="nav-list-item"><a href="resources.html#past-course-websites" class="nav-list-link">Past Course Websites</a></li></ul>
+    </nav>
+  <div class="content">
+<h1 id="resources">
+  
+  
+    <a href="resources.html#resources" class="anchor-heading" aria-labelledby="resources"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Resources
+  
+  
+</h1>
+    
+<h2 id="study-resources">
+  
+  
+    <a href="resources.html#study-resources" class="anchor-heading" aria-labelledby="study-resources"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Study Resources
+  
+  
+</h2>
+    
+
+<p>Disclaimer: In cases of content dispute, where different sources give conflicting information, the current semester’s lectures are take priority as the single source of truth.</p>
+
+<p><strong>Past TA resources</strong>:</p>
+<ul>
+  <li><a href="http://aguo.us/cs61b/">Allen Guo’s Website</a></li>
+  <li><a href="http://danielnguyen.io/cs61b/">Daniel Nguyen’s Website</a></li>
+  <li><a href="https://mattsit.github.io/cs61b">Matt Sit’s Website</a></li>
+  <li><a href="http://kevinl.info/cs61b">Kevin Lin’s Website</a></li>
+  <li><a href="https://wayne-li2.github.io/sp18-cs61b">Wayne Li’s Website</a></li>
+  <li><a href="http://tinyurl.com/cs61b-christine-zhou">Christine Zhou’s Materials</a></li>
+  <li><a href="http://kartikkapur.com/61B.html">Kartik’s Textbook and Practice Midterms</a></li>
+  <li><a href="https://www.youtube.com/playlist?list=PLEdR-EJ6X7NrMIEgC1chCWUUvmU0j5ftZ">Nicole’s videos on typing, overloading, and overriding</a></li>
+  <li><a href="https://drive.google.com/file/d/1lsSW3vrN7-x8SwsHqjfjDbAkyY0c_uv_/view">Antares’ and Vivian’s notes on inheritance</a></li>
+  <li><a href="https://drive.google.com/drive/folders/1TpWQ77lcC8YmxWBIwsIxOMJTXDC0CWM_">Small Group Tutoring (SP23)</a></li>
+</ul>
+
+<p><strong>Java</strong>:</p>
+<ul>
+  <li><a href="https://docs.oracle.com/en/java/javase/17/docs/api/">Java 17 Documentation</a></li>
+  <li><a href="http://www.pythontutor.com/java.html#mode=edit">JavaTutor</a></li>
+  <li><a href="http://cscircles.cemc.uwaterloo.ca/java_visualize/">Java Visualizer</a></li>
+  <li><a href="http://junit.org/">JUnit Documentation</a></li>
+</ul>
+
+<p><strong>Data Structures and Algorithms</strong>:</p>
+<ul>
+  <li><a href="http://www-inst.eecs.berkeley.edu/~cs61b/fa14/book2/data-structures.pdf">Professor Hilfinger’s <em>Data Structures Into Java</em> Book</a></li>
+  <li><a href="http://en.wikibooks.org/wiki/Data_Structures">Data Structures Wikibook</a></li>
+  <li><a href="http://www.cs.usfca.edu/~galles/visualization/Algorithms.html">Data Structures Visualizations</a></li>
+  <li><a href="http://www.cs.usfca.edu/~galles/visualization/Algorithms.html">USFCA Visualizations</a></li>
+  <li><a href="https://visualgo.net/en">VisuAlgo</a></li>
+  <li><a href="https://qiao.github.io/PathFinding.js/visual/">PathFinding.js</a></li>
+</ul>
+
+<p><strong>Asymptotics</strong>:</p>
+<ul>
+  <li><a href="http://bigocheatsheet.com/">Big-O Cheat Sheet</a></li>
+</ul>
+<h2 id="campus-resources">
+  
+  
+    <a href="resources.html#campus-resources" class="anchor-heading" aria-labelledby="campus-resources"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Campus Resources
+  
+  
+</h2>
+    
+
+<p><strong>Advising</strong>: Most departments have advisors that can guide you through academic and career decisions.</p>
+<ul>
+  <li><a href="https://data.berkeley.edu/ds-advising">Data Science Advising</a></li>
+  <li><a href="https://engineering.berkeley.edu/students/advising-counseling/ess-advising/">College of Engineering Advising</a></li>
+  <li><a href="https://eecs.berkeley.edu/resources/undergrads/cs/advising">L&amp;S CS Advising</a></li>
+</ul>
+
+<p><strong>Tutoring</strong>: These campus tutoring resources are not officially affiliated with CS 61B staff, but they may offer tutoring for CS 61B course content. (Check their websites for the most up-to-date information.)</p>
+<ul>
+  <li><strong><a href="https://csmentors.berkeley.edu/#/">Computer Science Mentors (CSM)</a></strong> run small-group tutoring sessions that follow the content schedule. Each section consists of 4-6 students and is led by a mentor who has taken the course before. CSM also holds review sessions and provides other resources throughout the semester. Sections open during the first couple weeks of school, keep an eye on Ed!</li>
+  <li>The <strong><a href="https://engineering.berkeley.edu/students/academic-support/">Center for Access to Engineering Excellence (CAEE)</a></strong> provides free tutoring for CS 61B. The weekly schedule can be found on their website.</li>
+  <li><strong><a href="https://hkn.eecs.berkeley.edu">HKN</a></strong> provides drop-in tutoring throughout the semester in their Soda or Cory office. See <a href="https://hkn.eecs.berkeley.edu/tutor/">the tutoring schedule on their website</a>.</li>
+  <li>The <strong><a href="https://www.csua.berkeley.edu/">CSUA (CS Undergraduate Association)</a></strong> is an undergraduate computer science student organization on campus. They hold tutoring sessions in their Soda office. See <a href="https://www.csua.berkeley.edu/officers/">the schedule on their website</a>.</li>
+  <li><strong><a href="https://upe.berkeley.edu/services/">UPE</a></strong> helps students navigate computer science at Berkeley. They provide career and academic office hours that you can sign up.</li>
+</ul>
+
+<p><strong>Other campus resources</strong>:</p>
+<ul>
+  <li>HKN has a <a href="https://hkn.eecs.berkeley.edu/courseguides">Course Prerequisite Chart</a>.</li>
+</ul>
+<h2 id="student-support-resources">
+  
+  
+    <a href="resources.html#student-support-resources" class="anchor-heading" aria-labelledby="student-support-resources"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Student Support Resources
+  
+  
+</h2>
+    
+
+<p><strong>CS 61B Student Support Meetings</strong>: During your time in CS 61B, we want to support you to the best of our ability. If you would like to meet with one of our student support TAs to discuss academics, external circumstances, or anything else, please <a href="https://forms.gle/RSE94TeZwLrxsXAk9">set up an appointment here</a>.</p>
+
+<p><strong><a href="https://uhs.berkeley.edu/caps">UHS Counseling and Psychological Services (CAPS)</a></strong> provides counseling and consultation services to all Berkeley students. Their services include drop-in counseling as well as crisis appointments.</p>
+
+<p>The <strong><a href="https://care.berkeley.edu/">PATH to Care Center</a></strong> provides support to survivors of sexual violence and sexual harassment.</p>
+
+<p>The <strong><a href="https://studenttech.berkeley.edu/step">Student Technology Equity Program (STEP)</a></strong> provides free on-campus tech support and leads device-lending programs. If during the semester, you lose access to a computer, you may be able to temporarily receive a device through this program.</p>
+<h2 id="past-course-websites">
+  
+  
+    <a href="resources.html#past-course-websites" class="anchor-heading" aria-labelledby="past-course-websites"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Past Course Websites
+  
+  
+</h2>
+    
+
+<div class="table-wrapper"><table>
+<thead>
+  <tr>
+    <th style="width:25%">Spring Semester</th>
+    <th style="width:50%">Summer Semester</th>
+    <th style="width:25%">Fall Semester</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><a href="https://sp25.datastructur.es">Spring 2025</a><br />(Justin Yokota, Josh Hug)</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><a href="https://sp24.datastructur.es">Spring 2024</a><br />(Justin Yokota, Peyrin Kao)</td>
+    <td><a href="https://cs61bl.org/su24/">Summer 2024</a><br />(Alex Kassil, Circle Chen, Dominic Conricode, Erik Kizior, Teresa Luo)</td>
+    <td><a href="https://fa24.datastructur.es/">Fall 2024</a><br />(Justin Yokota, Peyrin Kao)</td>
+  </tr>
+  <tr>
+    <td><a href="https://sp23.datastructur.es">Spring 2023</a><br />(Justin Yokota, Josh Hug)</td>
+    <td><a href="https://cs61bl.org/su23/">Summer 2023</a><br />(Anton Zabreyko, Crystal Wang, Laksith Prabu)</td>
+    <td><a href="https://fa23.datastructur.es/">Fall 2023</a><br />(Justin Yokota, Peyrin Kao)</td>
+  </tr>
+  <tr>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/sp22/">Spring 2022</a><br />(Paul Hilfinger)</td>
+    <td><a href="https://cs61bl.org/su22/">Summer 2022</a><br />(Ethan Ordentlich, Jedidiah Tsang, Zephyr Omaly)</td>
+    <td><a href="https://fa22.datastructur.es/">Fall 2022</a><br />(Josh Hug)</td>
+  </tr>
+  <tr>
+    <td><a href="https://sp21.datastructur.es/">Spring 2021</a><br />(Josh Hug)</td>
+    <td><a href="https://cs61bl.org/su21/">Summer 2021</a><br />(Allyson Park, Sohum Hulyalkar, Zephyr Omaly)</td>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/fa21/">Fall 2021</a><br />(Paul Hilfinger)</td>
+  </tr>
+  <tr>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/sp20/">Spring 2020</a><br />(Paul Hilfinger)</td>
+    <td><a href="https://cs61bl.org/su20/">Summer 2020</a><br />(Zephyr Omaly, Matt Owen)</td>
+    <td><a href="https://fa20.datastructur.es/">Fall 2020</a><br />(Josh Hug)</td>
+  </tr>
+  <tr>
+    <td><a href="https://sp19.datastructur.es/">Spring 2019</a><br />(Josh Hug)</td>
+    <td><a href="https://cs61bl.org/su19/">Summer 2019</a><br />(Christine Zhou, Jackson Leisure, Matthew Sit)</td>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/fa19/">Fall 2019</a><br />(Paul Hilfinger)</td>
+  </tr>
+  <tr>
+    <td><a href="https://sp18.datastructur.es/">Spring 2018</a><br />(Josh Hug)</td>
+    <td><a href="https://cs61bl.org/su18/">Summer 2018</a><br />(Christine Zhou, Kevin Lin)</td>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/fa18/">Fall 2018</a><br />(Paul Hilfinger)</td>
+  </tr>
+  <tr>
+    <td><a href="https://sp17.datastructur.es/">Spring 2017</a><br />(Josh Hug)</td>
+    <td><a href="https://cs61bl.org/su17/">Summer 2017</a><br />(Daniel Nguyen, Daniel Sochor)</td>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/fa17/">Fall 2017</a><br />(Paul Hilfinger)</td>
+  </tr>
+  <tr>
+    <td><a href="https://sp16.datastructur.es/">Spring 2016</a><br />(Josh Hug)</td>
+    <td><a href="https://cs61bl.org/su16/">Summer 2016</a><br />(Alan Yao, Sarah Kim)</td>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/fa16/">Fall 2016</a><br />(Paul Hilfinger)</td>
+  </tr>
+  <tr>
+    <td><a href="https://sp15.datastructur.es/">Spring 2015</a><br />(Josh Hug)</td>
+    <td><a href="https://cs61bl.org/su15/">Summer 2015</a><br />(Joseph Moghadam)</td>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/fa15/">Fall 2015</a><br />(Paul Hilfinger)</td>
+  </tr>
+  <tr>
+    <td><a href="https://people.eecs.berkeley.edu/~jrs/61bs14/">Spring 2014</a><br />(Jonathan Shewchuk)</td>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61bl/su14/">Summer 2014</a><br />(Edwin Liao)</td>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/fa14/">Fall 2014</a><br />(Paul Hilfinger, Josh Hug)</td>
+  </tr>
+  <tr>
+    <td><a href="https://people.eecs.berkeley.edu/~jrs/61bs13/">Spring 2013</a><br />(Jonathan Shewchuk)</td>
+    <td></td>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/fa13/">Fall 2013</a><br />(Paul Hilfinger)</td>
+  </tr>
+  <tr>
+    <td><a href="https://people.eecs.berkeley.edu/~jrs/61bs12/">Spring 2012</a><br />(Jonathan Shewchuk)</td>
+    <td></td>
+    <td><a href="https://inst.eecs.berkeley.edu/~cs61b/fa12/">Fall 2012</a><br />(Paul Hilfinger)</td>
+  </tr>
+</tbody>
+</table></div>
+
+<p>For semesters older than 2012, please see <a href="https://inst.eecs.berkeley.edu/~cs61b/archives">https://inst.eecs.berkeley.edu/~cs61b/archives</a>.</p>
+
+  </div>
+</div>
+
+          
+
+          
+            <hr>
+<h2 class="text-delta">Table of contents</h2>
+
+<ul>
+  
+  <li>
+    <a href="resources/assignment-workflow/index.html">61B Assignment Workflow</a>
+  </li>
+  
+  <li>
+    <a href="resources/style-guide.html">61B Style Guide</a>
+  </li>
+  
+  <li>
+    <a href="resources/exam-archive.html">Exam Archive</a>
+  </li>
+  
+  <li>
+    <a href="resources/exam-study-tips/index.html">Exam Study Tips</a>
+  </li>
+  
+  <li>
+    <a href="resources/example-tdd.html">Example TDD</a>
+  </li>
+  
+  <li>
+    <a href="resources/partnerships.html">Partnership Guide</a>
+  </li>
+  
+  <li>
+    <a href="resources/using-ed/index.html">Using Ed</a>
+  </li>
+  
+  <li>
+    <a href="resources/using-git.html">Using Git</a>
+  </li>
+  
+  <li>
+    <a href="resources/using-intellij/index.html">Using IntelliJ</a>
+  </li>
+  
+  <li>
+    <a href="resources/using-oh/index.html">Using Office Hours</a>
+  </li>
+  
+  <li>
+    <a href="resources/using-debugger/index.html">Using the Debugger</a>
+  </li>
+  
+  <li>
+    <a href="resources/using-soda-lab-machines/index.html">Using the Soda Lab Machines</a>
+  </li>
+  
+  <li>
+    <a href="resources/using-terminal.html">Using the Terminal</a>
+  </li>
+  
+</ul>
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

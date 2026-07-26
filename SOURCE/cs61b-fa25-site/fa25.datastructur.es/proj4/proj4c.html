@@ -1,0 +1,1005 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    .site-nav > ul.nav-list:first-child > li > a,
+    
+    .site-nav > ul.nav-list:first-child > li > ul > li:not(:nth-child(3)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(7) > ul > li:nth-child(3) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(7) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(7) > ul > li:nth-child(3) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(7) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(7) > ul.nav-list > li.nav-list-item:nth-child(3) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="../assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>4C: Wordnet (k==0) | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="4C: Wordnet (k==0)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Structures at UC Berkeley" />
+<meta property="og:description" content="Data Structures at UC Berkeley" />
+<link rel="canonical" href="proj4c.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/proj4/proj4c/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="4C: Wordnet (k==0)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Data Structures at UC Berkeley","headline":"4C: Wordnet (k==0)","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/proj4/proj4c/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="../assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="../assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="../assets/katex/katex.min.css"
+>
+<script defer src="../assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="../assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="proj4c.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="../index.html" class="site-title lh-tight">
+
+
+  <img src="../assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="../policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="../policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="../policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="../policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="../resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="../resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="../resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="../resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="../resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="../resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="../resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="../resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="../resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="../resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="../resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="../resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="../resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="../staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="../homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="../homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="../homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="../homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="../homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="../homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="../homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="../homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="../homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="../homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="../projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="../projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="../projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../proj5/index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="../proj5/landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="../proj5/proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="../proj5/proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="../proj5/proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="../proj5/ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="../proj5/checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="../proj5/bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="../troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="../troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="proj4c.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="index.html">Project 4</a></li>
+    <li class="breadcrumb-nav-list-item"><span>4C: Wordnet (k==0)</span></li>
+  </ol>
+</nav>
+
+
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item"><a href="proj4c.html#setup" class="nav-list-link">Setup</a></li><li class="nav-list-item"><a href="proj4c.html#task-1-dummy-hyponymshandler" class="nav-list-link">Task 1: Dummy HyponymsHandler</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4c.html#wordnet-dataset" class="nav-list-link">WordNet Dataset</a></li></ul></li><li class="nav-list-item"><a href="proj4c.html#hyponyms-basic-case" class="nav-list-link">Hyponyms (Basic Case)</a></li><li class="nav-list-item"><a href="proj4c.html#task-2-graph-implementation" class="nav-list-link">Task 2: Graph Implementation</a></li><li class="nav-list-item"><a href="proj4c.html#task-3-reading-wordnet-dataset-files" class="nav-list-link">Task 3: Reading WordNet Dataset Files</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4c.html#wordnet-file-format" class="nav-list-link">WordNet File Format</a></li><li class="nav-list-item"><a href="proj4c.html#design-tips" class="nav-list-link">Design Tips</a></li></ul></li><li class="nav-list-item"><a href="proj4c.html#task-4-traversing-the-wordnet-graph" class="nav-list-link">Task 4: Traversing the WordNet Graph</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4c.html#design-tips-1" class="nav-list-link">Design Tips</a></li><li class="nav-list-item"><a href="proj4c.html#writing-tests-wordnet" class="nav-list-link">Writing Tests: WordNet</a></li><li class="nav-list-item"><a href="proj4c.html#writing-tests-hyponymshandler" class="nav-list-link">Writing Tests: HyponymsHandler</a></li></ul></li><li class="nav-list-item"><a href="proj4c.html#handling-lists-of-words" class="nav-list-link">Handling Lists of Words</a></li><li class="nav-list-item"><a href="proj4c.html#task-5-lists-of-words" class="nav-list-link">Task 5: Lists of Words</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4c.html#writing-tests-hyponymshandler-1" class="nav-list-link">Writing Tests: HyponymsHandler</a></li></ul></li><li class="nav-list-item"><a href="proj4c.html#task-6-autograder-buddy" class="nav-list-link">Task 6: Autograder Buddy</a></li><li class="nav-list-item"><a href="proj4c.html#submission" class="nav-list-link">Submission</a></li></ul>
+    </nav>
+  <div class="content">
+<h1 id="project-4c-wordnet-k0">
+  
+  
+    <a href="proj4c.html#project-4c-wordnet-k0" class="anchor-heading" aria-labelledby="project-4c-wordnet-k0"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 4C: Wordnet (k==0)
+  
+  
+</h1>
+    
+
+<blockquote class="NOTE">
+  <p><em>Lectures needed for this project:</em></p>
+  <ul>
+    <li>Lecture 16 (Extends, Sets, Maps, and BSTs)</li>
+    <li>Lectures 20, 21 (Graph Traversals and Implementations)</li>
+  </ul>
+
+  <p><em>Partner policy:</em> No partners. Discussing ideas with other students is allowed, but code sharing is not allowed, and the solutions you submit should be your own work! More details on <a href="../policies.html#collaboration-policy">the policies page</a>.</p>
+</blockquote>
+
+<p>In this project, we will continue building out the browser-based tool NGordnet by adding a new feature to return
+hyponyms within the WordNet dataset.</p>
+
+<p>Here, you’ll complete part of your implementation to Wordnet by handling the <code class="language-plaintext highlighter-rouge">k == 0</code> case and lists of 
+words.</p>
+
+<p>Unlike Project 4A, the implementation for this part of the project is very open-ended. Deciding on an overall design is 
+an important skill that we’ll also revisit in Project 5. The number of lines of code for this project isn’t necessarily 
+large, but there are a lot of independent decisions that you’ll need to make along the way.</p>
+
+<p><a href="https://www.youtube.com/playlist?list=PLNpmrGKEeMf727KwSrG8Ez1o3odK--o9i">See below or click here for a video introduction to the project.</a> Note that the video might have some slightly outdated sections.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pHVCB4Lomik?si=vyTRNWWyPbTgZzQe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Em3nRZWmkUU?si=8ZS-a0g1NJf9skh9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+<h2 id="setup">
+  
+  
+    <a href="proj4c.html#setup" class="anchor-heading" aria-labelledby="setup"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Setup
+  
+  
+</h2>
+    
+
+<p>Follow the <a href="../resources/assignment-workflow/index.html">Assignment Workflow Guide</a> to get started with this assignment. This 
+starter code is in the <code class="language-plaintext highlighter-rouge">proj4cd</code> folder.</p>
+
+<p>You’ll also need to download the Project 4 data files (they are around 150 MB, which is too large to be pushed to 
+GitHub).</p>
+
+<blockquote class="NOTE">
+  <p>The data files in this assignment contain a new set of data files in addition to the ones from Project 4A.</p>
+</blockquote>
+
+<blockquote class="TASK">
+  <p>Download the data files <a href="https://drive.google.com/file/d/1tgFprQ-r4cXvmiFh2yIyUcE8DONN1lq2/view?usp=sharing">at this link</a>.</p>
+
+  <p>You should unzip this file into the proj4 directory such that the <code class="language-plaintext highlighter-rouge">data</code> folder is at the same level as the <code class="language-plaintext highlighter-rouge">src</code> and <code class="language-plaintext highlighter-rouge">static</code> folders.</p>
+
+  <ul>
+    <li><a href="https://support.microsoft.com/en-us/windows/zip-and-unzip-files-f6dde0a7-0fec-8294-e1d3-703ed85e7ebc#:~:text=To%20unzip%20files,folder%20to%20a%20new%20location.">How to unzip folders on Windows</a></li>
+    <li><a href="https://support.apple.com/guide/mac-help/zip-and-unzip-files-and-folders-on-mac-mchlp2528/mac#:~:text=Unzip%20(expand)%20a%20compressed%20item,zip%20file.">How to unzip folders on Mac</a></li>
+  </ul>
+</blockquote>
+
+<p>Once you are done with this step, your <code class="language-plaintext highlighter-rouge">proj4cd</code> directory should look like this:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proj4cd
+├── data
+├── src
+├── static
+├── tests
+</code></pre></div></div>
+
+<p>You’ll notice that this skeleton is (almost) the exact same as the Project 4A skeleton. Project 4D uses the <code class="language-plaintext highlighter-rouge">NGramMap</code> class from Project 4A, which is why we have provided a placeholder implementation for it. This includes a working implementation of the <code class="language-plaintext highlighter-rouge">countHistory</code> method.</p>
+
+<p>If you want to copy in your own <code class="language-plaintext highlighter-rouge">NGramMap</code> and <code class="language-plaintext highlighter-rouge">TimeSeries</code> from Project 4A, you can. However, we suggest only doing so after you get a full score on Project 4C and 4D, just in case your implementation has any subtle bugs in it.</p>
+
+<p>You may have also noticed that the <code class="language-plaintext highlighter-rouge">Plotter</code> class and the other handlers are not in the skeleton. Since they depend on <code class="language-plaintext highlighter-rouge">TimeSeries</code>, if you want to use them, you’ll have to copy it in from Project 4A along with your <code class="language-plaintext highlighter-rouge">TimeSeries</code> implementation.</p>
+
+<p>After importing <code class="language-plaintext highlighter-rouge">library-fa25</code>, the code in <code class="language-plaintext highlighter-rouge">NGramMap.java</code> should no longer be red.</p>
+<h2 id="task-1-dummy-hyponymshandler">
+  
+  
+    <a href="proj4c.html#task-1-dummy-hyponymshandler" class="anchor-heading" aria-labelledby="task-1-dummy-hyponymshandler"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 1: Dummy HyponymsHandler
+  
+  
+</h2>
+    
+
+<ol>
+  <li>In your web browser, open the <code class="language-plaintext highlighter-rouge">ngordnet.html</code> file in the <code class="language-plaintext highlighter-rouge">static</code> folder. As a refresher, you can find how to do that <a href="proj4a.html#task-3-historytexthandler">here</a>. You’ll see that there is a new button: “Hyponyms”. Note that there is also a new input box called <code class="language-plaintext highlighter-rouge">k</code>, though we won’t use this box until part D.</li>
+  <li>Try clicking the Hyponyms button. You’ll see nothing happens (and if you open the developer tools feature of your web browser, you’ll see that your browser shows an error).</li>
+</ol>
+
+<p>In Project 4C and 4D, your primary objective is to implement this button, which will require reading in a different type of dataset and synthesizing the results with the dataset from Project 4A. Unlike 4A. it will be entirely up to you to decide what classes you need to support this task.</p>
+
+<blockquote class="TASK">
+  <ol>
+    <li>Start by opening your <code class="language-plaintext highlighter-rouge">Main.java</code> file.</li>
+    <li>Create a new file called <code class="language-plaintext highlighter-rouge">HyponymsHandler</code> that simply returns the word “Hello!” when the user clicks the Hyponyms button in the browser. You’ll need to create a new <code class="language-plaintext highlighter-rouge">HyponymsHandler</code> class that extends the <code class="language-plaintext highlighter-rouge">NgordnetQueryHandler</code> class. See your other Handler classes for examples. Make sure when you register your handler that you use the string “hyponyms” as the first argument to the <code class="language-plaintext highlighter-rouge">register</code> method, and not “hyponym”.</li>
+    <li>Once you’ve modified <code class="language-plaintext highlighter-rouge">Main</code> so that your new handler is registered to handle hyponyms requests, start up <code class="language-plaintext highlighter-rouge">Main</code> and try clicking the Hyponyms button in your web browser again. You should see text appear that says “Hello”.</li>
+  </ol>
+</blockquote>
+<h3 id="wordnet-dataset">
+  
+  
+    <a href="proj4c.html#wordnet-dataset" class="anchor-heading" aria-labelledby="wordnet-dataset"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> WordNet Dataset
+  
+  
+</h3>
+    
+
+<p>Before we can incorporate WordNet into our project, we first need to understand the WordNet dataset.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/WordNet">WordNet</a> is a “semantic lexicon for the English language” that is used
+extensively by computational linguists and cognitive scientists; for example, it was a key component in IBM’s Watson. WordNet groups words into sets of synonyms called synsets and describes semantic relationships between them.</p>
+
+<p>One such relationship is the is-a relationship, which connects a <strong>hypo</strong>nym (more specific synset) to a <strong>hyper</strong>nym (more general synset). For example, “change” is a <strong>hypernym</strong> of “demotion”, since “demotion” is-a (type of) “change”. “change” is in turn a <strong>hyponym</strong> of “action”, since “change” is-a (type of) “action”. A visual depiction of some hyponym relationships in English is given below:</p>
+
+<p><img src="../assets/projects/proj4c/1-wordnet-fig.webp" alt="WordNet" title="WordNet" /></p>
+
+<p>Each node in the graph above is a <strong>synset</strong>. Synsets consist of one or more words in English that all have the same meaning. For example, one synset
+is “jump, parachuting”, which represents the act of descending to the ground with a parachute. “jump, parachuting” is a hyponym of “descent”, since “jump, parachuting” is-a “descent”.</p>
+
+<p>Words in English may belong to multiple synsets. This is just another way of saying words may have multiple meanings. For example, the word “jump” also belongs to the synset “jump, leap”, which represents the more figurative notion of jumping (e.g. a jump in attendance) rather the literal meaning of jump from the other synset (e.g. a jump over a puddle). The hypernym of the synset “jump, leap” is “increase”, since “jump, leap” is-an “increase”. Of course, there are other ways to “increase” something: for example, we can increase something through “augmentation,” and thus it is no surprise that we have an arrow pointing downwards from “increase” to “augmentation” in the diagram
+above.</p>
+
+<p>Synsets may include not just words, but also what are known as <a href="http://en.wikipedia.org/wiki/Collocation">collocations</a>. You can think of these as single words that occur next to each other so often that they are considered a single word, e.g. “nasal_decongestant”. To avoid ambiguity, Wordnet represents the constituent words of collocations as being separated with an underscore _
+instead of the usual convention in English of separating them with spaces. For simplicity, we will refer to collocations as simply “words” throughout this document.</p>
+
+<p>A synset may be a hyponym of multiple synsets. For example, “actifed” is a hyponym of both “antihistamine” and “nasal_decongestant”, since “actifed” is both of these things.</p>
+
+<p>Additional resources:</p>
+<ul>
+  <li><a href="https://ngordnet.datastructur.es/">Staff Solution Webpage</a>: Useful for generating expected outputs for different test case inputs. Use this to write your unit tests!</li>
+  <li><a href="https://www.qxbytes.com/wordnet/">Wordnet Visualizer</a>: Useful for visually understanding how synsets and hyponyms work and testing different words/lists of words for potential test case inputs. Click on the “?” bubbles to learn how to use the various features of this tool!</li>
+</ul>
+<h2 id="hyponyms-basic-case">
+  
+  
+    <a href="proj4c.html#hyponyms-basic-case" class="anchor-heading" aria-labelledby="hyponyms-basic-case"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Hyponyms (Basic Case)
+  
+  
+</h2>
+    
+
+<p>In the next 3 tasks, you’ll create a partial implementation of the Hyponyms button. For now, this button should:</p>
+
+<ul>
+  <li>Assume that the “words” entered is only a single word.</li>
+  <li>Ignore startYear, endYear, and k.</li>
+  <li>Return a string representation of a list of the hyponyms of the single word, including the word itself. The list should be in <strong>alphabetical order</strong>, with <strong>no repeated words</strong>.</li>
+</ul>
+
+<p>For example, suppose the WordNet dataset looks like the diagram below (given to you as the input files <code class="language-plaintext highlighter-rouge">synsets_size11.txt</code>
+and <code class="language-plaintext highlighter-rouge">hyponyms_size11.txt</code>). Suppose that the user enters “descent” and clicks on the Hyponyms button.</p>
+
+<p><img src="../assets/projects/proj4c/1-wordnet-fig.webp" alt="fig 1" /></p>
+
+<p>In this case, the output of your handler should be the string representation of a list containing “descent”, “jump”
+and “
+parachuting”, i.e <code class="language-plaintext highlighter-rouge">[descent, jump, parachuting]</code>. Note that the words are in alphabetical order.</p>
+
+<p>As another example, suppose we’re using a bigger dataset such as the one below (given to you as the input
+files <code class="language-plaintext highlighter-rouge">synsets_size16.txt</code> and <code class="language-plaintext highlighter-rouge">hyponyms_size16.txt</code>):</p>
+
+<p><img src="../assets/projects/proj4c/2-wordnet-fig2.webp" alt="synsets16" /></p>
+
+<p>Suppose the user enters “change” and clicks on the Hyponyms button. In this case, the hyponyms are all the words in the
+blue nodes in the diagram below:</p>
+
+<p><img src="../assets/projects/proj4c/3-wordnet-fig2-change-hyponyms.webp" alt="synsets16-change-hyponyms" /></p>
+
+<p>That is the output
+is <code class="language-plaintext highlighter-rouge">[alteration, change, demotion, increase, jump, leap, modification, saltation, transition, variation]</code>. Note that
+even though “change” belongs to two different synsets, it only appears once.</p>
+
+<p><strong>Note: Don’t overthink this</strong> and make life harder than it needs to be. Specifically, observe that the output <strong>does not</strong> include:</p>
+
+<ul>
+  <li>Synonyms of synonyms (e.g. does not include <em>“adjustment”</em>)</li>
+  <li>Hyponyms of synonyms (e.g. does not include <em>“conversion”</em>)</li>
+  <li>Hyponyms of other definitions of hyponyms (e.g. does not include <em>“flashback”</em>, which is a hyponym of another
+definition of “transition”)</li>
+</ul>
+
+<p>In other words, solving this problem in the most straightforward way is good enough.</p>
+
+<p>In the next few tasks, you will modify <code class="language-plaintext highlighter-rouge">HyponymsHandler.java</code> (and any helper classes) in order to implement the Hyponyms button.</p>
+
+<p>To implement this button, you’ll need to decide what additional classes you need to create. Don’t do all the work in <code class="language-plaintext highlighter-rouge">HyponymsHandler</code>! Instead, you should have helper classes. For example, in Project 4A, we created an <code class="language-plaintext highlighter-rouge">NGramMap</code> class. You’ll want to do something similar.</p>
+
+<p>In the next few tasks, we’ll suggest some steps you can take to tackle this problem, although you can organize your code in whatever way makes the most sense for your implementation.</p>
+<h2 id="task-2-graph-implementation">
+  
+  
+    <a href="proj4c.html#task-2-graph-implementation" class="anchor-heading" aria-labelledby="task-2-graph-implementation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 2: Graph Implementation
+  
+  
+</h2>
+    
+
+<p>To get the Hyponyms button working, you’ll need some kind of implementation of a directed graph as described in lectures 20 and 21. We suggest starting this project by creating such an implementation.</p>
+
+<blockquote class="TASK">
+  <p>Implement a directed graph to represent Wordnet.</p>
+</blockquote>
+
+<p>This project is unlike any project earlier in the class. We won’t be grading your graph implementation, and we won’t even be telling you what to put into it. That’s your choice.</p>
+
+<p>To decide what methods to include in your graph design, you’ll have to think ahead to how you’ll use it. This will require understanding the entire task described below.</p>
+
+<p>You may also want additional helper classes/methods that represent the idea of a traversal, but this is not required - you can implement your traversal within your graph implementation as well.</p>
+
+<p class="WARNING">For this project, you may not import any existing graph library into your code. Instead, you should build your own graph class or classes. Recall that you are not allowed to use LLMs for code generaton on this project!</p>
+
+<p class="NOTE">Since you’re only going to be creating one implementation, there’s no need to define an <code class="language-plaintext highlighter-rouge">interface</code>. That is, rather than having a <code class="language-plaintext highlighter-rouge">DirectedGraph</code> interface with several implementations, e.g. <code class="language-plaintext highlighter-rouge">AdjacencyMatrixDG</code> and <code class="language-plaintext highlighter-rouge">AdjacencyListDG</code>, you should just write a class.</p>
+
+<p><strong>Testing</strong></p>
+
+<p>We suggest writing tests to ensure that your graph implementation is working as expected. Our solution has a class called <code class="language-plaintext highlighter-rouge">TestGraph</code> that evaluates various aspects of our implementation.</p>
+
+<p>We recommend testing your graph methods with operations that are independent of the WordNet data. Granular tests will allow you to pinpoint whether a failing implementation is the result of an incorrect graph implementation, incorrect Wordnet data processing, or something else entirely. For example, if your implementation includes <code class="language-plaintext highlighter-rouge">createNode</code> or <code class="language-plaintext highlighter-rouge">addEdge</code> methods, confirm they yield an expected output separately from <code class="language-plaintext highlighter-rouge">hyponyms</code> and <code class="language-plaintext highlighter-rouge">synset</code> processing logic.</p>
+<h2 id="task-3-reading-wordnet-dataset-files">
+  
+  
+    <a href="proj4c.html#task-3-reading-wordnet-dataset-files" class="anchor-heading" aria-labelledby="task-3-reading-wordnet-dataset-files"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 3: Reading WordNet Dataset Files
+  
+  
+</h2>
+    
+<h3 id="wordnet-file-format">
+  
+  
+    <a href="proj4c.html#wordnet-file-format" class="anchor-heading" aria-labelledby="wordnet-file-format"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> WordNet File Format
+  
+  
+</h3>
+    
+
+<p>We now describe the two types of data files that store the WordNet dataset. These files are in comma separated format, meaning that each line contains a sequence of fields, separated by commas.</p>
+
+<ul>
+  <li>
+    <p>File Type #1: List of noun synsets. The file <code class="language-plaintext highlighter-rouge">synsets_size82191.txt</code> (and other smaller files with <code class="language-plaintext highlighter-rouge">synset</code> in the name) lists all the synsets in WordNet. The first field is the synset id (an integer), the second field is the synonym set (or synset), and the third field is its dictionary definition. For example, the line</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 6829,Goofy,a cartoon character created by Walt Disney
+</code></pre></div>    </div>
+
+    <p>means that the synset <code class="language-plaintext highlighter-rouge">{ Goofy }</code> has an id number of 6829, and its definition is “a cartoon character created by Walt Disney”. The individual nouns that comprise a synset are separated by spaces (and a synset element is not permitted to contain a space). The id numbers are useful because they also appear in the hyponym files, described as file type #2.</p>
+  </li>
+  <li>
+    <p>File Type #2: List of hyponyms. The file <code class="language-plaintext highlighter-rouge">hyponyms_size82191.txt</code> (and other smaller files with hyponym in the name) contains the hyponym relationships: The first field is a synset id; subsequent fields are the id numbers of the synset’s direct
+hyponyms. For example, the following line</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>79537,38611,9007
+</code></pre></div>    </div>
+
+    <p>means that the synset 79537 (“viceroy vicereine”) has two hyponyms: 38611 (“exarch”) and 9007 (“Khedive”),
+representing that exarchs and Khedives are both types of viceroys (or vicereine). The synsets are obtained from the corresponding lines in the file <code class="language-plaintext highlighter-rouge">synsets.txt</code>:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>79537,viceroy vicereine,governor of a country or province who rules...
+38611,exarch,a viceroy who governed a large province in the Roman Empire
+9007,Khedive,one of the Turkish viceroys who ruled Egypt between...
+</code></pre></div>    </div>
+
+    <p>There may be more than one line that starts with the same synset ID. For example, in <code class="language-plaintext highlighter-rouge">hyponyms_size16.txt</code>, we have</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>11,12
+11,13
+</code></pre></div>    </div>
+
+    <p>This indicates that both synsets 12 and 13 are direct hyponyms of synset 11. These two could also have been combined on to one line, i.e. the line below would have the exact same meaning, namely that synsets 12 and 13 are direct hyponyms of synset 11.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>11,12,13
+</code></pre></div>    </div>
+
+    <p>You might ask why there are two ways of specifying the same thing. Real world data is often messy, and we have to deal with it.</p>
+  </li>
+</ul>
+
+<blockquote class="TASK">
+  <p>Parse the Wordnet data files and use your directed graph implementation to store the data.</p>
+</blockquote>
+
+<p>Now that you have code for representing a graph in memory, the next step in building the Hyponyms button is writing code that converts the WordNet dataset files into a graph. This code could be a part of your graph implementation, or it could be a class or method that uses your graph implementation.</p>
+
+<p>We recommend creating another class/method that reads in the WordNet dataset and constructs an instance of your directed graph implementation from Task 2. The section below (Design Tips) provides some tips for reading Wordnet dataset files.</p>
+<h3 id="design-tips">
+  
+  
+    <a href="proj4c.html#design-tips" class="anchor-heading" aria-labelledby="design-tips"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Design Tips
+  
+  
+</h3>
+    
+
+<p>The Hyponyms button involves having to do all sorts of different lookups, graph operations, and data processing operations. There is no one right way to do this.</p>
+
+<p>Here are some example lookups that you might need to perform on the WordNet dataset:</p>
+
+<ul>
+  <li>Given a word (e.g. “change”), what nodes contain that word?
+    <ul>
+      <li>Example in synsets_size16.txt: change is in synsets 2 and 8</li>
+    </ul>
+  </li>
+  <li>Given an integer, what node goes with that index?
+    <ul>
+      <li>Necessary for processing hyponyms.txt. For example in hyponyms16.txt, we know that the node with synset 8 points
+at synsets 9 and 10, so we need to be able to find node 8 to get its adjacency list.</li>
+    </ul>
+  </li>
+  <li>Given a node, what words are in that node?
+    <ul>
+      <li>Example in synsets_size16.txt: synset 11 contains alteration, modification, and adjustment</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Here are some example graph operations you might need to perform:</p>
+
+<ul>
+  <li>Creating a node, e.g. each line of <code class="language-plaintext highlighter-rouge">synsets_size16.txt</code> contains the information for a node.</li>
+  <li>Adding edges between nodes node, e.g. each line of <code class="language-plaintext highlighter-rouge">hyponyms_size16.txt</code> contains one or more edges that should be added to the
+corresponding node.</li>
+  <li>Finding reachable nodes, e.g. the nodes reachable from node #7 in <code class="language-plaintext highlighter-rouge">hyponyms_size16.txt</code> are 7, 8, 9, 10.</li>
+</ul>
+
+<p>Your life will be a lot easier if you select instance variables for your classes that naturally help solve all six of the problems above.</p>
+
+<p>Note: If you over-engineer and write methods that you end up not needing, that’s fine.</p>
+
+<p class="WARNING">Just like NGramMap, you’ll want your helper classes to only parse the input files once. Do not create methods that have to read the entire Wordnet file every time they are called. This will be too slow!</p>
+
+<p class="WARNING">Also, a reminder from Project 4A: Deeply nested generics are a warning sign that you are doing something too complicated. Either find a simpler way or create a helper class to help manage the complexity. For example, if you find yourself trying to use something like <code class="language-plaintext highlighter-rouge">Map&lt;Set&lt;Set&lt;...</code>, you have started a walk down an unnecessarily difficult path.</p>
+
+<p>If you have a design that is painful and with which you cannot make progress, don’t be afraid to delete your existing instance variables and try again. The hard part of this project is the design, not the programming. You can always use git to recover your old design if you decide you actually liked it.</p>
+<h2 id="task-4-traversing-the-wordnet-graph">
+  
+  
+    <a href="proj4c.html#task-4-traversing-the-wordnet-graph" class="anchor-heading" aria-labelledby="task-4-traversing-the-wordnet-graph"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 4: Traversing the WordNet Graph
+  
+  
+</h2>
+    
+
+<blockquote class="TASK">
+  <p>Use an algorithm on your directed graph implementation to return the hyponyms of the query.</p>
+</blockquote>
+
+<p>Now that you have a way to represent the WordNet dataset in memory, the last step in building the Hyponyms button is writing code that takes a word, and uses a <strong>graph traversal</strong> to find all hyponyms of that word in the given graph.</p>
+
+<p>We recommend adding code to a WordNet class so that a WordNet object is able to take a word and return its hyponyms.</p>
+<h3 id="design-tips-1">
+  
+  
+    <a href="proj4c.html#design-tips-1" class="anchor-heading" aria-labelledby="design-tips-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Design Tips
+  
+  
+</h3>
+    
+
+<p>Here are some example data processing operations you might need in this task:</p>
+
+<ul>
+  <li>Given a collection of things, how do you find all non-duplicate items? (Hint: There is a data structure that makes this very easy and efficient). Don’t be afraid to also search the internet for the data structure that you choose (e.g. if you choose to use a TreeMap for whatever reason, feel free to look up “TreeMap methods java”, “Map methods
+java”, or “Collection methods java”, etc).</li>
+  <li>Given a collection of things, how do you sort them? (Hint: Google how to sort the collection that you’re using)</li>
+</ul>
+<h3 id="writing-tests-wordnet">
+  
+  
+    <a href="proj4c.html#writing-tests-wordnet" class="anchor-heading" aria-labelledby="writing-tests-wordnet"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Writing Tests: WordNet
+  
+  
+</h3>
+    
+
+<p>We recommend writing tests that evaluate queries on the examples above (for example, you might look at the hyponyms of “descent” in <code class="language-plaintext highlighter-rouge">synsets_size11.txt</code> and <code class="language-plaintext highlighter-rouge">hypernyms_size11.txt</code>, or the hyponyms of “change” in <code class="language-plaintext highlighter-rouge">synsets_size16.txt</code> and <code class="language-plaintext highlighter-rouge">hypernyms_size16.txt</code>.</p>
+
+<p>For example, our code has a class called <code class="language-plaintext highlighter-rouge">TestWordNet</code> containing the function below.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testHyponymsSimple</span><span class="o">(){</span>
+        <span class="nc">WordNet</span> <span class="n">wn</span><span class="o">=</span><span class="k">new</span> <span class="nc">WordNet</span><span class="o">(</span><span class="s">"./data/synsets_size11.txt"</span><span class="o">,</span><span class="s">"./data/hyponyms_size11.txt"</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">wn</span><span class="o">.</span><span class="na">hyponyms</span><span class="o">(</span><span class="s">"antihistamine"</span><span class="o">)).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="nc">Set</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"antihistamine"</span><span class="o">,</span><span class="s">"actifed"</span><span class="o">));</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note your WordNet class may not have the same functions as mine so the test shown will probably not work verbatim with your code. Note that our test does NOT use an <code class="language-plaintext highlighter-rouge">NGramMap</code> anywhere, nor is it using a <code class="language-plaintext highlighter-rouge">HyponymHandler</code>, nor is it directly invoking an object of type <code class="language-plaintext highlighter-rouge">Graph</code>. It is specifically tailored to testing the WordNet class.</p>
+<h3 id="writing-tests-hyponymshandler">
+  
+  
+    <a href="proj4c.html#writing-tests-hyponymshandler" class="anchor-heading" aria-labelledby="writing-tests-hyponymshandler"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Writing Tests: HyponymsHandler
+  
+  
+</h3>
+    
+
+<p>We’ve provided you with a short unit test files for this task in the file <code class="language-plaintext highlighter-rouge">tests/TestOneWordK0Hyponyms.java</code>.</p>
+
+<p>This file corresponds to tests for finding hyponyms of a single word, where <code class="language-plaintext highlighter-rouge">k = 0</code>.</p>
+
+<p>This test file is not comprehensive! In fact, it only contains one basic test. You should fill this file with more unit tests.</p>
+
+<p>If you need help figuring out what the expected outputs of your tests should be, you can use the <a href="https://ngordnet.datastructur.es/">staff solution webpage</a>.</p>
+
+<p><strong>Testing in Browser</strong></p>
+
+<p>While you can (and should) write unit tests for the helper classes/methods that you create for this project, another good way to test and see what’s going on with your code is to simply run <code class="language-plaintext highlighter-rouge">Main.java</code>, open <code class="language-plaintext highlighter-rouge">ngordnet.html</code>, enter some inputs into the boxes, and click the “Hyponyms” button. You may find visual debugging can lead to some useful discoveries in this project.</p>
+
+<p>For example, you can use the web front-end to check the two input examples (“descent” and “change”) from the diagrams above for <code class="language-plaintext highlighter-rouge">synsets_size16.txt</code> and <code class="language-plaintext highlighter-rouge">hyponyms_size16.txt</code>.</p>
+
+<p>You can also run <code class="language-plaintext highlighter-rouge">Main.java</code> with the debugger to debug different inputs quickly. After clicking the “Hyponyms” button, your code will execute with the debugger - breakpoints will be triggered, you can use the variables window, etc.</p>
+
+<p>Note: Relying on only browser tests will be incredibly frustrating (and slow!). Use your testing skills to build confidence in the foundational abstractions that you build (e.g. Graph, WordNet, etc.).</p>
+
+<p><strong>Debugging Tips</strong></p>
+
+<ul>
+  <li>Use the small input files while testing! This decreases the startup time to run <code class="language-plaintext highlighter-rouge">Main.java</code> and makes it easier to reason about the code. If you’re running <code class="language-plaintext highlighter-rouge">Main.java</code>, these files are set in the first few lines of the <code class="language-plaintext highlighter-rouge">main</code> method. For unit tests, the file names are passed into the <code class="language-plaintext highlighter-rouge">getHyponymHandler</code> method.</li>
+  <li>There are a lot of moving parts to this project. Don’t start by debugging line-by-line. Instead, narrow down which function/region of your code is not working correctly then search more closely in those lines.</li>
+  <li>Because of the obfuscation that we applied to the Project 4A files (in particular, TimeSeries and NGramMap), the argument name previews when using these classes in IntelliJ may look a little weird. You may see long, random strings; these are intentional in order to obfuscate the code, and they do not represent an issue with your own code in any way.</li>
+</ul>
+<h2 id="handling-lists-of-words">
+  
+  
+    <a href="proj4c.html#handling-lists-of-words" class="anchor-heading" aria-labelledby="handling-lists-of-words"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Handling Lists of Words
+  
+  
+</h2>
+    
+
+<p>Your next objective is to handle lists of words. As an example, if the user enters “change, occurrence” for the diagram below, we should only return common hyponyms of each word, i.e. <code class="language-plaintext highlighter-rouge">[alteration, change, increase, jump, leap, modification, saltation, transition]</code>. “Demotion” and “variation” are not included because they are not hyponyms of both words; specifically, they are not hyponyms of “occurrence”.</p>
+
+<p><img src="../assets/projects/proj4c/4-wordnet-fig2-two-word-query.webp" alt="synsets16-two-word-query" /></p>
+
+<p>As you can see, we only want to return words which are hyponyms of ALL words in the list. Furthermore, note that the list of words provided by the user can include more than just 2 words, even though our examples in this spec do not.</p>
+
+<p>Note that it is possible for two words to share hyponyms without necessarily sharing nodes. Take a look at this example. If the user enters “car, bug” for the diagram below, we should get <code class="language-plaintext highlighter-rouge">[beetle]</code>, not <code class="language-plaintext highlighter-rouge">[]</code> (empty list)! This example shows that we are getting the intersection of <strong>words</strong>, not <strong>nodes</strong>.</p>
+
+<p><img src="../assets/projects/proj4c/5-wordnet-fig3.webp" alt="wordnet-fig" /></p>
+
+<p>For some more examples which demonstrate the usefulness of this feature, let’s say we are using the full <code class="language-plaintext highlighter-rouge">synsets_size82191.txt</code> and <code class="language-plaintext highlighter-rouge">hyponyms_size82191.txt</code>.</p>
+
+<ul>
+  <li>Entering “video, recording” in the words box and clicking “Hyponyms” should display <code class="language-plaintext highlighter-rouge">[video, video_recording, videocassette, videotape]</code>, as these are all the words which are hyponyms of “video” and “recording”.</li>
+  <li>Entering “pastry, tart” in the words box and then clicking “Hyponyms” should display <code class="language-plaintext highlighter-rouge">[apple_tart, lobster_tart, quiche, quiche_Lorraine, tart, tartlet ]</code>.</li>
+</ul>
+<h2 id="task-5-lists-of-words">
+  
+  
+    <a href="proj4c.html#task-5-lists-of-words" class="anchor-heading" aria-labelledby="task-5-lists-of-words"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 5: Lists of Words
+  
+  
+</h2>
+    
+
+<blockquote class="TASK">
+  <p>Modify your <code class="language-plaintext highlighter-rouge">HyponymsHandler</code> and the rest of your implementation to deal with the List of Words case.</p>
+</blockquote>
+
+<p>To test this part of your code, we recommend manually constructing examples using <code class="language-plaintext highlighter-rouge">synsets_size16.txt</code> and <code class="language-plaintext highlighter-rouge">hyponyms_size16.txt</code> and using the provided front end to evaluate correctness.</p>
+<h3 id="writing-tests-hyponymshandler-1">
+  
+  
+    <a href="proj4c.html#writing-tests-hyponymshandler-1" class="anchor-heading" aria-labelledby="writing-tests-hyponymshandler-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Writing Tests: HyponymsHandler
+  
+  
+</h3>
+    
+
+<p>We’ve provided you with a short unit test files for this task in the file <code class="language-plaintext highlighter-rouge">tests/TestMultiWordK0Hyponyms.java</code>.</p>
+
+<p>This file corresponds to tests for finding hyponyms of multiple words, where <code class="language-plaintext highlighter-rouge">k=0</code> (e.g. <code class="language-plaintext highlighter-rouge">gallery, bowl</code>).</p>
+
+<p>This test file is not comprehensive! In fact, it only contains one basic test. You should fill this file with more unit tests.</p>
+
+<p>If you need help figuring out what the expected outputs of your tests should be, you can use the <a href="https://ngordnet.datastructur.es/">staff solution webpage</a>.</p>
+<h2 id="task-6-autograder-buddy">
+  
+  
+    <a href="proj4c.html#task-6-autograder-buddy" class="anchor-heading" aria-labelledby="task-6-autograder-buddy"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 6: Autograder Buddy
+  
+  
+</h2>
+    
+
+<p>Throughout this assignment, we’ve had you use your front end to test your code. Our grader is not sophisticated enough to pretend to be a web browser and call your code. Instead, we’ll need you to provide a method in the <code class="language-plaintext highlighter-rouge">AutograderBuddy</code> class that provides a handler that can deal with hyponyms requests.</p>
+
+<p>When you ran <code class="language-plaintext highlighter-rouge">git pull skeleton main</code> at the start of this spec, you should have received a file called <code class="language-plaintext highlighter-rouge">AutograderBuddy.java</code>.</p>
+
+<p class="TASK">Open <code class="language-plaintext highlighter-rouge">AutograderBuddy.java</code> and fill in the <code class="language-plaintext highlighter-rouge">getHyponymHandler</code> method such that it returns a <code class="language-plaintext highlighter-rouge">HyponymsHandler</code> that uses the four given files. Your code here should be quite similar to your code in <code class="language-plaintext highlighter-rouge">Main.java</code>.</p>
+
+<p>Now that you’ve created <code class="language-plaintext highlighter-rouge">AutograderBuddy</code>, you can submit to the autograder. If you fail any tests, you should be able to replicate them locally as Truth tests by building on the test files above. If any additional datafiles are needed, they will be added to this section as links.</p>
+<h2 id="submission">
+  
+  
+    <a href="proj4c.html#submission" class="anchor-heading" aria-labelledby="submission"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Submission
+  
+  
+</h2>
+    
+
+<p>Try submitting to the autograder. You may or may not pass everything.</p>
+
+<ul>
+  <li>If you fail a correctness test, this means that there is a case that your local tests did not cover.</li>
+  <li>The autograder will not run unless you fix all your style errors. Reminder that you can check style in IntelliJ as often as you’d like:
+<img src="../assets/resources/style-guide-img/intellij_style_checker.webp" alt="Run style checker in IntelliJ" /></li>
+  <li>You will have a token limit of 8 tokens every 24 hours. We will not reinstate tokens for failing to add/commit/push your code, run style, etc.</li>
+</ul>
+
+<p>Project 4C will be worth 70 points.</p>
+
+<p>Grading breakdown:</p>
+<ul>
+  <li><strong>HyponymHandler k == 0 Single Word (50%)</strong></li>
+  <li><strong>HyponymHandler k == 0 Multi Word (50%)</strong></li>
+</ul>
+
+<p>The score you receive on Gradescope is your final score for this assignment (assuming you followed the <a href="../policies.html#collaboration-policy">collaboration policy</a>).</p>
+
+<p class="ACKNOWLEDGMENT">The WordNet part of this assignment is loosely adapted from Alina Ene and Kevin Wayne’s <a href="http://www.cs.princeton.edu/courses/archive/fall14/cos226/assignments/wordnet.html">Wordnet assignment</a> at Princeton University.</p>
+
+  </div>
+</div>
+
+          
+
+          
+            
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="../assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

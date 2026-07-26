@@ -1,0 +1,816 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+    .site-nav ul li a {
+      background-image: none;
+    }
+
+  </style>
+
+  
+
+  
+    <script src="assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>CS 61B Fall 2025 | Data Structures at UC Berkeley</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="CS 61B Fall 2025" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Structures at UC Berkeley" />
+<meta property="og:description" content="Data Structures at UC Berkeley" />
+<link rel="canonical" href="index.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="CS 61B Fall 2025" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"Data Structures at UC Berkeley","headline":"CS 61B Fall 2025","name":"CS 61B Fall 2025","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="assets/katex/katex.min.css"
+>
+<script defer src="assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="index.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="index.html" class="site-title lh-tight">
+
+
+  <img src="assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="proj5/index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="proj5/landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="proj5/proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="proj5/proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="proj5/proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="proj5/ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="proj5/checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="proj5/bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="index.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <p><img align="right" alt="CS 61B Fall 2025 logo" width="85px" src="assets/images/bee.webp" /></p>
+<h1 id="cs-61b-fall-2025">
+  
+  
+    <a href="index.html#cs-61b-fall-2025" class="anchor-heading" aria-labelledby="cs-61b-fall-2025"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> CS 61B Fall 2025
+  
+  
+</h1>
+    
+
+<p><span style="white-space: nowrap;">
+    <strong>Instructors</strong>: Josh Hug, Peyrin Kao /</span>
+<span style="white-space: nowrap;">
+    <strong>Lecture</strong>: MWF, 4–5pm, Lewis 100</span>
+<span style="white-space: nowrap;">
+    [<a href="https://berkeley.zoom.us/j/94670723177">Zoom</a>, <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRqRI8oWOVjY3gyP3yIb1ExM">Live Lecture Recordings</a>, <a href="https://github.com/Berkeley-CS61B/lectureCode-fa25">Lecture Code</a>]
+</span></p>
+<h2 id="announcements">
+  
+  
+    <a href="index.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Announcements
+  
+  
+</h2>
+    
+
+<div class="announcement">
+<h2>
+  
+  
+    <a href="index.html#announcements" class="anchor-heading" aria-labelledby="announcements"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Week 14 Announcements
+  
+  
+</h2>
+    
+  <span class="announcement-meta">
+    
+      Nov 24
+    
+  </span>
+  <div>
+    <ul>
+  <li>Key Dates
+    <ul>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScnCcJUDY0OIEGfgIkC5iDvqrzSSk4fVZZ0GmM7fQGNhnxnZA/viewform">Week 13 Survey</a>: due <strong>Mon Nov 24</strong> at 11:59pm PT</li>
+      <li>Project 5B: BYOW (World Generation): due Monday (11/24) at 11:59 PT</li>
+      <li>Project 5C: BYOW (Ambition Features): due Monday (12/1) at 11:59 PT</li>
+    </ul>
+  </li>
+  <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfQTUhIxIfNSxdjp8Aqv0eBFDtLQ4MLKC5Knt8WtYHzeoW4uw/viewform">Final Exam Alterations Form</a> due Thursday, December 4th</li>
+  <li>Office Hours are available Monday-Tuesday virtually</li>
+</ul>
+
+<p><a href="https://edstem.org/us/courses/83254/discussion/7326769">See Ed for the full announcements</a>.</p>
+
+  </div>
+</div>
+
+<p><a href="announcements.html" class="btn btn-outline fs-3">Past announcements</a></p>
+<h2 id="course-calendar">
+  
+  
+    <a href="index.html#course-calendar" class="anchor-heading" aria-labelledby="course-calendar"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Course Calendar
+  
+  
+</h2>
+    
+
+<p><a href="index.html#week-02" class="btn btn-outline fs-3">Skip to current week</a></p>
+
+<div><div>
+  <div class="table-wrapper"><table class="spanned-table"><thead>
+      <tr class="starting-row">
+        <th style="width:6%">Wk.</th>
+        <th style="width:7%">Date</th>
+        <th style="width:30%">Lecture</th>
+        
+        <th style="width:25%">Sections</th>
+        
+        <th style="width:16%">HW</th>
+        <th style="width:16%">Project</th>
+      </tr>
+    </thead><tbody><tr class="starting-row"><td class=" week-cell" rowspan="2" id="week-34">
+                  1<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdtzkiv0GjiUIjsSPn5OE1c90w0jUq_KBKuvqkKYJdfPC7N7g/viewform" aria-label="Survey for Week 1">Survey</a></td><td class="" rowspan="1">
+                  Wed<br />Aug 27
+                </td><td class=" " rowspan="1">1. Intro, Instance Variables&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/1.-introduction">Ch. 1</a>)<br /><a href="https://docs.google.com/presentation/d/1jUT3gF1NIc0qvD3KPPScd4XDY1sFhnmJ8kCnMjU1k5E" aria-label="Slides for Lecture 1 (Intro, Instance Variables)">Slides</a> / <a href="https://www.youtube.com/watch?v=bAsrG4usBOw&amp;list=PL8FaHk7qbOD5qYmwubmu_CQPST79W-0lB" aria-label="Video for Lecture 1 (Intro, Instance Variables)">Video</a></td>
+<td class=" " rowspan="2">No Discussion</td>
+<td class="schedule-red" rowspan="1"><a href="homeworks/hw01.html"><p class="label syllabus-label-red syllabus-label">Tools</p> <br /> HW1: Setup</a>
+  <br />
+  (due Fri Aug 29)</td>
+<td class="" rowspan="5"></td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Fri<br />Aug 29
+                </td><td class=" " rowspan="1">2. Defining and Using Classes. Lists, Sets and Maps&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/2.-defining-and-using-classes">Ch. 2</a>)<br /><a href="https://docs.google.com/presentation/d/1MNjyMl0zuR8M2BQi3DFTtuaV_diOaiybi7KvddDjh04/edit?slide=id.g3291dab0df5_0_719#slide=id.g3291dab0df5_0_719" aria-label="Slides for Lecture 2 (Defining and Using Classes. Lists, Sets and Maps)">Slides</a> / <a href="https://www.youtube.com/watch?v=_Xnbqf6LlN8&amp;list=PL8FaHk7qbOD5EmpU8Xbpz1N9ofDai4MRH" aria-label="Video for Lecture 2 (Defining and Using Classes. Lists, Sets and Maps)">Video</a></td>
+<td class="schedule-blue" rowspan="1"><a href="homeworks/hw02.html"><p class="label syllabus-label-blue syllabus-label">Coding</p> <br /> HW2: Java Intro</a>
+  <br />
+  (due Fri Aug 29)</td>
+</tr><tr class="starting-row"><td class="is-even week-cell" rowspan="3" id="week-35">
+                  2<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdw8Wl-WsGVX7Ljso2YSSkAxHzm8blDEx6NwURoZqLfK3KpAw/viewform" aria-label="Survey for Week 2">Survey</a></td><td class="is-even" rowspan="1">
+                  Mon<br />Sep 01
+                </td><td class="is-even " rowspan="1"><p>No Lecture (Labor Day)</p>
+</td>
+<td class="is-even " rowspan="3">1. Introduction to Java<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc01.pdf" aria-label="Worksheet for Discussion 1 (Introduction to Java)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc01-sols.pdf" aria-label="Solutions for Discussion 1 (Introduction to Java)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRobydmi0jaICLlTv0q_lDhT" aria-label="Video for Discussion 1 (Introduction to Java)">Video</a> / <a href="https://docs.google.com/presentation/d/1ab_m0d_H9l0NaS-r4RXhorXqBBks-mso8izIWbAkAA4/edit?usp=sharing" aria-label="Slides for Discussion 1 (Introduction to Java)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep01.pdf" aria-label="Worksheet for Exam-Level 1 (Introduction to Java)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep01-sols.pdf" aria-label="Solutions for Exam-Level 1 (Introduction to Java)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRoH8ytpcjLoFCkM0v2FVp6C" aria-label="Video for Exam-Level 1 (Introduction to Java)">Video</a> / <a href="https://docs.google.com/presentation/d/1cjQmSZrvNzxmd4kKd_3doOGR0uHNjfXdad2qISNWHGA/edit?usp=sharing" aria-label="Slides for Exam-Level 1 (Introduction to Java)">Slides</a><br /><br />Homework 4 Intro Section:&nbsp;<a href="https://docs.google.com/presentation/d/1uq_mIVMPpILVucFkTxQuRy-CL-8fSEY9TzxNu3sMZlo/edit?usp=sharing" aria-label="Slides for Intro Section 1 (Introduction to Java)">Slides</a></td>
+<td class="schedule-blue" rowspan="1"><a href="homeworks/hw03.html"><p class="label syllabus-label-blue syllabus-label">Coding</p> <br /> HW3: Lists, Sets, Maps, Classes</a>
+  <br />
+  (due Tue Sep 02)</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Wed<br />Sep 03
+                </td><td class="is-even " rowspan="1">3. References, Recursion, IntLists&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/3.-references-recursion-and-lists">Ch. 3</a>)<br /><a href="https://docs.google.com/presentation/d/1XmIDpYk1r641BMYVcNCaCintXZXzeToQ-advUsytM3E" aria-label="Slides for Lecture 3 (References, Recursion, IntLists)">Slides</a> / <a href="https://youtube.com/playlist?list=PLnp31xXvnfRpb4EQp0tOFJNZUXHnxTfXm&amp;si=lUAGPJ0338-FX6UO" aria-label="Video for Lecture 3 (References, Recursion, IntLists)">Video</a></td>
+<td class="schedule-blue" rowspan="2"><a href="homeworks/hw04.html"><p class="label syllabus-label-blue syllabus-label">Coding</p> <br /> HW4: IntLists</a>
+  <br />
+  (due Fri Sep 05)</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Fri<br />Sep 05
+                </td><td class="is-even " rowspan="1">4. SLLists, Nested Classes, Sentinel Nodes&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/4.-sllists">Ch. 4</a>)<br /><a href="https://docs.google.com/presentation/d/1OxBaQLmmMdw4qVQQswDPhBQmPrDWDf201aoC_aM7RIs" aria-label="Slides for Lecture 4 (SLLists, Nested Classes, Sentinel Nodes)">Slides</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRqyuN_xxm4o1Woa44dXW_N8" aria-label="Video for Lecture 4 (SLLists, Nested Classes, Sentinel Nodes)">Video</a></td>
+</tr><tr class="starting-row"><td class=" week-cell" rowspan="3" id="week-36">
+                  3<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdhkzo3WMZsYIFuo4JD5kc0FrayHZkUUXaYCH_l65dLqst6ww/viewform" aria-label="Survey for Week 3">Survey</a></td><td class="" rowspan="1">
+                  Mon<br />Sep 08
+                </td><td class=" " rowspan="1">5. DLLists, Basic ALists&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/5.-dllists">Ch. 5</a> / <a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/6.-arrays">Ch. 6</a>)<br /><a href="https://docs.google.com/presentation/d/1BwZa8O5E1pGZ6Jp8EGZ01sPm_RkndSr0CFtla9FTzqE" aria-label="Slides for Lecture 5 (DLLists, Basic ALists)">Slides</a> / <a href="https://www.youtube.com/watch?v=4-AU8ZGWBmc" aria-label="Video for Lecture 5 (DLLists, Basic ALists)">Video</a></td>
+<td class=" " rowspan="3">2. Scope, Static, Linked Lists, Arrays<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc02.pdf" aria-label="Worksheet for Discussion 2 (Scope, Static, Linked Lists, Arrays)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc02-sols.pdf" aria-label="Solutions for Discussion 2 (Scope, Static, Linked Lists, Arrays)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRpemggJcC8s64Om7XBMmmWZ" aria-label="Video for Discussion 2 (Scope, Static, Linked Lists, Arrays)">Video</a> / <a href="https://docs.google.com/presentation/d/1iAGBmafDUt8vgaGFzYWVcRl3wXl8x0unih65bd2pSS0/edit?usp=sharing" aria-label="Slides for Discussion 2 (Scope, Static, Linked Lists, Arrays)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep02.pdf" aria-label="Worksheet for Exam-Level 2 (Scope, Static, Linked Lists, Arrays)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep02-sols.pdf" aria-label="Solutions for Exam-Level 2 (Scope, Static, Linked Lists, Arrays)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRpPzSP6eDAJLsqxHbAqhgkX" aria-label="Video for Exam-Level 2 (Scope, Static, Linked Lists, Arrays)">Video</a> / <a href="https://docs.google.com/presentation/d/1BxFr5sCaOMEOOfMIokTaGWLlJnchAA5EnRzro6KG_zI/edit?usp=sharing" aria-label="Slides for Exam-Level 2 (Scope, Static, Linked Lists, Arrays)">Slides</a><br /><br />P1 Intro Section:&nbsp;<a href="https://docs.google.com/presentation/d/1NL5wj1UiRcEmplvUi2rh5MgtcZiTKk-OEMlhB2wSBcI" aria-label="Slides for Intro Section 2 (Scope, Static, Linked Lists, Arrays)">Slides</a></td>
+<td class="schedule-blue" rowspan="1"><a href="homeworks/hw05.html"><p class="label syllabus-label-blue syllabus-label">Coding</p> <br /> HW5: Stacks</a>
+  <br />
+  (due Mon Sep 08)</td>
+<td class="schedule-purple" rowspan="3"><a href="projects/proj1.html"><p class="label syllabus-label-purple syllabus-label">Mini</p> <br /> Project 1: LinkedListDeque</a>
+  <br />
+  (due Mon Sep 15)</td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Wed<br />Sep 10
+                </td><td class=" " rowspan="1">6. Testing&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/7.-testing">Ch. 7</a>)<br /><a href="https://docs.google.com/presentation/d/1Y8AjbR2IJpaTX79cVZ-V5VnEJtjip9Gdb1NBzKkmg_U/" aria-label="Slides for Lecture 6 (Testing)">Slides</a> / <a href="https://youtu.be/zhhwSNk4gbo" aria-label="Video for Lecture 6 (Testing)">Video</a><br />
+  <p><a href="https://youtu.be/1MzbwZwos6Q">Bonus Video</a></p>
+</td>
+<td class="" rowspan="1"></td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Fri<br />Sep 12
+                </td><td class=" " rowspan="1">7. Resizing and Circular Arrays&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/8.-arraylist">Ch. 8</a>)<br /><a href="https://docs.google.com/presentation/d/1VqjBXKbvXx_h94gXjE4-6Xik-I8VCO1rb6RWdQb2Jjw" aria-label="Slides for Lecture 7 (Resizing and Circular Arrays)">Slides</a> / <a href="https://www.youtube.com/watch?v=Vg9OFGkw-TU&amp;list=PL8FaHk7qbOD4OkPxiepJoKY28imSjpF_4" aria-label="Video for Lecture 7 (Resizing and Circular Arrays)">Video</a></td>
+<td class="schedule-red" rowspan="1"><a href="homeworks/hw06.html"><p class="label syllabus-label-red syllabus-label">Tools</p> <br /> HW6: Debugging</a>
+  <br />
+  (due Fri Sep 12)</td>
+</tr><tr class="starting-row"><td class="is-even week-cell" rowspan="3" id="week-37">
+                  4<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdua41R4UYaXlkzMBZqatjyfyFXKyfy8B6NlAVd6ZIizZRfoQ/viewform" aria-label="Survey for Week 4">Survey</a></td><td class="is-even" rowspan="1">
+                  Mon<br />Sep 15
+                </td><td class="is-even " rowspan="1">8. Interface and Implementation Inheritance&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/9.-inheritance-i-interface-and-implementation-inheritance">Ch. 9</a>)<br /><a href="https://docs.google.com/presentation/d/15fnduQQYt_H0vQM4fnB64QdsOgGLFXbW7ysHDhxH3yU" aria-label="Slides for Lecture 8 (Interface and Implementation Inheritance)">Slides</a> / <a href="https://youtu.be/Ms-CgZWT1Qo" aria-label="Video for Lecture 8 (Interface and Implementation Inheritance)">Video</a></td>
+<td class="is-even " rowspan="3">3. Interface Inheritance, Comparables/Comparators, Generic Functions<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc03.pdf" aria-label="Worksheet for Discussion 3 (Interface Inheritance, Comparables/Comparators, Generic Functions)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc03-sols.pdf" aria-label="Solutions for Discussion 3 (Interface Inheritance, Comparables/Comparators, Generic Functions)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRpZCnCD8f6-j3WJQS_rbBe4" aria-label="Video for Discussion 3 (Interface Inheritance, Comparables/Comparators, Generic Functions)">Video</a> / <a href="https://docs.google.com/presentation/d/1p8Cl3GPFY5BSna-mip30d1E4WKhokJ7ytVR87Zyvovw/edit?usp=sharing" aria-label="Slides for Discussion 3 (Interface Inheritance, Comparables/Comparators, Generic Functions)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep03.pdf" aria-label="Worksheet for Exam-Level 3 (Interface Inheritance, Comparables/Comparators, Generic Functions)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep03-sols.pdf" aria-label="Solutions for Exam-Level 3 (Interface Inheritance, Comparables/Comparators, Generic Functions)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRo32RBXkS7LFlMNNIgF618Q" aria-label="Video for Exam-Level 3 (Interface Inheritance, Comparables/Comparators, Generic Functions)">Video</a> / <a href="https://docs.google.com/presentation/d/1cnpAQXwuFgKJGSuMXXllPfAgMmrVNSMVPUXhyvwdoyU/edit?usp=sharing" aria-label="Slides for Exam-Level 3 (Interface Inheritance, Comparables/Comparators, Generic Functions)">Slides</a><br /><br />P2 Intro Section:&nbsp;<a href="https://docs.google.com/presentation/d/1nq7yPRw2_JqidjDrmjqfmSVxdlNFZSs54CRdbZ6uIio/edit?usp=sharing" aria-label="Slides for Intro Section 3 (Interface Inheritance, Comparables/Comparators, Generic Functions)">Slides</a></td>
+<td class="" rowspan="5"></td>
+<td class="schedule-purple" rowspan="3"><a href="projects/proj2.html"><p class="label syllabus-label-purple syllabus-label">Mini</p> <br /> Project 2: ArrayDeque</a>
+  <br />
+  (due Mon Sep 22)</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Wed<br />Sep 17
+                </td><td class="is-even " rowspan="1">9. Iterators, Object Methods&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/12.-inheritance-iv-iterators-object-methods">Ch. 12</a>)<br /><a href="https://docs.google.com/presentation/d/1q6tjhe3kpIjqs30bC1LyoeD10kBt6dWF9HjeTxQIcUA" aria-label="Slides for Lecture 9 (Iterators, Object Methods)">Slides</a> / <a href="https://youtu.be/colny82Dw84" aria-label="Video for Lecture 9 (Iterators, Object Methods)">Video</a></td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Fri<br />Sep 19
+                </td><td class="is-even " rowspan="1">10. Subtype Polymorphism, Comparators, Comparables&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/10.-inheritance-ii-extends-casting-higher-order-functions">Ch. 10</a>)<br /><a href="https://docs.google.com/presentation/d/1jCemE01s6JfgtlYrcqvyTrvmCTQyGQowF0I5lM7RyAs" aria-label="Slides for Lecture 10 (Subtype Polymorphism, Comparators, Comparables)">Slides</a> / <a href="https://www.youtube.com/watch?v=tQ-xzN1h-3w" aria-label="Video for Lecture 10 (Subtype Polymorphism, Comparators, Comparables)">Video</a></td>
+</tr><tr class="starting-row"><td class=" week-cell" rowspan="4" id="week-38">
+                  5<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvXcYXS7S_EAdWkfsbgothhUL_i5ZDH0uM_M8uVF93sJgbRQ/viewform" aria-label="Survey for Week 5">Survey</a></td><td class="" rowspan="1">
+                  Mon<br />Sep 22
+                </td><td class=" " rowspan="1">11. Asymptotics I&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/13.-asymptotics-i">Ch. 13</a>)<br /><a href="https://docs.google.com/presentation/d/1Fz0cMbN0dAiAgoK1zGFeKzatNtx4ne52b-G73CPp100/" aria-label="Slides for Lecture 11 (Asymptotics I)">Slides</a> / <a href="https://www.youtube.com/watch?v=DF1ThvyLwnk&amp;list=PL8FaHk7qbOD4KbQAbIcBabdAqpO62g-tV" aria-label="Video for Lecture 11 (Asymptotics I)">Video</a></td>
+<td class=" " rowspan="4">4. Comparables/Comparators, Iterators, and Iterables<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc04.pdf" aria-label="Worksheet for Discussion 4 (Comparables/Comparators, Iterators, and Iterables)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc04-sols.pdf" aria-label="Solutions for Discussion 4 (Comparables/Comparators, Iterators, and Iterables)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRosONixmTTQnspn7fLOV4-Y" aria-label="Video for Discussion 4 (Comparables/Comparators, Iterators, and Iterables)">Video</a> / <a href="https://docs.google.com/presentation/d/1AZUcUPiCf1EqbbVcTZSm1NOYvK8Kyxgk7p9xmTIpQ_w/edit?usp=sharing" aria-label="Slides for Discussion 4 (Comparables/Comparators, Iterators, and Iterables)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep04.pdf" aria-label="Worksheet for Exam-Level 4 (Comparables/Comparators, Iterators, and Iterables)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep04-sols.pdf" aria-label="Solutions for Exam-Level 4 (Comparables/Comparators, Iterators, and Iterables)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRqOkhLqRr1OoRCpUKvlqm_P" aria-label="Video for Exam-Level 4 (Comparables/Comparators, Iterators, and Iterables)">Video</a> / <a href="https://docs.google.com/presentation/d/1lY-oBwUQiyPOi5cbpUwGVSKZVQyrV7rF0z_cjqCrDgc/edit?usp=sharing" aria-label="Slides for Exam-Level 4 (Comparables/Comparators, Iterators, and Iterables)">Slides</a><br /><br />No Intro Section</td>
+<td class="" rowspan="4"></td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Wed<br />Sep 24
+                </td><td class=" " rowspan="1">12. Ask Anything (midterm prep)<br /><a href="https://docs.google.com/presentation/d/1lATeasfntvZpIxbHzpPjJ4KViGiuPS0tSE8l0L69rQo/" aria-label="Slides for Lecture 12 (Ask Anything (midterm prep))">Slides</a> / <a href="https://www.youtube.com/watch?v=7_SSoA87w3Q" aria-label="Video for Lecture 12 (Ask Anything (midterm prep))">Video</a></td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Thu<br />Sep 25
+                </td><td class=" " rowspan="1"><p><strong>Midterm 1 (Thu Sep 25, 8–10pm)</strong></p>
+</td>
+<td class="schedule-blue" rowspan="2"><a href="homeworks/hw07.html"><p class="label syllabus-label-blue syllabus-label">Coding</p> <br /> HW7: Comparators, Comparables</a>
+  <br />
+  (due Mon Sep 29)</td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Fri<br />Sep 26
+                </td><td class=" " rowspan="1">13. Disjoint Sets&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/14.-disjoint-sets">Ch. 14</a>)<br /><a href="https://docs.google.com/presentation/d/1ki_jXKBTUNCl_QomfpErBFH9T1wOYrHZ8jOGFOQSQoA" aria-label="Slides for Lecture 13 (Disjoint Sets)">Slides</a> / <a href="https://www.youtube.com/playlist?list=PL8FaHk7qbOD44CGmkFro1gqxkDl5gIpXB" aria-label="Video for Lecture 13 (Disjoint Sets)">Video</a></td>
+</tr><tr class="starting-row"><td class="is-even week-cell" rowspan="3" id="week-39">
+                  6<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfC79nQ5ALJGJWDisEco-RSWrQsMLVtUXzYH7sOgUugP-NnXw/viewform" aria-label="Survey for Week 6">Survey</a></td><td class="is-even" rowspan="1">
+                  Mon<br />Sep 29
+                </td><td class="is-even " rowspan="1">14. Asymptotics II&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/15.-asymptotics-ii">Ch. 15</a>)<br /><a href="https://docs.google.com/presentation/d/1DwHfrhD4xVvhgXmzpkVmY9bukwXfoR5JT_J0XL9mUvU" aria-label="Slides for Lecture 14 (Asymptotics II)">Slides</a> / <a href="https://www.youtube.com/watch?v=ZdmiCfbvb9k" aria-label="Video for Lecture 14 (Asymptotics II)">Video</a></td>
+<td class="is-even " rowspan="3">5. Asymptotics and Disjoint Sets<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc05.pdf" aria-label="Worksheet for Discussion 5 (Asymptotics and Disjoint Sets)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc05-sols.pdf" aria-label="Solutions for Discussion 5 (Asymptotics and Disjoint Sets)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRpqWL31oiZlmcka8zFyT5uM" aria-label="Video for Discussion 5 (Asymptotics and Disjoint Sets)">Video</a> / <a href="https://docs.google.com/presentation/d/1hDO4w09UfeQFDPy1nDWl1s04C6aHJDR_bMf0G1DBrsA/edit?usp=sharing" aria-label="Slides for Discussion 5 (Asymptotics and Disjoint Sets)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep05.pdf" aria-label="Worksheet for Exam-Level 5 (Asymptotics and Disjoint Sets)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep05-sols.pdf" aria-label="Solutions for Exam-Level 5 (Asymptotics and Disjoint Sets)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRpebKdnwkYKIkyCBNzNXAHW" aria-label="Video for Exam-Level 5 (Asymptotics and Disjoint Sets)">Video</a> / <a href="https://docs.google.com/presentation/d/13RHtiduISrAfYJ8wqhOwlA5NjFM7B2crwoeU9mcdZCo/edit?usp=sharing" aria-label="Slides for Exam-Level 5 (Asymptotics and Disjoint Sets)">Slides</a><br /><br />P3 Intro Section:&nbsp;<a href="https://docs.google.com/presentation/d/1-rB3EmOoC1BU-vgoOeDtWh6d93g4ZC0Z2Wd6fCrTK0o/edit?usp=sharing" aria-label="Slides for Intro Section 5 (Asymptotics and Disjoint Sets)">Slides</a></td>
+<td class="" rowspan="1"></td>
+<td class="schedule-purple" rowspan="3"><a href="projects/proj3.html"><p class="label syllabus-label-purple syllabus-label">Mini</p> <br /> Project 3: Percolation</a>
+  <br />
+  (due Mon Oct 06)</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Wed<br />Oct 01
+                </td><td class="is-even " rowspan="1">15. Asymptotics III&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/17.-asymptotics-iii">Ch. 17</a>)<br /><a href="https://docs.google.com/presentation/d/1IRwSRAwCMAS4O-xiDFENNyvhQ2fXGWGeW128IpnbD68" aria-label="Slides for Lecture 15 (Asymptotics III)">Slides</a> / <a href="https://www.youtube.com/watch?v=JprfGi01pLo" aria-label="Video for Lecture 15 (Asymptotics III)">Video</a></td>
+<td class="schedule-green" rowspan="2"><a href="https://www.gradescope.com/courses/1104518/assignments/6841210"><p class="label syllabus-label-green syllabus-label">Theory</p> <br /> HW8: Asymptotics</a>
+  <br />
+  (due Fri Oct 03)</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Fri<br />Oct 03
+                </td><td class="is-even " rowspan="1">16. Extends, Sets, Maps, and BSTs&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/16.-adts-and-bsts">Ch. 16</a>)<br /><a href="https://docs.google.com/presentation/d/1om5UziaGFnPS8jpbigSEPyTWBehWvfq9SKt0dfnehQE" aria-label="Slides for Lecture 16 (Extends, Sets, Maps, and BSTs)">Slides</a> / <a href="https://www.youtube.com/watch?v=ARMv5Pe1F5Q&amp;list=PLnp31xXvnfRqRI8oWOVjY3gyP3yIb1ExM&amp;index=16" aria-label="Video for Lecture 16 (Extends, Sets, Maps, and BSTs)">Video</a></td>
+</tr><tr class="starting-row"><td class=" week-cell" rowspan="3" id="week-40">
+                  7<br />
+                      <a href="https://forms.gle/8FFrxP91cRKwtN1p6" aria-label="Survey for Week 7">Survey</a></td><td class="" rowspan="1">
+                  Mon<br />Oct 06
+                </td><td class=" " rowspan="1">17. B-Trees (2-3, 2-3-4 Trees)&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/18.-b-trees">Ch. 18</a>)<br /><a href="https://docs.google.com/presentation/d/1Tpsm48w1WVOF71ffJUogST_XSKSJnTGbjOTgXPEMReA" aria-label="Slides for Lecture 17 (B-Trees (2-3, 2-3-4 Trees))">Slides</a> / <a href="https://www.youtube.com/watch?v=0SCtnf84QrI&amp;list=PL8FaHk7qbOD41EHkD7CgQuRw1jpH_Fv7-" aria-label="Video for Lecture 17 (B-Trees (2-3, 2-3-4 Trees))">Video</a></td>
+<td class=" " rowspan="3">6. Asymptotics II, ADTs, BSTs<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc06.pdf" aria-label="Worksheet for Discussion 6 (Asymptotics II, ADTs, BSTs)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc06-sols.pdf" aria-label="Solutions for Discussion 6 (Asymptotics II, ADTs, BSTs)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRpBCAx-EGDwnOY4YW0zwczO" aria-label="Video for Discussion 6 (Asymptotics II, ADTs, BSTs)">Video</a> / <a href="https://docs.google.com/presentation/d/1LLmIZbPZauUWzCp_09dqoTcIzrADVkI3qmjTZK8-_3Y/edit?usp=sharing" aria-label="Slides for Discussion 6 (Asymptotics II, ADTs, BSTs)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep06.pdf" aria-label="Worksheet for Exam-Level 6 (Asymptotics II, ADTs, BSTs)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep06-sols.pdf" aria-label="Solutions for Exam-Level 6 (Asymptotics II, ADTs, BSTs)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRonJvfbSeiELXQ5TcvrAO1U" aria-label="Video for Exam-Level 6 (Asymptotics II, ADTs, BSTs)">Video</a> / <a href="https://docs.google.com/presentation/d/17n2k4mRWFeX0TrjrptYepe9UtwiN6c7qAt3KtnMMV5g/edit?usp=sharing" aria-label="Slides for Exam-Level 6 (Asymptotics II, ADTs, BSTs)">Slides</a><br /><br />HW9 Intro Section:&nbsp;<a href="https://docs.google.com/presentation/d/1KveWZbBejLavI7UIcqvn86fw4cYKhtoaf7AI0Gll_d0" aria-label="Slides for Intro Section 6 (Asymptotics II, ADTs, BSTs)">Slides</a></td>
+<td class="" rowspan="1"></td>
+<td class="schedule-yellow" rowspan="3"><a href="proj4/proj4a.html"><p class="label syllabus-label-yellow syllabus-label">Design</p> <br /> Project 4A: NGrams</a>
+  <br />
+  (due Mon Oct 13)</td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Wed<br />Oct 08
+                </td><td class=" " rowspan="1">18. Red Black Trees&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/19.-red-black-trees">Ch. 19</a>)<br /><a href="https://docs.google.com/presentation/d/1eITMp5V1yqEpfzRzK7cdD2Dq9GWdxEDd3kdrm5Zgm8k" aria-label="Slides for Lecture 18 (Red Black Trees)">Slides</a> / <a href="https://www.youtube.com/watch?v=kkd8d0QhiQ0&amp;list=PL8FaHk7qbOD6aKgTz2W-foDiTeBEaBoS3&amp;index=3" aria-label="Video for Lecture 18 (Red Black Trees)">Video</a></td>
+<td class="schedule-blue" rowspan="2"><a href="homeworks/hw09.html"><p class="label syllabus-label-blue syllabus-label">Coding</p> <br /> HW9: BSTMap</a>
+  <br />
+  (due Fri Oct 10)</td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Fri<br />Oct 10
+                </td><td class=" " rowspan="1">19. Heaps and Priority Queues&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/22.-heaps-and-priority-queues">Ch. 22</a>)<br /><a href="https://docs.google.com/presentation/d/1XoUYEwv-qvR9B9g70T7NBzB9WYdaav-kltixAOaUZ44" aria-label="Slides for Lecture 19 (Heaps and Priority Queues)">Slides</a> / <a href="https://youtube.com/playlist?list=PLnp31xXvnfRrFJrMMOkrShULQ3KeoqZB9&amp;si=N7_r1I06TVMxxHsK" aria-label="Video for Lecture 19 (Heaps and Priority Queues)">Video</a></td>
+</tr><tr class="starting-row"><td class="is-even week-cell" rowspan="3" id="week-41">
+                  8<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdzvLw2EGUR5n-zDTlSLjDnWJjYtOta5iW2t9hVdG0M0y9tzA/viewform" aria-label="Survey for Week 8">Survey</a></td><td class="is-even" rowspan="1">
+                  Mon<br />Oct 13
+                </td><td class="is-even " rowspan="1">20. Tree and Graph Traversals&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/23.-tree-traversals-and-graphs">Ch. 23</a>)<br /><a href="https://docs.google.com/presentation/d/1nJmLj2gCwKRwx0_fIEFj0d2_JFhsjknzOpCk4jjGklw" aria-label="Slides for Lecture 20 (Tree and Graph Traversals)">Slides</a> / <a href="https://www.youtube.com/watch?v=wkkCVWn7au4&amp;list=PL8FaHk7qbOD4tIQrwqsx16fNq6uXNhauw" aria-label="Video for Lecture 20 (Tree and Graph Traversals)">Video</a></td>
+<td class="is-even " rowspan="3">7. B-Trees, LLRBs, Heaps<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc07.pdf" aria-label="Worksheet for Discussion 7 (B-Trees, LLRBs, Heaps)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc07-sols.pdf" aria-label="Solutions for Discussion 7 (B-Trees, LLRBs, Heaps)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRrjXIJbf0eFsWeUnD6RsfYa" aria-label="Video for Discussion 7 (B-Trees, LLRBs, Heaps)">Video</a> / <a href="https://docs.google.com/presentation/d/1nIKlduNq4WFTV9m6EUz2tOYeZd8D2wAhRI9Nw75VTF0/edit?usp=sharing" aria-label="Slides for Discussion 7 (B-Trees, LLRBs, Heaps)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep07.pdf" aria-label="Worksheet for Exam-Level 7 (B-Trees, LLRBs, Heaps)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep07-sols.pdf" aria-label="Solutions for Exam-Level 7 (B-Trees, LLRBs, Heaps)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRoIGRoR3H0WHl2AmxCgcxTN" aria-label="Video for Exam-Level 7 (B-Trees, LLRBs, Heaps)">Video</a> / <a href="https://docs.google.com/presentation/d/1hdAnqbaTngcK14FLXbBt_SAUBIu7wRgv2Q-X_Af1WPA/edit?usp=sharing" aria-label="Slides for Exam-Level 7 (B-Trees, LLRBs, Heaps)">Slides</a><br /><br />P4B Design Intro Section:&nbsp;<a href="https://docs.google.com/presentation/d/1M0KwDZ-FbPph2av8JtvgAgaVYFVmpfsRU1KN3_72wuQ/edit?usp=sharing" aria-label="Slides for Intro Section 7 (B-Trees, LLRBs, Heaps)">Slides</a></td>
+<td class="" rowspan="1"></td>
+<td class="schedule-yellow" rowspan="4"><a href="proj4/proj4b.html"><p class="label syllabus-label-yellow syllabus-label">Design</p> <br /> Project 4B: Wordnet (Design)</a>
+  <br />
+  (due Wed Oct 22)</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Wed<br />Oct 15
+                </td><td class="is-even " rowspan="1">21. Graph Traversals and Implementations&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/24.-graph-traversals-and-implementations">Ch. 24</a>)<br /><a href="https://docs.google.com/presentation/d/1OgYtbTBXDnHeS_Rbv8XQOAfg1AH4_W0_6JZnRN5664o" aria-label="Slides for Lecture 21 (Graph Traversals and Implementations)">Slides</a> / <a href="https://www.youtube.com/watch?v=YgPtwbWpLaM&amp;list=PLnp31xXvnfRqyRDKtQeHvjxhonhNuaOAK" aria-label="Video for Lecture 21 (Graph Traversals and Implementations)">Video</a></td>
+<td class="schedule-blue" rowspan="2"><a href="homeworks/hw10.html"><p class="label syllabus-label-blue syllabus-label">Coding</p> <br /> HW10: LLRB Set</a>
+  <br />
+  (due Fri Oct 17)</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Fri<br />Oct 17
+                </td><td class="is-even " rowspan="1">22. Shortest Paths&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/25.-shortest-paths">Ch. 25</a>)<br /><a href="https://docs.google.com/presentation/d/1Bv1gzXFz4J4Y5Y1J2ktwUVkAkcuI7Q4SDUbuKao4dBw" aria-label="Slides for Lecture 22 (Shortest Paths)">Slides</a> / <a href="https://www.youtube.com/watch?v=iMoFtG1md3w&amp;list=PLnp31xXvnfRrbIn8mZ3pmpgygnfwp2zjW" aria-label="Video for Lecture 22 (Shortest Paths)">Video</a></td>
+</tr><tr class="starting-row"><td class=" week-cell" rowspan="3" id="week-42">
+                  9<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe3T7ANmL-5CEYq_3mInBcNvBvsuS68gFEB2iLt21VX0osA3Q/viewform" aria-label="Survey for Week 9">Survey</a></td><td class="" rowspan="1">
+                  Mon<br />Oct 20
+                </td><td class=" " rowspan="1">23. Shortest Paths (continued)&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/25.-shortest-paths">Ch. 25</a>)<br /><a href="https://docs.google.com/presentation/d/1Bv1gzXFz4J4Y5Y1J2ktwUVkAkcuI7Q4SDUbuKao4dBw" aria-label="Slides for Lecture 23 (Shortest Paths (continued))">Slides</a> / <a href="https://www.youtube.com/watch?v=iMoFtG1md3w&amp;list=PLnp31xXvnfRrbIn8mZ3pmpgygnfwp2zjW" aria-label="Video for Lecture 23 (Shortest Paths (continued))">Video</a></td>
+<td class=" " rowspan="3">8. Tree Traversals, Graphs, and Shortest Paths<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc08.pdf" aria-label="Worksheet for Discussion 8 (Tree Traversals, Graphs, and Shortest Paths)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc08-sols.pdf" aria-label="Solutions for Discussion 8 (Tree Traversals, Graphs, and Shortest Paths)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRrdIn4Jnf_aI1Hgw5m-wrL2" aria-label="Video for Discussion 8 (Tree Traversals, Graphs, and Shortest Paths)">Video</a> / <a href="https://docs.google.com/presentation/d/1R1ezyvocKlbNfC16MDTLVaBJEws2qfKfoma2Cs87Jl4/edit?usp=sharing" aria-label="Slides for Discussion 8 (Tree Traversals, Graphs, and Shortest Paths)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep08.pdf" aria-label="Worksheet for Exam-Level 8 (Tree Traversals, Graphs, and Shortest Paths)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep08-sols.pdf" aria-label="Solutions for Exam-Level 8 (Tree Traversals, Graphs, and Shortest Paths)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRqWGEpy-S22SMXVVxtkqmmT" aria-label="Video for Exam-Level 8 (Tree Traversals, Graphs, and Shortest Paths)">Video</a> / <a href="https://docs.google.com/presentation/d/1DkiNNUjlO13NKiL8CH2w03BdYuqBEzVRBh4O2Rd1jSc/edit?usp=sharing" aria-label="Slides for Exam-Level 8 (Tree Traversals, Graphs, and Shortest Paths)">Slides</a><br /><br />P4B Design Feedback Intro Section:&nbsp;<a href="https://docs.google.com/presentation/d/1LmYyZtuypH9_fF83zzcnetti_i09G7SDKCI2DckeC28/edit?usp=sharing" aria-label="Slides for Intro Section 8 (Tree Traversals, Graphs, and Shortest Paths)">Slides</a></td>
+<td class="" rowspan="6"></td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Wed<br />Oct 22
+                </td><td class=" " rowspan="1">24. Minimum Spanning Trees&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/26.-minimum-spanning-trees">Ch. 26</a>)<br /><a href="https://docs.google.com/presentation/d/1p03sWzNGOIjmKwto9i2aRZlD6pi1mQG4uyU6Awxj5wI" aria-label="Slides for Lecture 24 (Minimum Spanning Trees)">Slides</a> / <a href="https://www.youtube.com/watch?v=vnKK38JS9Ik&amp;list=PL8FaHk7qbOD7SvlWei_-neNmgmXzJG2ad" aria-label="Video for Lecture 24 (Minimum Spanning Trees)">Video</a></td>
+<td class="schedule-yellow" rowspan="2"><a href="proj4/proj4c.html"><p class="label syllabus-label-yellow syllabus-label">Design</p> <br /> Project 4C: Wordnet (k == 0)</a>
+  <br />
+  (due Mon Oct 27)</td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Fri<br />Oct 24
+                </td><td class=" " rowspan="1">25. Directed Acyclic Graphs&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/29.-reductions-and-decomposition">Ch. 29</a>)<br /><a href="https://docs.google.com/presentation/d/1Q162xqKOBlRAaHLquHRu13dCKu4ARyfLRFDdyC3r0ug" aria-label="Slides for Lecture 25 (Directed Acyclic Graphs)">Slides</a> / <a href="https://youtube.com/playlist?list=PLnp31xXvnfRprqOwH0sojH3VLONWXtYM0&amp;si=PokkZG0u_t06es5m" aria-label="Video for Lecture 25 (Directed Acyclic Graphs)">Video</a></td>
+</tr><tr class="starting-row"><td class="is-even week-cell" rowspan="3" id="week-43">
+                  10<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSe3T7ANmL-5CEYq_3mInBcNvBvsuS68gFEB2iLt21VX0osA3Q/viewform" aria-label="Survey for Week 10">Survey</a></td><td class="is-even" rowspan="1">
+                  Mon<br />Oct 27
+                </td><td class="is-even " rowspan="1">26. Hashing I&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/20.-hashing">Ch. 20</a>)<br /><a href="https://docs.google.com/presentation/d/1-xM1BMMNWMlSZ5NCFwhwe05M2Ut5DEIrf2iWM-2PAnE" aria-label="Slides for Lecture 26 (Hashing I)">Slides</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRr_rFqN57yjZtcw_P4UiJ7a" aria-label="Video for Lecture 26 (Hashing I)">Video</a></td>
+<td class="is-even " rowspan="3">9. MSTs, DAGs, and Hashing<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc09.pdf" aria-label="Worksheet for Discussion 9 (MSTs, DAGs, and Hashing)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc09-sols.pdf" aria-label="Solutions for Discussion 9 (MSTs, DAGs, and Hashing)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRrdIn4Jnf_aI1Hgw5m-wrL2" aria-label="Video for Discussion 9 (MSTs, DAGs, and Hashing)">Video</a> / <a href="https://docs.google.com/presentation/d/1W-t1gdkEd5vK3g8OY3qQWyKCii6lmVmr5JNRdwVhvvY/edit?usp=sharing" aria-label="Slides for Discussion 9 (MSTs, DAGs, and Hashing)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep09.pdf" aria-label="Worksheet for Exam-Level 9 (MSTs, DAGs, and Hashing)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep09-sols.pdf" aria-label="Solutions for Exam-Level 9 (MSTs, DAGs, and Hashing)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRqWGEpy-S22SMXVVxtkqmmT" aria-label="Video for Exam-Level 9 (MSTs, DAGs, and Hashing)">Video</a> / <a href="https://docs.google.com/presentation/d/1n-XURjhPOLoayn6zOdHg9KSz5LMANIk_1dI10VXBXds/edit?usp=sharing" aria-label="Slides for Exam-Level 9 (MSTs, DAGs, and Hashing)">Slides</a></td>
+<td class="schedule-yellow" rowspan="3"><a href="proj4/proj4d.html"><p class="label syllabus-label-yellow syllabus-label">Design</p> <br /> Project 4D: Wordnet (k != 0)</a>
+  <br />
+  (due Mon Nov 03)</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Wed<br />Oct 29
+                </td><td class="is-even " rowspan="1">27. Hashing II&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/21.-hashing-ii">Ch. 21</a>)<br /><a href="https://docs.google.com/presentation/d/1MLBgQC7X0ymvx5kloBBJGCngQtA1MKpv6xpnTQHXiHY" aria-label="Slides for Lecture 27 (Hashing II)">Slides</a> / <a href="https://youtube.com/playlist?list=PLnp31xXvnfRrSxUje7m5-Y41ELVPm50N_&amp;si=5plPlOH7IPamR6YH" aria-label="Video for Lecture 27 (Hashing II)">Video</a></td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Fri<br />Oct 31
+                </td><td class="is-even schedule-red" rowspan="1">28. Software Engineering I [Optional]<br /><a href="https://docs.google.com/presentation/d/1CEY8bqMYXpMygTi07Izfeu8p06d3FDvZL9y3l7hq_dU" aria-label="Slides for Lecture 28 (Software Engineering I [Optional])">Slides</a> / <a href="https://www.youtube.com/watch?v=ZX3qi30HcDU" aria-label="Video for Lecture 28 (Software Engineering I [Optional])">Video</a></td>
+</tr><tr class="starting-row"><td class=" week-cell" rowspan="4" id="week-44">
+                  11<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1rohhzdl-itZJHZUTnkqJqgAxqoauDAip78-c1zXblLNvkQ/viewform?usp=dialog" aria-label="Survey for Week 11">Survey</a></td><td class="" rowspan="1">
+                  Mon<br />Nov 03
+                </td><td class=" " rowspan="1">29. Tries&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/27.-prefix-operations-and-tries">Ch. 27</a>)<br /><a href="https://docs.google.com/presentation/d/1SiX9BAMNYQfOM9FAa3UXd9dfNnwaUxDqcAlBlTVaAHE" aria-label="Slides for Lecture 29 (Tries)">Slides</a> / <a href="https://www.youtube.com/watch?v=F8Q-SHW2hAM&amp;list=PLnp31xXvnfRoMxe8IbO1qF3lXwudLHVDk" aria-label="Video for Lecture 29 (Tries)">Video</a></td>
+<td class=" " rowspan="4">10. Midterm Review<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc10.pdf" aria-label="Worksheet for Discussion 10 (Midterm Review)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc10-sols.pdf" aria-label="Solutions for Discussion 10 (Midterm Review)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRp0SkHfIO9HavzXht0K9mOA" aria-label="Video for Discussion 10 (Midterm Review)">Video</a> / <a href="https://docs.google.com/presentation/d/1nFA9znhj_Iy3GO9f_EOmlme2stlCh1d9o31gnk-xDg4/edit?usp=sharing" aria-label="Slides for Discussion 10 (Midterm Review)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep10.pdf" aria-label="Worksheet for Exam-Level 10 (Midterm Review)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep10-sols.pdf" aria-label="Solutions for Exam-Level 10 (Midterm Review)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRqhMYH6tRt4bru5HxoWta9G" aria-label="Video for Exam-Level 10 (Midterm Review)">Video</a> / <a href="https://docs.google.com/presentation/d/1nsMkC0-KW_OoBrB5CoPdoisRtQ9s7jvo0Bo7dMuZxj0/edit?usp=sharing" aria-label="Slides for Exam-Level 10 (Midterm Review)">Slides</a><br /><br />No Intro Section</td>
+<td class="schedule-green" rowspan="2"><a href="https://www.gradescope.com"><p class="label syllabus-label-green syllabus-label">Theory</p> <br /> HW11: Midterm Review</a>
+  <br />
+  (due Wed Nov 05)</td>
+<td class="" rowspan="4"></td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Wed<br />Nov 05
+                </td><td class=" " rowspan="1">30. Basic Sorts&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/30.-basic-sorts">Ch. 30</a>)<br /><a href="https://docs.google.com/presentation/d/1RIlO0BLQBu_Du7L_IuBQ8srFdqA6wfteGB0T69OcBLo" aria-label="Slides for Lecture 30 (Basic Sorts)">Slides</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRrK9o_QZyGOCbQVFTsqOPtN" aria-label="Video for Lecture 30 (Basic Sorts)">Video</a></td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Thu<br />Nov 06
+                </td><td class=" " rowspan="1"><p><strong>Midterm 2 (Thu Nov 06, 8–10pm)</strong></p>
+</td>
+<td class="" rowspan="2"></td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Fri<br />Nov 07
+                </td><td class=" schedule-red" rowspan="1">31. Software Engineering II [Optional]<br /><a href="https://docs.google.com/presentation/d/1UIfsoWRF12n-qDqhNRQ5_MiibbTBCeTLkPdTuYz5XlM" aria-label="Slides for Lecture 31 (Software Engineering II [Optional])">Slides</a> / <a href="https://www.youtube.com/watch?v=xxnEueoBZ7Y" aria-label="Video for Lecture 31 (Software Engineering II [Optional])">Video</a></td>
+</tr><tr class="starting-row"><td class="is-even week-cell" rowspan="3" id="week-45">
+                  12<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxVNlUyUJY1Delg4Np_kRFhekP58ChUyhlJgrWSN8BuiDIkw/viewform" aria-label="Survey for Week 12">Survey</a></td><td class="is-even" rowspan="1">
+                  Mon<br />Nov 10
+                </td><td class="is-even " rowspan="1">32. Merge Sort, Insertion Sort, and Quick Sort&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/31.-quicksort">Ch. 31</a>)<br /><a href="https://docs.google.com/presentation/d/1LaozqAT3MAEkK6x-w_njeM0oCcBQDbKCloiKUOr5q-8" aria-label="Slides for Lecture 32 (Merge Sort, Insertion Sort, and Quick Sort)">Slides</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRqsfDWZNS86oYmHFY6UKA2t" aria-label="Video for Lecture 32 (Merge Sort, Insertion Sort, and Quick Sort)">Video</a></td>
+<td class="is-even " rowspan="3">11. Tries and Sorting<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc11.pdf" aria-label="Worksheet for Discussion 11 (Tries and Sorting)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc11-sols.pdf" aria-label="Solutions for Discussion 11 (Tries and Sorting)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRrD3GyILak06gbTN0rbKJat" aria-label="Video for Discussion 11 (Tries and Sorting)">Video</a> / <a href="https://docs.google.com/presentation/d/1tOiJTrDtgnGl6eQ2ihbzc2jDz-LqTbGQrmaMsB2eCjQ/edit?usp=sharing" aria-label="Slides for Discussion 11 (Tries and Sorting)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep11.pdf" aria-label="Worksheet for Exam-Level 11 (Tries and Sorting)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep11-sols.pdf" aria-label="Solutions for Exam-Level 11 (Tries and Sorting)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRoboeJhEoJbAb7U_W7KBvoj" aria-label="Video for Exam-Level 11 (Tries and Sorting)">Video</a> / <a href="https://docs.google.com/presentation/d/1KWAQaevz6Q-BNp3rphI7WIg_CnbQiXmGttfuu5GX25Y/edit?usp=sharing" aria-label="Slides for Exam-Level 11 (Tries and Sorting)">Slides</a><br /><br />HW12 Intro Section:&nbsp;<a href="https://docs.google.com/presentation/d/1QCFrmKrb5pGabrOzS0i5YuzbOkp9OPir5k3LRFRe5vE/edit?usp=sharing" aria-label="Slides for Intro Section 11 (Tries and Sorting)">Slides</a></td>
+<td class="schedule-blue" rowspan="3"><a href="homeworks/hw12.html"><p class="label syllabus-label-blue syllabus-label">Coding</p> <br /> HW12: HashMap</a>
+  <br />
+  (due Fri Nov 14)</td>
+<td class="schedule-yellow" rowspan="3"><a href="proj5/proj5a.html"><p class="label syllabus-label-yellow syllabus-label">Design</p> <br /> Project 5A: BYOW (Design)</a>
+  <br />
+  (due Mon Nov 17)</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Wed<br />Nov 12
+                </td><td class="is-even " rowspan="1">33. More Quicksort&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/33.-more-quick-sort-sorting-summary">Ch. 33</a>)<br /><a href="https://docs.google.com/presentation/d/1LWudJy0LNwrqSEjFbpPeE8ANOh72mBNMn96_i-Ole9A" aria-label="Slides for Lecture 33 (More Quicksort)">Slides</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRrHHQP93qqc_QBNBF_WEQLy" aria-label="Video for Lecture 33 (More Quicksort)">Video</a></td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Fri<br />Nov 14
+                </td><td class="is-even schedule-red" rowspan="1">34. Software Engineering III - Stella Kaval guest lecture [Optional]<br /><a href="https://docs.google.com/presentation/d/1dVryW50lXi__NsvTh3NoMLEKP_2BwXrRjvwuHW6Aw4w" aria-label="Slides for Lecture 34 (Software Engineering III - Stella Kaval guest lecture [Optional])">Slides</a> / <a href="https://www.youtube.com/watch?v=ORtjlW4Jv7A" aria-label="Video for Lecture 34 (Software Engineering III - Stella Kaval guest lecture [Optional])">Video</a></td>
+</tr><tr class="starting-row"><td class=" week-cell" rowspan="3" id="week-46">
+                  13<br />
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLScnCcJUDY0OIEGfgIkC5iDvqrzSSk4fVZZ0GmM7fQGNhnxnZA/viewform" aria-label="Survey for Week 13">Survey</a></td><td class="" rowspan="1">
+                  Mon<br />Nov 17
+                </td><td class=" " rowspan="1">35. Sorting and Algorithmic Bounds&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/35.-sorting-and-algorithmic-bounds">Ch. 35</a>)<br /><a href="https://docs.google.com/presentation/d/1zqb9zNdSDt6DhS-73xrz_0LlTA85x2upyI3iwgXFo30" aria-label="Slides for Lecture 35 (Sorting and Algorithmic Bounds)">Slides</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRqEadgCMXeo1gnlIxnETooG" aria-label="Video for Lecture 35 (Sorting and Algorithmic Bounds)">Video</a></td>
+<td class=" " rowspan="3">12. Sorting II<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc12.pdf" aria-label="Worksheet for Discussion 12 (Sorting II)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc12-sols.pdf" aria-label="Solutions for Discussion 12 (Sorting II)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRqxJ0qF1CglXRb-Qb-oNOgs" aria-label="Video for Discussion 12 (Sorting II)">Video</a> / <a href="https://docs.google.com/presentation/d/1piMfJ_xBX4TtWkdhGf60wCQXduZT5tB9gxH1pUK67H4/edit?usp=sharing" aria-label="Slides for Discussion 12 (Sorting II)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep12.pdf" aria-label="Worksheet for Exam-Level 12 (Sorting II)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-examprep12-sols.pdf" aria-label="Solutions for Exam-Level 12 (Sorting II)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRrxu6rDIFiBjifethxW7gSl" aria-label="Video for Exam-Level 12 (Sorting II)">Video</a> / <a href="https://docs.google.com/presentation/d/1djFsWOkSCZJ4LBZNAGcWd5UxejCaA7SGjqjeifXAe9c/edit?usp=sharing" aria-label="Slides for Exam-Level 12 (Sorting II)">Slides</a><br /><br />P5 Design Intro Section:&nbsp;<a href="https://docs.google.com/presentation/d/17I2W_-55Skwkqu_hTiZCp90YCSftLbFtVuZkowq-9jY/edit?usp=sharing" aria-label="Slides for Intro Section 12 (Sorting II)">Slides</a></td>
+<td class="" rowspan="7"></td>
+<td class="schedule-yellow" rowspan="3"><a href="proj5/proj5b.html"><p class="label syllabus-label-yellow syllabus-label">Design</p> <br /> Project 5B: BYOW (World Generation)</a>
+  <br />
+  (due Mon Nov 24)</td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Wed<br />Nov 19
+                </td><td class=" " rowspan="1">36. Radix Sorts&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/36.-radix-sorts">Ch. 36</a>)<br /><a href="https://docs.google.com/presentation/d/1l62vi0eTne893R90sDgjqUWiq9-EbJFBC1binj3KWuI" aria-label="Slides for Lecture 36 (Radix Sorts)">Slides</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRr4cg5TeJZplLTlOVmMNE0d" aria-label="Video for Lecture 36 (Radix Sorts)">Video</a></td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Fri<br />Nov 21
+                </td><td class=" " rowspan="1">37. Radix vs. Comparison Sorting&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/37.-sorting-and-data-structures-conclusion">Ch. 37</a>)<br /><a href="https://docs.google.com/presentation/d/1yP1duv4gtivzDy61IwOY9B7LA5jfvPevyVvZ58WFavU" aria-label="Slides for Lecture 37 (Radix vs. Comparison Sorting)">Slides</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRoDV1sFRy3Hdx0N6BMZjI1n" aria-label="Video for Lecture 37 (Radix vs. Comparison Sorting)">Video</a></td>
+</tr><tr class="starting-row"><td class="is-even week-cell" rowspan="3" id="week-47">
+                  14</td><td class="is-even" rowspan="1">
+                  Mon<br />Nov 24
+                </td><td class="is-even schedule-red" rowspan="1">38. Compression [Optional]<br /><a href="https://docs.google.com/presentation/d/17FdujbKWYNfDrEoyfsdX-iggAgMzkZJX_9n9EymBWFI" aria-label="Slides for Lecture 38 (Compression [Optional])">Slides</a> / <a href="https://www.youtube.com/watch?v=LF2tmNNhyKw" aria-label="Video for Lecture 38 (Compression [Optional])">Video</a></td>
+<td class="is-even " rowspan="3">13. Sorting III<br /><br />Discussion:&nbsp;<a href="assets/discussions/cs61b-fa25-disc13.pdf" aria-label="Worksheet for Discussion 13 (Sorting III)">Worksheet</a> / <a href="assets/discussions/cs61b-fa25-disc13-sols.pdf" aria-label="Solutions for Discussion 13 (Sorting III)">Solutions</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRrpqJ8WTjbBOwSNFg54wQDT" aria-label="Video for Discussion 13 (Sorting III)">Video</a> / <a href="https://docs.google.com/presentation/d/18pQgcINUqcodmvsUOleR8T_7pi7WSW4lGeA_3Af5jgY/edit?usp=sharing" aria-label="Slides for Discussion 13 (Sorting III)">Slides</a><br /><br />Exam-Level:&nbsp;<a href="assets/discussions/cs61b-fa25-examprep13.pdf" aria-label="Worksheet for Exam-Level 13 (Sorting III)">Worksheet</a> / <a href="https://www.youtube.com/playlist?list=PLnp31xXvnfRoenwS-qOt7TtocoDP-qXo4" aria-label="Video for Exam-Level 13 (Sorting III)">Video</a> / <a href="https://docs.google.com/presentation/d/1YNO4oZzukBC-mbyUKYyV5xs8ZOlvTL0wddazEe_aBrU/edit?usp=sharing" aria-label="Slides for Exam-Level 13 (Sorting III)">Slides</a><br /><br />No Intro Section</td>
+<td class="schedule-yellow" rowspan="3"><a href="proj5/proj5c.html"><p class="label syllabus-label-yellow syllabus-label">Design</p> <br /> Project 5C: BYOW (Interactivity)</a>
+  <br />
+  (due Mon Dec 01)</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Wed<br />Nov 26
+                </td><td class="is-even " rowspan="2"><p>No Lecture (Thanksgiving)</p>
+</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Fri<br />Nov 28
+                </td></tr><tr class="starting-row"><td class=" week-cell" rowspan="3" id="week-48">
+                  15</td><td class="" rowspan="1">
+                  Mon<br />Dec 01
+                </td><td class=" schedule-red" rowspan="1">39. Putting Java in Context; Language Development &amp; Optimisations&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/39.-compression-and-complexity">Ch. 39</a>)<br /><a href="https://docs.google.com/presentation/d/1MJG32H6I-0alvAGeBkRgNdPTQsZVbVEk0qJEC3Q8hno/edit?usp=sharing" aria-label="Slides for Lecture 39 (Putting Java in Context; Language Development &amp; Optimisations)">Slides</a> / <a href="https://www.youtube.com/watch?v=CZhXfaTFoSk" aria-label="Video for Lecture 39 (Putting Java in Context; Language Development &amp; Optimisations)">Video</a></td>
+<td class=" " rowspan="3">14. Goodbye, Fun</td>
+<td class="" rowspan="10"></td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Wed<br />Dec 03
+                </td><td class=" schedule-red" rowspan="1">40. Version Control Systems: Git&nbsp;(<a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/40.-compression-complexity-p-np">Ch. 40</a>)<br /><a href="https://docs.google.com/presentation/d/12tuztNLTJH25dHvpOrpbcT618qpYeCT8KAJS7TtnNd4/edit?usp=sharing" aria-label="Slides for Lecture 40 (Version Control Systems: Git)">Slides</a> / <a href="https://www.youtube.com/watch?v=W1WBa456lzg" aria-label="Video for Lecture 40 (Version Control Systems: Git)">Video</a></td>
+<td class="schedule-green" rowspan="3"><a href="https://www.gradescope.com"><p class="label syllabus-label-green syllabus-label">Theory</p> <br /> HW13: Final Exam Review</a>
+  <br />
+  (due Mon Dec 08)</td>
+</tr><tr class=""><td class="" rowspan="1">
+                  Fri<br />Dec 05
+                </td><td class=" schedule-red" rowspan="1">41. Summary, Fun [Optional]<br /><a href="https://docs.google.com/presentation/d/18t9gS9WEQkTEgbclAcMEgTE68RpUWFlnCzt-R1S-jic" aria-label="Slides for Lecture 41 (Summary, Fun [Optional])">Slides</a> / <a href="https://www.youtube.com/watch?v=k5JLR8EPZ-E" aria-label="Video for Lecture 41 (Summary, Fun [Optional])">Video</a></td>
+</tr><tr class="starting-row"><td class="is-even week-cell" rowspan="3" id="week-49">
+                  16</td><td class="is-even" rowspan="1">
+                  Mon<br />Dec 08
+                </td><td class="is-even " rowspan="3"><p>No Lecture (RRR Week)</p>
+</td>
+<td class="is-even " rowspan="3">No Discussion</td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Wed<br />Dec 10
+                </td><td class="" rowspan="4"></td>
+</tr><tr class=""><td class="is-even" rowspan="1">
+                  Fri<br />Dec 12
+                </td></tr><tr class="starting-row"><td class=" week-cell" rowspan="1" id="week-50">
+                  17</td><td class="" rowspan="1">
+                  Thu<br />Dec 18
+                </td><td class=" " rowspan="1"><p><strong>Final Exam (Thu Dec 18, 8–11am)</strong></p>
+</td>
+<td class=" " rowspan="3"></td>
+</tr></tbody>
+  </table></div>
+</div>
+</div>
+
+          
+
+          
+            
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

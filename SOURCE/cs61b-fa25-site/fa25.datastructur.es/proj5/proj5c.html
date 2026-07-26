@@ -1,0 +1,900 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    .site-nav > ul.nav-list:first-child > li > a,
+    
+    .site-nav > ul.nav-list:first-child > li > ul > li:not(:nth-child(4)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(8) > ul > li:nth-child(4) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(8) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(8) > ul > li:nth-child(4) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(8) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(8) > ul.nav-list > li.nav-list-item:nth-child(4) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="../assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>5C: BYOW (Interactivity) | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="5C: BYOW (Interactivity)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Project 5C spec." />
+<meta property="og:description" content="Project 5C spec." />
+<link rel="canonical" href="proj5c.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/proj5/proj5c/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="5C: BYOW (Interactivity)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Project 5C spec.","headline":"5C: BYOW (Interactivity)","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/proj5/proj5c/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="../assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="../assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="../assets/katex/katex.min.css"
+>
+<script defer src="../assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="../assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="proj5c.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="../index.html" class="site-title lh-tight">
+
+
+  <img src="../assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="../policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="../policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="../policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="../policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="../resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="../resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="../resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="../resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="../resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="../resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="../resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="../resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="../resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="../resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="../resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="../resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="../resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="../staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="../homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="../homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="../homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="../homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="../homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="../homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="../homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="../homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="../homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="../homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="../projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="../projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="../projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="../proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="../proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="../proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="../proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="../proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="../troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="../troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="proj5c.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="index.html">Project 5</a></li>
+    <li class="breadcrumb-nav-list-item"><span>5C: BYOW (Interactivity)</span></li>
+  </ol>
+</nav>
+
+
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item"><a href="proj5c.html#deadlines" class="nav-list-link">Deadlines</a></li><li class="nav-list-item"><a href="proj5c.html#task-1-main-menu" class="nav-list-link">Task 1: Main Menu</a></li><li class="nav-list-item"><a href="proj5c.html#task-2-interactivity" class="nav-list-link">Task 2: Interactivity</a><ul class="nav-list"><li class="nav-list-item"><a href="proj5c.html#overview-animating-the-game" class="nav-list-link">Overview: Animating the Game</a></li><li class="nav-list-item"><a href="proj5c.html#overview-determinism" class="nav-list-link">Overview: Determinism</a></li></ul></li><li class="nav-list-item"><a href="proj5c.html#task-3-hud" class="nav-list-link">Task 3: HUD</a></li><li class="nav-list-item"><a href="proj5c.html#task-4-saving-and-loading" class="nav-list-link">Task 4: Saving and Loading</a></li><li class="nav-list-item"><a href="proj5c.html#task-5-ambition-features" class="nav-list-link">Task 5: Ambition Features</a><ul class="nav-list"><li class="nav-list-item"><a href="proj5c.html#clarifications" class="nav-list-link">Clarifications</a></li></ul></li><li class="nav-list-item"><a href="proj5c.html#deliverables" class="nav-list-link">Deliverables</a><ul class="nav-list"><li class="nav-list-item"><a href="proj5c.html#gradescope" class="nav-list-link">Gradescope</a></li><li class="nav-list-item"><a href="proj5c.html#live-checkoff" class="nav-list-link">Live Checkoff</a></li><li class="nav-list-item"><a href="proj5c.html#post-project-partnership-form" class="nav-list-link">Post-Project Partnership Form</a></li><li class="nav-list-item"><a href="proj5c.html#style" class="nav-list-link">Style</a></li></ul></li></ul>
+    </nav>
+  <div class="content">
+<h2 id="deadlines">
+  
+  
+    <a href="proj5c.html#deadlines" class="anchor-heading" aria-labelledby="deadlines"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Deadlines
+  
+  
+</h2>
+    
+
+<div>
+
+<style type="text/css">
+
+.proj5-table {
+  all: revert;
+  border-collapse: collapse !important;
+}
+
+.proj5-header-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+}
+
+.proj5a-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+  border-bottom: 2px solid !important;
+  background-color:rgba(114,83,237,0.2);
+}
+
+.proj5b-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+  border-bottom: 2px solid !important;
+  background-color:rgba(44,132,250,0.15);
+}
+
+.proj5c-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+  border-bottom: 2px solid !important;
+  background-color:rgba(65,214,147,0.15);
+}
+
+</style>
+
+<!-- how many deadlines??-->
+Warning: There are <b>3 deadlines</b> for this project, and some deadlines require you to submit <b>multiple deliverables</b>. Please double-check that you submitted everything!
+
+<div class="table-wrapper"><table class="proj5-table"><thead>
+  <tr>
+    <th class="proj5-header-cell">Assignment</th>
+    <th class="proj5-header-cell">Tasks</th>
+    <th class="proj5-header-cell">Deliverable</th>
+    <th class="proj5-header-cell">Points</th>
+    <th class="proj5-header-cell">Due Date</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="proj5a-cell" rowspan="2">Project 5A</td>
+    <td class="proj5a-cell" rowspan="2">- Partnerships<br />- Setup<br />- Design Document</td>
+    <td class="proj5a-cell">Pre-Project <b>Google Form</b></td>
+    <td class="proj5a-cell">5</td>
+    <td class="proj5a-cell" rowspan="2">Mon, Nov 17<br />11:59pm PT</td>
+  </tr>
+  <tr>
+    <td class="proj5a-cell">Design Document</td>
+    <td class="proj5a-cell">20</td>
+  </tr>
+  <tr>
+    <td class="proj5b-cell" rowspan="1">Project 5B</td>
+    <td class="proj5b-cell" rowspan="1">- World Generation</td>
+    <td class="proj5b-cell">World Screenshots on <b>Gradescope</b></td>
+    <td class="proj5b-cell">20</td>
+    <td class="proj5b-cell" rowspan="1">Mon, Nov 24<br />11:59pm PT</td>
+  </tr>
+  <tr>
+    <td class="proj5c-cell" rowspan="3">Project 5C</td>
+    <td class="proj5c-cell" rowspan="3">- Task 1: Main Menu<br />- Task 2: Interactivity<br />- Task 3: HUD<br />- Task 4: Saving and Loading<br />- Task 5: Ambition Features</td>
+    <td class="proj5c-cell">Code on <b>Gradescope</b><br />(0 pts, but required for checkoff)<br /></td>
+    <td class="proj5c-cell">0</td>
+    <td class="proj5c-cell" rowspan="3">Mon, Dec 1<br />11:59pm PT</td>
+  </tr>
+  <tr>
+    <td class="proj5c-cell"><b>Live Checkoff</b> with TA<br />(Checkoffs will happen 12/01 – 12/05)</td>
+    <td class="proj5c-cell">150</td>
+  </tr>
+  <tr>
+    <td class="proj5c-cell">Post-Project <b>Google Form</b></td>
+    <td class="proj5c-cell">5</td>
+  </tr>
+</tbody>
+</table></div>
+
+To request extensions on Project 5, <b>both partners</b> need to submit separate extension requests on Beacon.
+
+</div>
+<h1 id="project-5c-byow-interactivity">
+  
+  
+    <a href="proj5c.html#project-5c-byow-interactivity" class="anchor-heading" aria-labelledby="project-5c-byow-interactivity"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 5C: BYOW (Interactivity)
+  
+  
+</h1>
+    
+<h2 id="task-1-main-menu">
+  
+  
+    <a href="proj5c.html#task-1-main-menu" class="anchor-heading" aria-labelledby="task-1-main-menu"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 1: Main Menu
+  
+  
+</h2>
+    
+
+<p>In Project 5B, when a user ran the <code class="language-plaintext highlighter-rouge">main</code> method in <code class="language-plaintext highlighter-rouge">Main.java</code>, they saw a world pop up. We’ll now change this to give the user a nice menu.</p>
+
+<p class="TASK">Implement a Main Menu that follows the requirements detailed below.</p>
+
+<p>Now, when a user runs <code class="language-plaintext highlighter-rouge">Main.main</code>, they should see some Main Menu text pop up, like this:</p>
+
+<p><img alt="Main menu with title CS 61B: The Game, and options New Game (N), Load Game (L), and Quit (Q)." src="../assets/projects/proj5c/1-main-menu.webp" /></p>
+
+<p>The menu should give the user these options:</p>
+<ul>
+  <li>Pressing <code class="language-plaintext highlighter-rouge">N</code> or <code class="language-plaintext highlighter-rouge">n</code> on the main menu creates a new game.</li>
+  <li>Pressing <code class="language-plaintext highlighter-rouge">L</code> or <code class="language-plaintext highlighter-rouge">l</code> on the main menu loads a saved game from the save file.</li>
+  <li>Pressing <code class="language-plaintext highlighter-rouge">Q</code> or <code class="language-plaintext highlighter-rouge">q</code> on the main menu closes the window. To close the window, run <code class="language-plaintext highlighter-rouge">System.exit(0)</code>.</li>
+</ul>
+
+<p>The user should be able to press the corresponding keys on the keyboard to select an option.</p>
+
+<p>Notice that the key presses are not case-sensitive. The user should be able to press either <code class="language-plaintext highlighter-rouge">N</code> or <code class="language-plaintext highlighter-rouge">n</code>, and the behavior should be the same (new game created).</p>
+
+<p>Besides the requirements above, you can customize the appearance of this menu however you like.</p>
+
+<p>If the user presses <code class="language-plaintext highlighter-rouge">N</code> or <code class="language-plaintext highlighter-rouge">n</code>, they should see a new screen that allows them to enter a seed, like this:</p>
+
+<p><img alt="Enter Seed menu, with user typing a numerical seed." src="../assets/projects/proj5c/enter-seed.gif" /></p>
+
+<p>The screen should show the user the value that the user has entered so far. In other words, every time the user types a digit, that digit should immediately appear on screen (next to all the other digits typed).</p>
+
+<p>After the user is done typing their seed, the user should be able to press <code class="language-plaintext highlighter-rouge">S</code> or <code class="language-plaintext highlighter-rouge">s</code> to start the game. You should display a world generated from the user’s seed.</p>
+
+<p>Again, besides the requirements above, you can customize the appearance of this menu however you like.</p>
+
+<p>Here are some features you <em>don’t</em> need to support (unless you want to). The behavior of these cases is <em>undefined</em>, which means that your code can do anything in these cases (e.g. crash, or display an error, or anything else).</p>
+<ul>
+  <li>The user entering seeds outside of the range [0, 9223372036854775807] is undefined. These are the values representable by the <code class="language-plaintext highlighter-rouge">long</code> primitive data type in Java.</li>
+  <li>The user typing disallowed characters on the seed screen (i.e. anything except <code class="language-plaintext highlighter-rouge">0123456789sS</code>) is undefined. For example, the user pressing Backspace, or typing a comma, or typing <code class="language-plaintext highlighter-rouge">Q</code>, or typing other alphabetical characters on the seed screen, is undefined.</li>
+</ul>
+<h2 id="task-2-interactivity">
+  
+  
+    <a href="proj5c.html#task-2-interactivity" class="anchor-heading" aria-labelledby="task-2-interactivity"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 2: Interactivity
+  
+  
+</h2>
+    
+
+<p>Next, let’s give the user the ability to move an avatar around the world.</p>
+
+<p class="TASK">Implement an Avatar that follows the requirements detailed below.</p>
+
+<p>When the user starts the game, the world you generated should additionally include a single <em>avatar</em> tile representing the user. In the example below, the <code class="language-plaintext highlighter-rouge">@</code> tile is the avatar. Your avatar can look different, as long as there is a clear single avatar.</p>
+
+<p><img alt="World with a single avatar." src="../assets/projects/proj5c/2-avatar.webp" /></p>
+
+<p>The avatar can start on any floor square. The starting square doesn’t need to be randomly-chosen, e.g. it can always be the bottommost-leftmost floor square. However, the starting square does need to be deterministic, e.g. entering the same seed twice should result in the avatar in the same square. See the section below for more details on determinism.</p>
+
+<p>The user should be able to move the avatar around the world as follows:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">W</code> or <code class="language-plaintext highlighter-rouge">w</code> should move the avatar up one square.</li>
+  <li><code class="language-plaintext highlighter-rouge">A</code> or <code class="language-plaintext highlighter-rouge">a</code> should move the avatar left one square.</li>
+  <li><code class="language-plaintext highlighter-rouge">S</code> or <code class="language-plaintext highlighter-rouge">s</code> should move the avatar down one square.</li>
+  <li><code class="language-plaintext highlighter-rouge">D</code> or <code class="language-plaintext highlighter-rouge">d</code> should move the avatar right one square.</li>
+</ul>
+
+<p>If the user attempts to move into a wall, the avatar should stay in the same place, and the program should not crash. For example, in the sample world above, pressing <code class="language-plaintext highlighter-rouge">W</code> or <code class="language-plaintext highlighter-rouge">w</code> once should move the avatar up, and then pressing <code class="language-plaintext highlighter-rouge">W</code> or <code class="language-plaintext highlighter-rouge">w</code> again should not move the avatar.</p>
+
+<p>You don’t need to support pressing and holding down a key. It’s fine if holding down a key results in undefined behavior.</p>
+
+<p>Later in the project, you can add additional gameplay features if you’d like. For example, a power-up could allow the user to move through walls or move multiple squares at once. Or, the user could use an additional key <code class="language-plaintext highlighter-rouge">P</code> to push items around. Additional features are fine, as long as you follow the basic spirit of interactivity outlined here, where users can move around, but are limited by walls.</p>
+<h3 id="overview-animating-the-game">
+  
+  
+    <a href="proj5c.html#overview-animating-the-game" class="anchor-heading" aria-labelledby="overview-animating-the-game"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Overview: Animating the Game
+  
+  
+</h3>
+    
+
+<p>To animate your game, you need to continuously re-render updates to your game state. These updates will vary depending on the specific scene you are in. You can conceptualize this process as a “game loop.” Your world movement scene might be characterized by the following game loop:</p>
+
+<ol>
+  <li>Initialize the game window and the world state.</li>
+  <li>Update the movements of the avatar based on the player’s input.</li>
+  <li>Render the updated game state in the game window.</li>
+  <li>Repeat steps 2 and 3 until the player quits.</li>
+</ol>
+
+<p>Check out <code class="language-plaintext highlighter-rouge">GameLoopDemo.java</code>, located in the <code class="language-plaintext highlighter-rouge">demo</code> folder of your Project 5 repo, for an example of what this might look like.</p>
+
+<p>In general, good coding practice is to first build small procedures with explicit 
+purposes and then compose more complex methods using the basic ones. It will give you a clear path forward in development and will be easier to break down your logic for unit testing.</p>
+<h3 id="overview-determinism">
+  
+  
+    <a href="proj5c.html#overview-determinism" class="anchor-heading" aria-labelledby="overview-determinism"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Overview: Determinism
+  
+  
+</h3>
+    
+
+<p>Your game should be <strong>deterministic</strong>. This means that if two users press the exact same keys in the exact same sequence, the resulting state of their game should be exactly the same. For example, the 2D tile grid should be exactly the same, and any other features you add (e.g. points, health bar, etc.) should also be exactly the same.</p>
+
+<p>Recall that we already used pseudorandomness to make the new-game process deterministic. If two users type in the same seed, they’ll get the exact same world.</p>
+
+<p>As you start to add more features from now on, make sure that your game is still deterministic. You can still use pseudorandomness to help you ensure determinism.</p>
+
+<p><strong>Note on real-time gameplay:</strong></p>
+
+<p>The easiest way to produce deterministic behavior is for your game to not depend on real-time. Some examples of non-real-time behavior:</p>
+
+<ul>
+  <li>If the user presses the same sequence of keys very quickly, or very slowly, the resulting behavior should be exactly the same.</li>
+  <li>If you have features like a countdown timer, the timer should be measured by number of moves (e.g. decrement each time the user moves), as opposed to real-time like number of seconds.</li>
+  <li>If you have features like enemy character spawning, you can spawn an enemy every 5 moves, as opposed to something real-time like every 5 seconds.</li>
+</ul>
+
+<p>If you do intend to implement real-time behavior, that’s fine, as long as anybody can easily produce deterministic behavior by pressing the same keys in the same sequence. For example, asking the user to press a key within a 10-second timer is fine and reproducible, but asking the user to press 20 keys within a 0.1-second timer is too hard to reproduce reliably.</p>
+<h2 id="task-3-hud">
+  
+  
+    <a href="proj5c.html#task-3-hud" class="anchor-heading" aria-labelledby="task-3-hud"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 3: HUD
+  
+  
+</h2>
+    
+
+<p>Add a “Heads up Display” (HUD) that provides additional information that maybe useful to the user.</p>
+
+<blockquote class="TASK">
+  <p>Implement the HUD feature that follows the requirements detailed below.</p>
+</blockquote>
+
+<p>At the bare minimum, this should include Text that describes the tile currently under the mouse pointer. Ideally, your HUD should not flicker as the mouse moves. The HUD must update as you move the mouse cursor, i.e. you must update even if the user is only moving the mouse and isn’t pressing any keys.</p>
+
+<blockquote class="NOTE">
+  <p>As a hint on how you can do this, we’d recommend two things</p>
+  <ol>
+    <li>Modify your code so that there is some empty space at the top for you to put your HUD in</li>
+    <li>Look into the <code class="language-plaintext highlighter-rouge">StdDraw.textLeft(x, y, text)</code> function, which draws the given <code class="language-plaintext highlighter-rouge">text</code> at the given <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> position. Analagously, there are also the <code class="language-plaintext highlighter-rouge">textRight</code> and <code class="language-plaintext highlighter-rouge">text</code> functions with the same inputs but will make it so that the right and center of <code class="language-plaintext highlighter-rouge">text</code> is at the given <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> positions.</li>
+  </ol>
+</blockquote>
+
+<p>As an example of the bare minimum, the simple interface below displays a grid of tiles and a HUD that displays the description of the tile under the mouse pointer (click image for higher resolution). Here, the mouse cursor (not shown) is over the g, and the text is there to tell the user that the green g represents a goblin.</p>
+
+<p><a href="../assets/projects/proj5c/3-simple-hud.webp"><img src="../assets/projects/proj5c/3-simple-hud.webp" alt="HUD example showing description" /></a></p>
+
+<p>You may include additional features to your HUD if you choose. In the example below from Fall 2022 students <a href="https://www.youtube.com/watch?v=VZR-yU3t-_o">Shannon Jay and Angelique</a>, we a see a more complex HUD. As with the previous example, the mouse cursor is currently over a floor tile, so the HUD displays the text “floor” in the top right. However, this HUD also provides the user with 5 hearts representing the avatar’s “health”, as well as a description about a special key that can be pressed to turn a lamp on or off. Click image below for high resolution.</p>
+
+<p><a href="../assets/projects/proj5c/4-complex-hud.webp"><img src="../assets/projects/proj5c/4-complex-hud.webp" alt="HUD example showing health" /></a></p>
+<h2 id="task-4-saving-and-loading">
+  
+  
+    <a href="proj5c.html#task-4-saving-and-loading" class="anchor-heading" aria-labelledby="task-4-saving-and-loading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 4: Saving and Loading
+  
+  
+</h2>
+    
+
+<p>Suppose the user is playing your game, but needs to take a break. (Maybe they need to attend a CS 61B lecture?) Let’s give users a way to save their progress and load back a game later.</p>
+
+<p class="TASK">Implement the Saving and Loading feature that follows the requirements detailed below.</p>
+
+<p>We know we haven’t given you guys much exposure to saving and loading so we’ve included a demo file that gives an example of how to save/load data. You can feel free to copy code as/if necessary for the purposes of your project.</p>
+
+<p class="TASK">Go through the <code class="language-plaintext highlighter-rouge">ExampleSaveLoad.java</code> file in your demo folder and make sure you understand it.</p>
+
+<p>Here’s a video demo of the saving and loading process:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Q8-FKMLYVwk?si=TYxKvHCL4sCQHaeF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+<p>When the user is in “World mode” (looking at a 2D world, not the main menu), they should be able to press <code class="language-plaintext highlighter-rouge">:q</code> or <code class="language-plaintext highlighter-rouge">:Q</code> to immediately save the game and quit the program. To quit the program, run <code class="language-plaintext highlighter-rouge">System.exit(0)</code>.</p>
+
+<p>When the user quits your program, all Java variables will be lost. Therefore, you will need to save the user’s progress in a file, like <code class="language-plaintext highlighter-rouge">save.txt</code>. What you put in <code class="language-plaintext highlighter-rouge">save.txt</code> is up to you, but it should contain enough information to perfectly reconstruct the user’s game later.</p>
+
+<p>Some notes on the keypresses:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">:Q</code> is two characters pressed separately. The user first presses colon only, and then they press Q only.</li>
+  <li><code class="language-plaintext highlighter-rouge">:Q</code> or <code class="language-plaintext highlighter-rouge">:q</code> in “World mode” should immediately save and quit, with no further key-presses needed to complete. For example, don’t ask the user if they are sure before quitting.</li>
+  <li>In “Menu mode” (looking at the main menu), pressing Q alone should quit the program, without saving anything.</li>
+  <li>In “World mode” (looking at a 2D world), pressing Q alone should do nothing, and pressing <code class="language-plaintext highlighter-rouge">:Q</code> should save the game and quit the program.</li>
+  <li>In “World mode,” pressing colon, followed by any other letter, should not do anything.</li>
+</ul>
+
+<p>If the user presses <code class="language-plaintext highlighter-rouge">L</code> or <code class="language-plaintext highlighter-rouge">l</code> on the main menu, you should load the most-recently-saved world from the <code class="language-plaintext highlighter-rouge">save.txt</code> file. We do not test if your world loads when your world has not been previously saved.</p>
+
+<p>The loaded world should be in the exact same state before the user quit the game. For example, these two scenarios should result in identical worlds:</p>
+<ul>
+  <li>The user types <code class="language-plaintext highlighter-rouge">N999SDDDWWW</code> (New Game, seed 999, Start, move right 3 times, move up 3 times).</li>
+  <li>The user types <code class="language-plaintext highlighter-rouge">N999SDDD:Q</code> (New Game, seed 999, Start, move right 3 times, save). Then, the user re-starts the program and types <code class="language-plaintext highlighter-rouge">LWWW</code> (Load, move up 3 times).</li>
+</ul>
+
+<p>The loaded world should be identical, including the state of the random number generator!</p>
+
+<p>Here are some cases of undefined behavior. Remember, undefined behavior means your code can crash, display an error, or do anything else you want. We won’t test these cases.</p>
+<ul>
+  <li>If there is no previous save, and the user presses <code class="language-plaintext highlighter-rouge">L</code> or <code class="language-plaintext highlighter-rouge">l</code> on the main menu, the behavior is undefined.</li>
+  <li>If the user quits the program some other way (e.g. quits IntelliJ, or unplugs their computer), the behavior is undefined. You don’t need to save anything in this case.</li>
+</ul>
+<h2 id="task-5-ambition-features">
+  
+  
+    <a href="proj5c.html#task-5-ambition-features" class="anchor-heading" aria-labelledby="task-5-ambition-features"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 5: Ambition Features
+  
+  
+</h2>
+    
+
+<p>Now that you have a basic game working, in the last part of the project, you’ll get a chance to add creative features of your own choosing!</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This method was written by Gemini 2.5.</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">someMethod</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<blockquote class="TASK">
+  <p>Implement at least <strong>one primary</strong> Ambition Feature and <strong>one secondary</strong> Ambition Feature either from the list below or of your choosing. 
+You are more than welcome to implement more than the minimum requirement, such as two primary Ambition Features, etc.</p>
+
+  <p>If you’d like to implement your own feature(s), please ask on the <a href="proj5c.html">Feature Request Ed thread</a> and ask <strong><em>early</em></strong> so we can let you know if your feature is approved!</p>
+</blockquote>
+
+<p><a href="ambition.html">For a list of pre-approved ambition features, see our ambition features list.</a></p>
+
+<blockquote class="WARNING">
+  <p>Note that your game should retain the same functionality from previous tasks (e.g. Main Menu, Interactivity, Saving and Loading).</p>
+
+  <p>In other words, you should be implementing your ambition features <em>on top of</em> your existing code.</p>
+</blockquote>
+<h3 id="clarifications">
+  
+  
+    <a href="proj5c.html#clarifications" class="anchor-heading" aria-labelledby="clarifications"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Clarifications
+  
+  
+</h3>
+    
+<p><strong>Note:</strong> Ambition features are graded <em>separately</em> from the previous tasks.</p>
+
+<p>Specifically, for Saving and Loading, we do not require you to save and load any additional state of the world that is affected by an ambition feature.</p>
+
+<p>For example, if you’re implementing the Line of Sight feature, you can load your world with either the line of sight toggled on or off, regardless of the state it was saved in.
+However, you’ll still want to make sure that your Ambition Feature doesn’t break your Saving and Loading functionality.</p>
+<h2 id="deliverables">
+  
+  
+    <a href="proj5c.html#deliverables" class="anchor-heading" aria-labelledby="deliverables"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Deliverables
+  
+  
+</h2>
+    
+<h3 id="gradescope">
+  
+  
+    <a href="proj5c.html#gradescope" class="anchor-heading" aria-labelledby="gradescope"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Gradescope
+  
+  
+</h3>
+    
+
+<p>Submit the code of the game you want us to grade to Gradescope.</p>
+
+<p>There is no autograder, but we need a submission in order to assign you a grade during your live checkoff (see below).</p>
+
+<p>The code you present during your live checkoff needs to be the same as the code you submitted to Gradescope.</p>
+<h3 id="live-checkoff">
+  
+  
+    <a href="proj5c.html#live-checkoff" class="anchor-heading" aria-labelledby="live-checkoff"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Live Checkoff
+  
+  
+</h3>
+    
+
+<p>Project 5C will be graded in a live checkoff with a TA. These checkoffs typically happen during the last week of class, before RRR week. Checkoffs are held in-person, though we will have a very limited number of remote checkoffs for documented reasons (e.g. sickness).</p>
+
+<p>Exact details, including how to sign up for a checkoff slot, will be posted on Ed closer to the start of checkoffs.</p>
+
+<p><a href="checkoff.html">For a full run-down of how the checkoff will work, see the checkoff script.</a></p>
+<h3 id="post-project-partnership-form">
+  
+  
+    <a href="proj5c.html#post-project-partnership-form" class="anchor-heading" aria-labelledby="post-project-partnership-form"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Post-Project Partnership Form
+  
+  
+</h3>
+    
+
+<blockquote class="TASK">
+  <p>Submit the <a href="https://docs.google.com/forms/d/e/1FAIpQLSegYPrJrg58qfnEcHrUlR3aCLPHvnSK4S17DP2hb6Q0Rk8KKw/viewform?usp=publish-editor">Project 5 Post-Project Partnership Reflection Form</a>.</p>
+
+  <p>Please note the deadline for this form has been pushed back to Tuesday, December 2nd 11:59 PM.</p>
+</blockquote>
+
+<p>You will receive an email receipt to confirm that you’ve submitted it.</p>
+
+<p>Your form response is confidential between you and staff. The response will not be shared with your partner.</p>
+
+<p>Warning: Don’t forget the form! Students every semester forget this form and they are sad.</p>
+<h3 id="style">
+  
+  
+    <a href="proj5c.html#style" class="anchor-heading" aria-labelledby="style"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Style
+  
+  
+</h3>
+    
+
+<p>Note: Since there are no autograders in Project 3, we will not be enforcing the 61B style guide on this project. However, we still highly recommend following the style guide, so that your code is readable by your partner!</p>
+
+  </div>
+</div>
+
+          
+
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="../assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

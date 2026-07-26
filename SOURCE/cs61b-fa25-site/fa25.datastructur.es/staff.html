@@ -1,0 +1,1446 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    
+    .site-nav > ul.nav-list:first-child > li:not(:nth-child(4)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(4) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(4) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(4) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Staff | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Staff" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A listing of all the course staff members." />
+<meta property="og:description" content="A listing of all the course staff members." />
+<link rel="canonical" href="staff.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/staff/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Staff" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A listing of all the course staff members.","headline":"Staff","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/staff/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="assets/katex/katex.min.css"
+>
+<script defer src="assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="staff.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="index.html" class="site-title lh-tight">
+
+
+  <img src="assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="proj5/index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="proj5/landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="proj5/proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="proj5/proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="proj5/proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="proj5/ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="proj5/checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="proj5/bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="staff.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <h1 id="staff">
+  
+  
+    <a href="staff.html#staff" class="anchor-heading" aria-labelledby="staff"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Staff
+  
+  
+</h1>
+    
+
+<p>For logistics and administrative questions, please email <a href="mailto:cs61b@berkeley.edu">cs61b@berkeley.edu</a>.
+Access to these emails is denoted by the <code class="language-plaintext highlighter-rouge">Staff Email Access</code> tag. Future instructors and
+head TAs may also be able to read emails here, but we can delete emails upon request.</p>
+
+<p>Staff with the <code class="language-plaintext highlighter-rouge">DSP</code> tag can see the DSP letter of accommodations (knowing whether or not a student is DSP does not
+count as DSP access).</p>
+
+<p>Staff with the <code class="language-plaintext highlighter-rouge">STUDENT SUPPORT</code> tag can see student support meeting notes, extenuating circumstances form responses, and see/respond to emails for <a href="mailto:cs61b-student-support@berkeley.edu">cs61b-student-support@berkeley.edu</a>.</p>
+
+<p>If you have a non-course related question, you can view staff emails by pressing the button below:</p>
+
+<div id="staffButtonContainer">
+  <button id="email-trigger" class="btn btn-outline-primary">Show Emails</button>
+</div>
+<h2 id="instructors">
+  
+  
+    <a href="staff.html#instructors" class="anchor-heading" aria-labelledby="instructors"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Instructors
+  
+  
+</h2>
+    
+
+<div class="role">
+  
+
+
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/josh-hug.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Josh Hug</strong><span class="staffer-pronouns">DSP Data Access</span><span class="staffer-pronouns">Staff Email Access</span><span class="staffer-pronouns">Student Support</span></div>
+    
+      <p>
+        <a href="mailto:hug@berkeley.edu" class="padded-link staff-email">hug@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>I am Josh Hug.</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/peyrin-kao.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Peyrin Kao</strong><span class="staffer-pronouns">DSP Data Access</span><span class="staffer-pronouns">Staff Email Access</span><span class="staffer-pronouns">Student Support</span></div>
+    
+      <p>
+        <a href="mailto:peyrin@berkeley.edu" class="padded-link staff-email">peyrin@berkeley.edu</a>
+      </p>
+    
+    
+    
+    
+
+  </div>
+</div>
+
+
+
+</div>
+<h2 id="head-tas">
+  
+  
+    <a href="staff.html#head-tas" class="anchor-heading" aria-labelledby="head-tas"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Head TAs
+  
+  
+</h2>
+    
+
+<div class="role">
+  
+
+
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/daniel-wang.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://www.linkedin.com/in/daniel-r-wang/" class="padded-link">Daniel Wang</a></strong><span class="staffer-pronouns">he/him</span><span class="staffer-pronouns">DSP Data Access</span><span class="staffer-pronouns">Staff Email Access</span><span class="staffer-pronouns">Student Support</span></div>
+    
+      <p>
+        <a href="mailto:dwwwang@berkeley.edu" class="padded-link staff-email">dwwwang@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hello! I’m Daniel, a senior majoring in Computer Science from San Diego, CA. Besides teaching, I also enjoy graphic design, fashion, and badminton. Outside of class, you’ll probably find me around a local cafe, library, or literally everywhere. Feel free to reach out, I’d love to meet and talk!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/elaine-shu.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Elaine Shu</strong><span class="staffer-pronouns">she/her/hers</span><span class="staffer-pronouns">DSP Data Access</span><span class="staffer-pronouns">Staff Email Access</span><span class="staffer-pronouns">Student Support</span></div>
+    
+      <p>
+        <a href="mailto:elaineshu@berkeley.edu" class="padded-link staff-email">elaineshu@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I’m Elaine, a 4th year majoring in CS. I love taking photos, playing tennis, and exploring new places. I’m so excited to be teaching CS 61B this fall and I hope you have a fun time in this class!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/stacey-lei.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Stacey Lei</strong><span class="staffer-pronouns">she/her/hers</span><span class="staffer-pronouns">DSP Data Access</span><span class="staffer-pronouns">Staff Email Access</span><span class="staffer-pronouns">Student Support</span></div>
+    
+      <p>
+        <a href="mailto:stacey.lei@berkeley.edu" class="padded-link staff-email">stacey.lei@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Heya! I’m Stacey, a senior from Las Vegas majoring in computer science. In my free time, I love illustrating, swimming, and animating. I’m super excited to meet everyone– feel free to reach out for anything!</p>
+
+  </div>
+</div>
+
+
+
+</div>
+<h2 id="tas">
+  
+  
+    <a href="staff.html#tas" class="anchor-heading" aria-labelledby="tas"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> TAs
+  
+  
+</h2>
+    
+
+<div class="role">
+  
+
+
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/aditya-hariharan.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Aditya Hariharan</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:adityahariharan@berkeley.edu" class="padded-link staff-email">adityahariharan@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hey everyone, I’m Aditya, and I’m a senior studying CS and Business. Outside of teaching, I really enjoy brunch, photography, Lady Gaga, climbing, watching hoops, motivational quotes, and Soda Hall. Excited to meet you all, and feel free to reach out!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/amy-wang.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://rocky-headlight-582.notion.site/studio-ghibli-7e07338578d2442fb4df61dbb9aa3882" class="padded-link">Amy Wang</a></strong><span class="staffer-pronouns">she/her</span></div>
+    
+      <p>
+        <a href="mailto:amywanglw@berkeley.edu" class="padded-link staff-email">amywanglw@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I’m Amy, a third year studying CogSci and CS. This will be my fourth time on staff for 61B! I love spending time with my cats, reading, and playing video games (when I have the time–rare). Super looking forward to meeting everyone! :]</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/anirudh-kotamraju.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Anirudh Kotamraju</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:akotamraju@berkeley.edu" class="padded-link staff-email">akotamraju@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hey! I’m Anirudh, a senior from the Bay Area studying Computer Science. This is my fourth time on 61B staff. I love landscape photography, listening to film scores, and bike rides. Excited to meet you!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/dawn-schumacher.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://fa25.datastructur.es/staff/dawns.info" class="padded-link">Dawn Schumacher</a></strong><span class="staffer-pronouns">she/they</span></div>
+    
+      <p>
+        <a href="mailto:dawn@berkeley.edu" class="padded-link staff-email">dawn@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi all!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/iris-zhou.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Iris Zhou</strong><span class="staffer-pronouns">she/her/hers</span><span class="staffer-pronouns">DSP Data Access</span><span class="staffer-pronouns">Staff Email Access</span><span class="staffer-pronouns">Student Support</span></div>
+    
+      <p>
+        <a href="mailto:iris.zhou@berkeley.edu" class="padded-link staff-email">iris.zhou@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>hii! i’m iris, a senior from san jose studying cs + astrophysics. this is my 5th semester on 61b staff! in my free time, i enjoy cafe hopping, skiing, thrifting, and going to concerts. looking forward to meeting everyone this semester :D</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/karen-meng.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://www.youtube.com/watch?v=0tYFtgKfo6U&amp;t=191s" class="padded-link">Karen Meng</a></strong><span class="staffer-pronouns">she/her</span></div>
+    
+      <p>
+        <a href="mailto:kmeng@berkeley.edu" class="padded-link staff-email">kmeng@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>🌊 Hi!! I’m Karen, a third-year EECS major from Davis! I enjoy listening to music 🎶 (mostly cpop, but feel free to rec me anything!), going on Sharetea runs 👀, doom-scrolling 💀 through Ed 🤓, and using emojis 👌 💯. I’m also trying to spend more time doing “research” on this seemingly intangible thing called grass 🧐 😬 (lmk if u have any leads lol). Looking forward to a 61Bizarre semester 😎</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/natalia-grondin.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://bongo.cat" class="padded-link">Natalia Grondin</a></strong><span class="staffer-pronouns">she/her/hers</span></div>
+    
+      <p>
+        <a href="mailto:nataliagrondin@berkeley.edu" class="padded-link staff-email">nataliagrondin@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi, I’m Natalia, I’m a 4th year studying cs and ds. I like rocks and being outside. I am an avid harmonica ripper, and enjoy any board sports. Excited for a great semester!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/ricardo-sandoval.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://ricardojsandoval.github.io/" class="padded-link">Ricardo Sandoval</a></strong></div>
+    
+      <p>
+        <a href="mailto:rjsandoval@berkeley.edu" class="padded-link staff-email">rjsandoval@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi all! I’m Ricardo, a CS PhD student at Berkeley. I’m broadly interested in causal inference, sequential inference, and learning theory. Outside of research I enjoy biking, photography, and sailing!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/ritika-joshi.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Ritika Joshi</strong><span class="staffer-pronouns">she/her/hers</span><span class="staffer-pronouns">DSP Data Access</span><span class="staffer-pronouns">Staff Email Access</span><span class="staffer-pronouns">Student Support</span></div>
+    
+      <p>
+        <a href="mailto:ritikajoshi@berkeley.edu" class="padded-link staff-email">ritikajoshi@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hey y’all! I’m Ritika, a senior from the bay area majoring in applied math and cs. Outside of school I love to crochet, watch tv, and try coffee shops around berkeley! This is my fourth semester on CS61B and I’m so excited to be teaching you guys this semester!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/ronnie-beggs.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Ronnie Beggs</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:rbeggs@berkeley.edu" class="padded-link staff-email">rbeggs@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I’m Ronnie, a senior from the Bay Area studying CS &amp; DS. I love running, traveling, spending too much money on food, and 61B!!!! This was my favorite class and I hope I can cultivate that same experience for y’all! Let’s have an amazing semester :)</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/ryan-yang.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Ryan Yang</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:yuchanyang@berkeley.edu" class="padded-link staff-email">yuchanyang@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi, I’m Ryan, a fourth year studying CS and this will be my 4th time teaching 61B. I like to play games such as set and slay the spire in my free time. Hope to see you guys in class!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/tiffany-li.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Tiffany Li</strong><span class="staffer-pronouns">she/her/hers</span></div>
+    
+      <p>
+        <a href="mailto:tiffany_li@berkeley.edu" class="padded-link staff-email">tiffany_li@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! My name is Tiffany and I’m a senior studying Computer Science and Data Science. This is my 4th semester on staff, and in my free time I enjoy photography and going to concerts. Excited to meet you all this semester!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/yinqi-yi.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Yinqi Yi</strong><span class="staffer-pronouns">she/her/hers</span></div>
+    
+      <p>
+        <a href="mailto:yiyinqi@berkeley.edu" class="padded-link staff-email">yiyinqi@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I’m Yinqi, a junior studying EECS from Singapore. I enjoy watching TV shows and movies during my free time, and I’m always looking for good food around Berkeley! Looking forward to a great semester with all of you!</p>
+
+  </div>
+</div>
+
+
+
+</div>
+<h2 id="tutors">
+  
+  
+    <a href="staff.html#tutors" class="anchor-heading" aria-labelledby="tutors"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Tutors
+  
+  
+</h2>
+    
+
+<div class="role">
+  
+
+
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/andrew-schoenen.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://rocky-headlight-582.notion.site/studio-ghibli-7e07338578d2442fb4df61dbb9aa3882" class="padded-link">Andrew Schoenen</a></strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:andrewschoenen@berkeley.edu" class="padded-link staff-email">andrewschoenen@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi everyone! This is my second semester on course staff, and I enjoy playing the guitar, surfing and running. Stoked to see you all out there this semester!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/avik-gautam.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Avik Gautam</strong><span class="staffer-pronouns">he/him</span></div>
+    
+      <p>
+        <a href="mailto:avikgautam8@berkeley.edu" class="padded-link staff-email">avikgautam8@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! My name is Avik, and I am a third-year from Pasadena majoring in Computer Science. I was a teaching intern in the spring and am excited to continue teaching as a tutor this semester! You might catch me playing volleyball, going to concerts, playing music, or trying new restaurants or cafes.</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/ayush-gupta.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Ayush Gupta</strong></div>
+    
+      <p>
+        <a href="mailto:ayush_gupta_27@berkeley.edu" class="padded-link staff-email">ayush_gupta_27@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hey everyone! I’m Ayush, a third year Data Science major, and this is my third time helping out with 61B. Outside of school, you can find me playing intramural (soccer, volleyball, flag football), eating out, and going on random adventures with my friends!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/codey-ma.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Codey Ma</strong><span class="staffer-pronouns">Staff Email Access</span><span class="staffer-pronouns">Student Support</span></div>
+    
+      <p>
+        <a href="mailto:cm.1@berkeley.edu" class="padded-link staff-email">cm.1@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>:)</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/dennis-koh.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Dennis Koh</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:dkoh135@berkeley.edu" class="padded-link staff-email">dkoh135@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hey guys, I’m Dennis and I’m super excited to be on course staff for 61B again this semester! I’m a senior majoring in CS and this would be my third time on staff. While I’m not doing anything 61B, I love watching sports, swimming, hiking, and trying new food spots on campus!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/isabel-dong.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Isabel Dong</strong><span class="staffer-pronouns">she/her/hers</span></div>
+    
+      <p>
+        <a href="mailto:isabeldong@berkeley.edu" class="padded-link staff-email">isabeldong@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>hi! i’m isabel, a junior from the bay area studying computer science + business. i’m a huge fan of women’s college basketball, snoopy, the new york times connections (and now pips), and collecting smiskis. in my free time, you can find me playing basketball, listening to taylor swift, or sneaking onto tennis courts to play pickleball. excited to meet y’all :)</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/jonathan-gasser-brennan.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://www.instagram.com/p/DD_ay0Yi0gM/" class="padded-link">Jonathan Gasser-Brennan</a></strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:jonathangb@berkeley.edu" class="padded-link staff-email">jonathangb@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I’m a junior studying CS and this is my second semester on 61B staff. I love programming, listening to music (Carti, Yeat, Frank Ocean), and backpacking+fishing in the Sierras. Recently I’ve been getting into Judo and tennis. Hope to see you around! Feel free to reach out about anything.</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/lawrence-wu.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Lawrence Wu</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:lawrence.wu@berkeley.edu" class="padded-link staff-email">lawrence.wu@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi everyone! I’m Lawrence, and this is my 5th semester on staff. In my free time, I enjoy doing anything outdoors in nature, and lately have been watching a lot of Trailer Park Boys. 61b is one of my favorite classes at Berkeley, and I’m excited to meet you all!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/lilah-durney.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Lilah Durney</strong><span class="staffer-pronouns">she/her/hers</span></div>
+    
+      <p>
+        <a href="mailto:ldurney@berkeley.edu" class="padded-link staff-email">ldurney@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I’m Lilah, a junior studying CS. In my free time, I love rock climbing, testing out new matcha spots, and playing the guitar. Looking forward to meeting everyone!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/marcus-koh.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Marcus Koh</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:marcuskoh@berkeley.edu" class="padded-link staff-email">marcuskoh@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>hello and welcome! I am a junior studying Computer Science and Physics. Skiing and traveling are my favorites, but I spend my free time in Berkeley playing Rocket League and Minecraft. lmk if you got any good food recs in Berkeley!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/michelle-koga.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Michelle Koga</strong><span class="staffer-pronouns">she/her/hers</span></div>
+    
+      <p>
+        <a href="mailto:michellesk@berkeley.edu" class="padded-link staff-email">michellesk@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! My name is Michelle, I’m a junior studying EECS from Lompoc, CA and I’m super excited to be a tutor this semester! I love swimming, reading, journaling, climbing, and drinking matcha. Looking forward to meeting everyone! :)</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/miller-liu.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Miller Liu</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:millerliu@berkeley.edu" class="padded-link staff-email">millerliu@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi everyone! My name is Miller, and I’m a third-year studying computer science. This is my first semester on course staff, and I’m super excited to be here! Outside of school, I love snowboarding, watching movies (so, movie yappers… &gt;:( consider this your warning), and I recently got into dancing. Also, you have to check out Pizza de Laura on Shattuck — if you know, you know.</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/phoenix-wilson.png" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://phoenixw.info" class="padded-link">Phoenix Wilson</a></strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:phoenixw@berkeley.edu" class="padded-link staff-email">phoenixw@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I am a senior studying EECS. The only thing I like more than searing a steak on the grill is searing two steaks on the grill.</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/rushil-saraf.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Rushil Saraf</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:rsaraf@berkeley.edu" class="padded-link staff-email">rsaraf@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! My name is Rushil and I’m a second year from the bay. In my free time, I enjoy trying new food, swimming, and travelling. Super excited to meet you guys this semester!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/sarveshan-saravanan.webp" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Sarveshan Saravanan</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:sarveshan@berkeley.edu" class="padded-link staff-email">sarveshan@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I’m Sarveshan, a junior studying EECS from the Bay Area. I enjoy walking my dog to the park, eating donuts, playing basketball, and going to the gym. I’m also a Bo Nix fan and SGA bandwagon.</p>
+
+  </div>
+</div>
+
+
+
+</div>
+<h2 id="teaching-interns-tis">
+  
+  
+    <a href="staff.html#teaching-interns-tis" class="anchor-heading" aria-labelledby="teaching-interns-tis"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Teaching Interns (TIs)
+  
+  
+</h2>
+    
+
+<div class="role">
+  
+
+
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/alex-nava--1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Alex Nava</strong><span class="staffer-pronouns">he/him</span></div>
+    
+      <p>
+        <a href="mailto:alexnava@berkeley.edu" class="padded-link staff-email">alexnava@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>My name is Alex Nava, and I’m from Sonoma County, a community deeply rooted in agriculture. Back home, I’m closely involved with livestock, as my family owns dairy cows in a small town in Jalisco, Mexico. Outside of that, I have a strong passion for cars. On Friday nights, you’ll usually find me catching up on schoolwork or cooking—though I’ll admit Chipotle is one of my favorite go-to meals.</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/anay-shukla-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Anay Shukla</strong></div>
+    
+      <p>
+        <a href="mailto:anayrshukla@berkeley.edu" class="padded-link staff-email">anayrshukla@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hey guys I’m Anay, I have a decent amount of experience in Data Science and Software Engineering. Last summer I interned at Accenture. Some of my hobbies include tennis, chess, and reading! Excited to get to know you guys</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/brendan-reyes-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Brendan Reyes</strong><span class="staffer-pronouns">He/him</span></div>
+    
+      <p>
+        <a href="mailto:brendanreyes@berkeley.edu" class="padded-link staff-email">brendanreyes@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi everyone I’m Brendan! I’m a Junior studying EECS from Pasadena, CA. I like playing board games and eating Mexican food. I took 61B my 1st year and I really enjoyed it so I’m excited to teach the course! Feel free to reach out through my email if you need any help!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/deven-mittal-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Deven Mittal</strong><span class="staffer-pronouns">He/him</span></div>
+    
+      <p>
+        <a href="mailto:devenmittal@berkeley.edu" class="padded-link staff-email">devenmittal@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>My name is Deven Mittal and I am a sophomore studying EECS. Before coming to Berkeley, my coding experience consisted of coding small games like brick breaker and flappy bird, though I haven’t done that in a while. I really enjoy spending time with friends and playing video games. I’ve also gotten into running and drawing!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/elaine-liu-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Elaine Liu</strong></div>
+    
+      <p>
+        <a href="mailto:el3904@berkeley.edu" class="padded-link staff-email">el3904@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hello! I’m a senior studying Environmental Sciences and Data Science. I’m relatively new to coding, having started in my junior year. In my free time I make jewelry, play Minecraft and Stardew Valley, and add to my database of plant and bug photos. My favourite restaurant in Berkeley is Tsuruya Ramen in Downtown!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/emily-huynh-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Emily Huynh</strong><span class="staffer-pronouns">she/her/hers</span></div>
+    
+      <p>
+        <a href="mailto:emily.huynh@berkeley.edu" class="padded-link staff-email">emily.huynh@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hello! I’m Emily, and I’m a second-year EECS student from San Jose. On my free time, I like to read, hike, and play board games! Please feel free to reach out about anything :D</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/ethan-yang-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Ethan Yang</strong><span class="staffer-pronouns">he/his</span></div>
+    
+      <p>
+        <a href="mailto:yang_ethan@berkeley.edu" class="padded-link staff-email">yang_ethan@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hey! I’m Ethan, a sophomore studying Computer Science, and I took CS 61B in Spring 2025. I love hiking, playing tennis (or pickleball), eating and trying new foods, playing the guitar (Krnb and praise), and clash royale :) Excited to meet you!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/ishanth-hombaiah-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Ishanth Hombaiah</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:ihombaiah@berkeley.edu" class="padded-link staff-email">ihombaiah@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hello, I’m Ishanth and I’m a sophomore studying CS. In my free time, I enjoy hiking, reading, and drawing. It’s nice to meet everyone!</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/john.png" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">John Hu</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:john_0807@berkeley.edu" class="padded-link staff-email">john_0807@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! My name is John. I am a junior studying data science, economics, and statistics. I love playing volleyball and running in my spare time. One fun fact about me is that I am addicted to MATCHA. I usually sleep all the day to keep myself energetic at night….</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/jonathan-cao-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Jonathan Cao</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:jbcao@berkeley.edu" class="padded-link staff-email">jbcao@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I’m Jonathan, a second year CS major. I enjoy playing and developing games, and I’m a big fan of public transit and biking. Probably playing Silksong at any given moment as of late.</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/krishna-chunduri-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Krishna Chunduri</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:krishnac24@berkeley.edu" class="padded-link staff-email">krishnac24@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>I’m Krishna, a sophomore studying computer science and data science. I like to play basketball, run marathons, and play chess. I like to spend my Friday nights hanging out with friends or grinding out a few chess games. My favorite restaurant at Berkeley is Ike’s.</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/kuljit-uppal-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Kuljit Uppal</strong><span class="staffer-pronouns">he/him</span></div>
+    
+      <p>
+        <a href="mailto:kuljit@berkeley.edu" class="padded-link staff-email">kuljit@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I’m from a small town in central California. I love solving puzzles, reading, cybersecurity, playing tennis, and rock climbing.</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/monishka-tanwani-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Monishka Tanwani</strong><span class="staffer-pronouns">she/her/hers</span></div>
+    
+      <p>
+        <a href="mailto:mtanwani@berkeley.edu" class="padded-link staff-email">mtanwani@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! My name is Monishka and I’m a third year data science and math major. Excited to be a TI this semester :)</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/saksham-jain-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://youtu.be/I6IQ_FOCE6I?feature=shared" class="padded-link">Saksham Jain</a></strong><span class="staffer-pronouns">he/him</span></div>
+    
+      <p>
+        <a href="mailto:sakshamjain@berkeley.edu" class="padded-link staff-email">sakshamjain@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi, I’m Saksham, a second-year international student from India majoring in EECS. On Friday nights, you’ll usually find me dancing or playing volleyball and lifting at RSF. My favorite food spot in Berkeley is Imm Thai (Generic, I know!).</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/sruthi.png" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Sruthi Vegunta</strong><span class="staffer-pronouns">she/her/hers</span></div>
+    
+      <p>
+        <a href="mailto:sruthi_vegunta@berkeley.edu" class="padded-link staff-email">sruthi_vegunta@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi y’all! I’m Sruthi, a sophomore majoring in Computer Science from Richmond, Virginia. I love playing tennis, singing, playing the guitar, and reading. I’m also a foodie and love to travel :)</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/theo-sohn-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05">Theo Sohn</strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:theosohn@berkeley.edu" class="padded-link staff-email">theosohn@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi! I’m Theo, a sophomore studying EECS and IEOR. I love to read and watch all kinds of books and TV shows and you can find me playing random games on Steam with my friends on weekends. My favorite restaurant at Berkeley is probably La Note.</p>
+
+  </div>
+</div>
+<div class="staffer cols-2">
+  
+    <img class="staffer-image" src="assets/staff/zhen-liu-1.jpg" alt="" />
+  
+  <div>
+    <div style="font-size: 18.72px;" class="staffer-name"><strong class="mr-05"><a href="https://www.linkedin.com/in/zh3nl/" class="padded-link">Zhen Liu</a></strong><span class="staffer-pronouns">he/him/his</span></div>
+    
+      <p>
+        <a href="mailto:zhen_liu@berkeley.edu" class="padded-link staff-email">zhen_liu@berkeley.edu</a>
+      </p>
+    
+    
+    
+    <p>Hi guys, I’m Zhen and I’m a sophomore studying EECS and Engineering Math &amp; Statistics. I come from a SWE background but also have huge interest in AI/ML and Quant, Feel free to talk to me about anything soccer, the gym, poker, archery, and stocks. Typically I spend my Friday nights grubbing at a restaurant near the school or chilling with my friends. Current favorite restaurant: Zhangliang Malatang (best bang for your buck)!</p>
+
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+  var visible = false;
+  document.addEventListener("DOMContentLoaded", function() {
+    var button = document.getElementById("email-trigger");
+    var emails = document.getElementsByClassName("staff-email");
+    button.addEventListener("click", () => {
+      if (visible) {
+        button.innerHTML = "Show Emails"
+      } else {
+        button.innerHTML = "Hide Emails"
+      }
+
+      var i = 0;
+      for (i; i < emails.length; i++) {
+        if (visible) {
+          emails[i].style.display = "";
+        } else {
+          emails[i].style.display = "inline";
+        }
+      }
+
+      visible = !visible;
+    })
+  });
+</script>
+
+          
+
+          
+            
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

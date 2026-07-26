@@ -1,0 +1,948 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    .site-nav > ul.nav-list:first-child > li > a,
+    
+    .site-nav > ul.nav-list:first-child > li > ul > li:not(:nth-child(1)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(7) > ul > li:nth-child(1) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(7) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(7) > ul > li:nth-child(1) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(7) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(7) > ul.nav-list > li.nav-list-item:nth-child(1) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="../assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>4A: NGrams | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="4A: NGrams" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Structures at UC Berkeley" />
+<meta property="og:description" content="Data Structures at UC Berkeley" />
+<link rel="canonical" href="proj4a.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/proj4/proj4a/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="4A: NGrams" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Data Structures at UC Berkeley","headline":"4A: NGrams","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/proj4/proj4a/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="../assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="../assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="../assets/katex/katex.min.css"
+>
+<script defer src="../assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="../assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="proj4a.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="../index.html" class="site-title lh-tight">
+
+
+  <img src="../assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="../policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="../policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="../policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="../policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="../resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="../resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="../resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="../resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="../resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="../resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="../resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="../resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="../resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="../resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="../resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="../resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="../resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="../staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="../homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="../homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="../homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="../homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="../homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="../homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="../homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="../homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="../homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="../homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="../projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="../projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="../projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../proj5/index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="../proj5/landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="../proj5/proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="../proj5/proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="../proj5/proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="../proj5/ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="../proj5/checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="../proj5/bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="../troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="../troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="proj4a.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="index.html">Project 4</a></li>
+    <li class="breadcrumb-nav-list-item"><span>4A: NGrams</span></li>
+  </ol>
+</nav>
+
+
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item"><a href="proj4a.html#setup" class="nav-list-link">Setup</a></li><li class="nav-list-item"><a href="proj4a.html#task-1-timeseries" class="nav-list-link">Task 1: TimeSeries</a></li><li class="nav-list-item"><a href="proj4a.html#task-2-ngrammap" class="nav-list-link">Task 2: NGramMap</a><ul class="nav-list"><li class="nav-list-item"><a href="proj4a.html#reading-input-files" class="nav-list-link">Reading Input Files</a></li><li class="nav-list-item"><a href="proj4a.html#ngrammap-methods" class="nav-list-link">NGramMap Methods</a></li></ul></li><li class="nav-list-item"><a href="proj4a.html#task-3-historytexthandler" class="nav-list-link">Task 3: HistoryTextHandler</a></li><li class="nav-list-item"><a href="proj4a.html#task-4-historyhandler" class="nav-list-link">Task 4: HistoryHandler</a></li><li class="nav-list-item"><a href="proj4a.html#submission" class="nav-list-link">Submission</a></li></ul>
+    </nav>
+  <div class="content">
+<h1 id="project-4a-ngrams">
+  
+  
+    <a href="proj4a.html#project-4a-ngrams" class="anchor-heading" aria-labelledby="project-4a-ngrams"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 4A: NGrams
+  
+  
+</h1>
+    
+
+<p><em>Lectures needed for this project:</em></p>
+<ul>
+  <li>Lecture 16 (Extends, Sets, Maps, and BSTs), or <a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/16.-adts-and-bsts">Chapter 16</a> of the textbook.</li>
+</ul>
+
+<p><em>Partner policy:</em> No partners, and the solutions you submit should be your own work! More details on <a href="../policies.html#collaboration-policy">the policies page</a>.</p>
+
+<p><em>LLM policy:</em> LLMs should not write any of the code that you turn in. See <a href="https://docs.google.com/presentation/d/1jUT3gF1NIc0qvD3KPPScd4XDY1sFhnmJ8kCnMjU1k5E/edit?slide=id.g2f6e6787d08_0_0#slide=id.g2f6e6787d08_0_0">this Lecture 1 slide</a> and the <a href="../policies.html#collaboration-policy">collaboration policy</a> for more details.</p><hr />
+
+<p>In this project, we will build a browser-based tool for exploring the history of word usage in English texts.</p>
+
+<p>The <a href="http://storage.googleapis.com/books/ngrams/books/datasetsv3.html">Google Ngram dataset</a> provides many terabytes of information about the historical frequencies of all observed words and phrases in English (or more precisely, all observed <a href="http://en.wikipedia.org/wiki/N-gram">ngrams</a>). Google provides the <a href="https://books.google.com/ngrams/graph?content=global+warming%2Cto+the+moon&amp;year_start=1800&amp;year_end=2019&amp;corpus=en-2019&amp;smoothing=0">Google Ngram Viewer on the web</a>, allowing users to visualize the relative historical popularity of words and phrases. For example, the link above plots the <em>weighted popularity history</em> of the phrases “global warming” (a 2gram) and “to the moon” (a 3gram).</p>
+
+<p>In Project 4A, you will be build a version of this tool that only handles 1grams. In other words, you’ll only be able to handle individual words. We’ll only use a small subset (around 150 MB) of the full 1grams dataset, as larger datasets will require more sophisticated techniques that are out of scope for this class.</p>
+
+<p>We have provided the front end code (in Javascript and HTML) that collects user inputs and displays outputs. Your Java code will be the back end for this tool, accepting input and generating appropriate output for display.</p>
+
+<p>To support this tool, you will write a series of Java packages that will allow for data analysis. Along the way we’ll get lots of experience with different useful data structures. The early part of the project (Project 4A) will start by telling you exactly what functions to write and classes to create. The later part (Project 4C, 4D) will be more open to your own design.</p>
+
+<p><a href="https://www.youtube.com/watch?v=ri9BzE723QA&amp;list=PL8FaHk7qbOD7-899l1hKEd5aICB9u1wrm&amp;index=1">See below or click here for a video introduction to the project.</a> Note that the videos might have some slightly outdated sections.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ri9BzE723QA?si=CSpOnUIKmQjQ3Jm_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Jd1g9LnpTtg?si=cnti0cxFieGNAYrm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kX11gp2l_y0?si=d5ysNhFD6iJLIPKQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+<p>To see what the fully-finished project looks like, check out the staff implementation at <a href="https://ngordnet.datastructur.es">ngordnet.datastructur.es</a>.</p>
+<h2 id="setup">
+  
+  
+    <a href="proj4a.html#setup" class="anchor-heading" aria-labelledby="setup"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Setup
+  
+  
+</h2>
+    
+
+<p>Follow the <a href="../resources/assignment-workflow/index.html">Assignment Workflow Guide</a> to get started with this assignment. This starter code is in the <code class="language-plaintext highlighter-rouge">proj4a</code> folder.</p>
+
+<p>You’ll also need to download the Project 4 data files (they are around 150 MB, which is too large to be pushed to GitHub).</p>
+
+<blockquote class="TASK">
+  <p>Download the data files <a href="https://drive.google.com/file/d/1sQZycCy1JpfI7keKK3ZJHI_4kMLw7sNc">at this link</a>.</p>
+
+  <p>You should unzip this file into the proj4 directory such that the <code class="language-plaintext highlighter-rouge">data</code> folder is at the same level as the <code class="language-plaintext highlighter-rouge">src</code> and <code class="language-plaintext highlighter-rouge">static</code> folders.</p>
+
+  <ul>
+    <li><a href="https://support.microsoft.com/en-us/windows/zip-and-unzip-files-f6dde0a7-0fec-8294-e1d3-703ed85e7ebc#:~:text=To%20unzip%20files,folder%20to%20a%20new%20location.">How to unzip folders on Windows</a></li>
+    <li><a href="https://support.apple.com/guide/mac-help/zip-and-unzip-files-and-folders-on-mac-mchlp2528/mac#:~:text=Unzip%20(expand)%20a%20compressed%20item,zip%20file.">How to unzip folders on Mac</a></li>
+  </ul>
+</blockquote>
+
+<p>Once you are done with this step, your <code class="language-plaintext highlighter-rouge">proj4a</code> directory should look like this:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proj4a
+├── data
+├── src
+├── static
+├── tests
+</code></pre></div></div>
+
+<p>Note that we’ve set up a hidden <a href="https://help.github.com/articles/ignoring-files/"><code class="language-plaintext highlighter-rouge">.gitignore</code></a> file in your repository, so that Git will avoid uploading these large data files. If you ever run into a “Large files detected” error with Git, see <a href="../troubleshooting/git-wtfs.html#large-files-detected">this Git WTFS section</a>.</p>
+
+<p>If you need to work on multiple machines, you should download the zip file once for each machine.</p>
+
+<p><a href="https://www.youtube.com/watch?v=8uIt7pXua6Y">See below or click here for a video demo of the setup process.</a> Note that some files/filenames may be slightly different.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8uIt7pXua6Y?si=wd35tOl_CZlRsMGs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+<h2 id="task-1-timeseries">
+  
+  
+    <a href="proj4a.html#task-1-timeseries" class="anchor-heading" aria-labelledby="task-1-timeseries"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 1: TimeSeries
+  
+  
+</h2>
+    
+
+<p>A <code class="language-plaintext highlighter-rouge">TimeSeries</code> is a special purpose extension of the existing <code class="language-plaintext highlighter-rouge">TreeMap</code> class, where:</p>
+<ul>
+  <li>The key type parameter is always <code class="language-plaintext highlighter-rouge">Integer</code>, representing a year.</li>
+  <li>The value type parameter is always <code class="language-plaintext highlighter-rouge">Double</code>, representing a numerical data point for that year.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">TimeSeries</code> class provides some additional utility methods to the <code class="language-plaintext highlighter-rouge">TreeMap</code> class, which it extends. <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/TreeMap.html">See the <code class="language-plaintext highlighter-rouge">TreeMap</code> API</a> to see which methods are available to you.</p>
+
+<p>For example, the following code would create a <code class="language-plaintext highlighter-rouge">TimeSeries</code> and associate the year 1992 with the value 3.6 and 1993 with 9.2.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">TimeSeries</span> <span class="n">ts</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">TimeSeries</span><span class="o">();</span>
+<span class="n">ts</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">1992</span><span class="o">,</span> <span class="mf">3.6</span><span class="o">);</span>
+<span class="n">ts</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="mi">1993</span><span class="o">,</span> <span class="mf">9.2</span><span class="o">);</span>
+</code></pre></div></div>
+
+<blockquote class="TASK">
+  <p>Implement the methods in <code class="language-plaintext highlighter-rouge">src/main/TimeSeries.java</code> according to the API provided in the file.</p>
+
+  <p>For an example of how <code class="language-plaintext highlighter-rouge">TimeSeries</code> objects are used, check out the <code class="language-plaintext highlighter-rouge">testFromSpec()</code> test in <code class="language-plaintext highlighter-rouge">tests/TimeSeriesTest.java</code>.</p>
+</blockquote>
+
+<p>You may not add additional public methods to this class. You’re welcome to add additional private methods.</p>
+
+<p>Tips:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">TimeSeries</code> objects should have no instance variables. A <code class="language-plaintext highlighter-rouge">TimeSeries</code> is-a <code class="language-plaintext highlighter-rouge">TreeMap</code>. That means your <code class="language-plaintext highlighter-rouge">TimeSeries</code> class also has access to all methods that a TreeMap has; see <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/TreeMap.html">the TreeMap API</a>.</li>
+  <li>You’ll notice in <code class="language-plaintext highlighter-rouge">testFromSpec()</code> that we did not directly compare <code class="language-plaintext highlighter-rouge">expectedTotal</code> with <code class="language-plaintext highlighter-rouge">totalPopulation.data()</code>. This is because doubles are prone to rounding errors, especially after division operations (for reasons that you will learn in 61C). Thus, <code class="language-plaintext highlighter-rouge">assertThat(x).isEqualTo(y)</code> may unexpectedly return false when <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> are doubles. Instead, you should use <code class="language-plaintext highlighter-rouge">assertThat(x).isWithin(1E-10).of(y)</code>, which returns true as long as <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> are within $10^{-10}$ of each other.</li>
+  <li>We did not provide a test for the <code class="language-plaintext highlighter-rouge">dividedBy</code> method. Feel free to add your own tests.</li>
+  <li>Several methods require that you compare the data of two <code class="language-plaintext highlighter-rouge">TimeSeries</code>. You should not have any code which fills in a zero if a year or value is unavailable.</li>
+  <li>You may assume that the <code class="language-plaintext highlighter-rouge">dividedBy</code> operation never divides by zero.</li>
+</ul>
+<h2 id="task-2-ngrammap">
+  
+  
+    <a href="proj4a.html#task-2-ngrammap" class="anchor-heading" aria-labelledby="task-2-ngrammap"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 2: NGramMap
+  
+  
+</h2>
+    
+
+<p>The <code class="language-plaintext highlighter-rouge">NGramMap</code> class will provide various convenient methods for interacting with Google’s NGrams dataset. This task is more open-ended and challenging than the creation of the <code class="language-plaintext highlighter-rouge">TimeSeries</code> class. As with <code class="language-plaintext highlighter-rouge">TimeSeries</code>, you’ll be filling in the methods of an existing <code class="language-plaintext highlighter-rouge">NGramMap.java</code> file.</p>
+
+<p>There is a lot to think about for this part of the project. We’re trying to mimic the situation in the real world where you have some big open-ended problem and have to figure out the approach from scratch. This can be intimidating! It will likely take some time and a lot of experimentation to figure out how to proceed. To help keep things from being too difficult, we’ve at least provided a list of methods to implement. Keep in mind that in the real world (and in later projects in this class), even the list of methods will be your choice.</p>
+<h3 id="reading-input-files">
+  
+  
+    <a href="proj4a.html#reading-input-files" class="anchor-heading" aria-labelledby="reading-input-files"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Reading Input Files
+  
+  
+</h3>
+    
+
+<p>The NGram dataset comes in two different file types. The first type is a “word history file”. Each line of a word history file provides tab separated information about the history of a particular word in English during a given year.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>airport     2007    175702  32788
+airport     2008    173294  31271
+request     2005    646179  81592
+request     2006    677820  86967
+request     2007    697645  92342
+request     2008    795265  125775
+wandered    2005    83769   32682
+wandered    2006    87688   34647
+wandered    2007    108634  40101
+wandered    2008    171015  64395
+</code></pre></div></div>
+
+<p>On each row:</p>
+<ol>
+  <li>The first column is the word.</li>
+  <li>The second column is the year.</li>
+  <li>The third column is the number of times that the word appeared in any book that year.</li>
+  <li>You can ignore the fourth column. (If you’re curious, it is the number of distinct sources that contain that word.)</li>
+</ol>
+
+<p>For example, from the text file above, we can observe that the word “wandered” appeared 171,015 times during the year 2008, and these appearances were spread across 64,395 distinct texts.</p>
+
+<p>The other type of file is a “year history file”. Each line of a year history file provides comma separated information about the total corpus of data available for each calendar year.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1470,984,10,1
+1472,117652,902,2
+1475,328918,1162,1
+1476,20502,186,2
+1477,376341,2479,2
+</code></pre></div></div>
+
+<p>On each row:</p>
+<ol>
+  <li>The first column is the year.</li>
+  <li>The second column is the total number of words recorded from all texts that year.</li>
+  <li>You can ignore the third column. (If you’re curious, it is the total number of pages of text from that year.)</li>
+  <li>You can ignore the fourth column. (If you’re curious, it is the total number of distinct sources from that year.)</li>
+</ol>
+
+<p>For example, we see that Google has exactly 1 English language text from the year 1470, and that it contains 984 words and 10 pages. For our project, the 10 and the 1 are irrelevant.</p>
+
+<p>You may wonder why one file is tab separated and the other is comma separated. I didn’t do it, Google did. Luckily, this difference won’t be too hard to handle.</p>
+
+<blockquote class="TASK">
+  <p>Fill out the constructor of the <code class="language-plaintext highlighter-rouge">NGramMap</code>.</p>
+
+  <p>You’ll need to parse through the provided data files and store this data in data structure(s) of your choice.</p>
+</blockquote>
+
+<p>Tips:</p>
+<ul>
+  <li>Choosing the right data structure(s) is important, since picking the right data structure(s) can make your life a lot easier when implementing the rest of the methods. Thus, we recommend taking a look at the rest of the methods first to help you decide what data structure might be best; then, begin implementing the constructor.</li>
+  <li>Avoid using a HashMap or TreeMap as an <a href="https://docs.google.com/presentation/d/1j2vivowiaZWepIjUoWj6Cx3CdJiyuYslxkg8GsT8kxM/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.g631db3c57_38">actual type argument</a> for your maps. This is usually a sign that what you actually want is a custom defined type. In other words, if your instance variables include a nested mapping that looks like <code class="language-plaintext highlighter-rouge">HashMap&lt;blah, HashMap&lt;blah, blah&gt;&gt;</code>, then a <code class="language-plaintext highlighter-rouge">TimeSeries</code> or some other class you come up with might be useful to keep in mind instead.</li>
+  <li>We have not taught you how to read files in Java. We recommend using the <code class="language-plaintext highlighter-rouge">In</code> class. <a href="https://introcs.cs.princeton.edu/java/stdlib/javadoc/In.html">The official <code class="language-plaintext highlighter-rouge">In</code> documentation can be found here.</a> However, you’re welcome to use whatever technique you’d like that you learn about online. We provide an example class <code class="language-plaintext highlighter-rouge">src/demo/FileReadDemo.java</code> that gives examples of how to use <code class="language-plaintext highlighter-rouge">In</code>.</li>
+  <li>If you use <code class="language-plaintext highlighter-rouge">In</code>, don’t use <code class="language-plaintext highlighter-rouge">readAllLines</code> or <code class="language-plaintext highlighter-rouge">readAllStrings</code>. These methods are slow. Instead, read inputs one chunk at a time. See <code class="language-plaintext highlighter-rouge">src/demo/FileReadDemo.java</code> for an example.</li>
+</ul>
+<h3 id="ngrammap-methods">
+  
+  
+    <a href="proj4a.html#ngrammap-methods" class="anchor-heading" aria-labelledby="ngrammap-methods"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> NGramMap Methods
+  
+  
+</h3>
+    
+
+<p>Your constructor parsed the data files, and stored the data in some data structures. Now, the methods in NGramMap can compute interesting results from that data. For example, consider these data files (only relevant rows/columns shown):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>word_history_size3.csv:
+-----------------------------
+Word        Year    Frequency
+airport     2007    175702
+airport     2008    173294
+wandered    2005    83769
+wandered    2006    87688
+wandered    2007    108634
+wandered    2008    171015
+...
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>year_history.csv:
+-----------------------------
+Year    Total number of words
+2005,   26609986084
+2006,   27695491774
+2007,   28307904288
+2008,   28752030034
+...
+</code></pre></div></div>
+
+<div class="table-wrapper"><table>
+    <tr>
+        <th style="width:20%">Method</th>
+        <th style="width:30%">Description</th>
+        <th style="width:50%">Example</th>
+    </tr>
+    <tr>
+        <td><code>countHistory</code></td>
+        <td>
+            Takes in a word. For each year, return the frequency of the word in that year.
+        </td>
+        <td>
+            <code>countHistory("wandered", 2006, 2007)</code><br />should return<br /><code>{2006: 87688, &nbsp;&nbsp; 2007: 108634}</code>.
+        </td>
+    </tr>
+    <tr>
+        <td><code>totalCountHistory</code></td>
+        <td>
+            For each year, return the total number of words in that year.
+        </td>
+        <td>
+            <code>totalCountHistory()</code> should return<br /><code>{2005: 26609986084, &nbsp;&nbsp; 2006: 27695491774, ...}</code>.
+        </td>
+    </tr>
+    <tr>
+        <td><code>weightHistory</code></td>
+        <td>
+            Takes in a word. For each year, return the frequency of the word in that year, divided by the total number of words in that year.
+        </td>
+        <td>
+            <code>weightHistory("wandered", 2006, 2007)</code><br />should return<br /><code>{2006: 87688 / 27695491774,<br />&nbsp;2007: 108634 / 28307904288}</code>.
+        </td>
+    </tr>
+    <tr>
+        <td><code>summedWeightHistory</code></td>
+        <td>
+            Takes in multiple words. For each year, return the summed frequency of all the input words in that year, divided by the total number of words in that year.
+        </td>
+        <td>
+            <code>summedWeightHistory(["wandered", "airport"], 2006, 2007)</code><br />should return<br /><code>{2006: (87688 + 0) / 27695491774,<br />&nbsp;2007: (108634 + 175702) / 28307904288}</code>.
+        </td>
+    </tr>
+</table></div>
+
+<p>For all methods, if start and end years are provided, limit the returned output to only the years in the provided range.</p>
+
+<p>You can assume all data is between the years 1400 and 2100. These variables are stored as constants <code class="language-plaintext highlighter-rouge">MIN_YEAR</code> and <code class="language-plaintext highlighter-rouge">MAX_YEAR</code> in the <code class="language-plaintext highlighter-rouge">TimeSeries</code> class.</p>
+
+<p>If you call a method that returns a <code class="language-plaintext highlighter-rouge">TimeSeries</code>, and there is no available data for the given method call, you should return an empty <code class="language-plaintext highlighter-rouge">TimeSeries</code>.</p>
+<ul>
+  <li>Example: <code class="language-plaintext highlighter-rouge">ngm.weightHistory("asdfasdf")</code> should return a <code class="language-plaintext highlighter-rouge">TimeSeries</code> with nothing in it, since <code class="language-plaintext highlighter-rouge">"asdfasdf"</code> is not a word in the dataset.</li>
+  <li>Example: <code class="language-plaintext highlighter-rouge">ngm.countHistory("adopt", 1400, 1410)</code> should also return a <code class="language-plaintext highlighter-rouge">TimeSeries</code> with nothing in it, since <code class="language-plaintext highlighter-rouge">"adopt"</code> has no data during those years.</li>
+</ul>
+
+<blockquote class="TASK">
+  <p>Implement the methods in <code class="language-plaintext highlighter-rouge">src/main/NGramMap.java</code> according to the API provided in the file.</p>
+
+  <p>For an example of an <code class="language-plaintext highlighter-rouge">NGramMap</code> at work, check out the <code class="language-plaintext highlighter-rouge">testOnLargeFile()</code> test in <code class="language-plaintext highlighter-rouge">tests/NGramMapTest.java</code>.</p>
+</blockquote>
+
+<p>NGramMap should not extend any class.</p>
+
+<p>You may not add additional public methods to this class. You’re welcome to add additional private methods.</p>
+
+<p>Tips:</p>
+<ul>
+  <li>Your methods should be simple! If you pick the right data structures, the methods should be relatively short.</li>
+  <li>The provided tests are not comprehensive. You will need to write additional tests. Rather than using one of the large input files (e.g. <code class="language-plaintext highlighter-rouge">word_history_size14377.csv</code>), we recommend starting with one of the smaller input files (e.g. <code class="language-plaintext highlighter-rouge">word_history_size3.csv</code>, <code class="language-plaintext highlighter-rouge">word_history_size4.csv</code>).</li>
+  <li>Like in TimeSeries, you should <em>not</em> have any code which fills in a zero if a value is unavailable.</li>
+  <li>Your code should be fast enough that you can create an <code class="language-plaintext highlighter-rouge">NGramMap</code> using <code class="language-plaintext highlighter-rouge">word_history_size14377.csv</code>. Loading should take less than 60 seconds (maybe a bit longer on an older computer).</li>
+</ul>
+<h2 id="task-3-historytexthandler">
+  
+  
+    <a href="proj4a.html#task-3-historytexthandler" class="anchor-heading" aria-labelledby="task-3-historytexthandler"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 3: HistoryTextHandler
+  
+  
+</h2>
+    
+
+<p>In this final part of Project 4A, we’ll do a bit of software engineering to set up a web server that can handle NgordnetQueries. While this content isn’t strictly related to data structures, it is incredibly important to be able to take projects and deploy them for real world use.</p>
+
+<p>Note: You should only begin this part when you are fairly confident that <code class="language-plaintext highlighter-rouge">TimeSeries</code> and <code class="language-plaintext highlighter-rouge">NGramMap</code> are working properly.</p>
+
+<ol>
+  <li>
+    <p>In your web browser, open up the <code class="language-plaintext highlighter-rouge">ngordnet_4a.html</code> file in the <code class="language-plaintext highlighter-rouge">static</code> folder. You can do this from your finder menu in your operating system, or by right-clicking on the <code class="language-plaintext highlighter-rouge">ngordnet_4a.html</code> in IntelliJ, clicking “Open in”, then “Browser”. You can use whatever browser you want, though TAs will be most familiar with Chrome. You’ll see a web browser based interface that will ultimately (when you’re done with the project) allow a user to enter a list of words and display a visualization.</p>
+  </li>
+  <li>
+    <p>Try entering “cat, dog” into the “words” box, then click <code class="language-plaintext highlighter-rouge">History (Text)</code>. You’ll see that nothing useful shows up.</p>
+
+    <p>Optional: If you open the developer tools in your web browser (see Google for how to do this), you’ll see an error that looks like either “CONNECTION_REFUSED” or “INVALID_URL”. The problem is that the Javascript tries to access a server to generate the results, but there is no web server running that can handle the request to see the history of cat and dog.</p>
+  </li>
+  <li>
+    <p>Open the <code class="language-plaintext highlighter-rouge">main.Main</code> class. This class’s <code class="language-plaintext highlighter-rouge">main</code> method first creates a <code class="language-plaintext highlighter-rouge">NgordnetServer</code> object. The API for this class is as follows: First, we call <code class="language-plaintext highlighter-rouge">startUp</code> on the <code class="language-plaintext highlighter-rouge">NgordnetServer</code> object, then we “register” one or more <code class="language-plaintext highlighter-rouge">NgordnetQueryHandler</code> using the <code class="language-plaintext highlighter-rouge">register</code> command. The precise details here are beyond the scope of our class.</p>
+
+    <p>The basic idea is that when you call <code class="language-plaintext highlighter-rouge">hns.register("historytext", new DummyHistoryTextHandler(ngm))</code>, an object of type <code class="language-plaintext highlighter-rouge">DummyHistoryTextHandler</code> is created that will handle any clicks to the <code class="language-plaintext highlighter-rouge">History (Text)</code> button.</p>
+  </li>
+  <li>
+    <p>Try running the <code class="language-plaintext highlighter-rouge">main.Main</code> class. In the terminal output in IntelliJ you should see the
+line: <code class="language-plaintext highlighter-rouge">INFO org.eclipse.jetty.server.Server - Started...</code>, which means the server started correctly.</p>
+
+    <p>Now open the <code class="language-plaintext highlighter-rouge">ngordnet_4a.html</code> file again (or visit <a href="http://localhost:4567/ngordnet_4a.html">http://localhost:4567/ngordnet_4a.html</a>). Enter “cat, dog” again, then click <code class="language-plaintext highlighter-rouge">History (Text)</code>. This time, you should see a
+message that says:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You entered the following info into the browser:
+Words: [cat, dog]
+Start Year: 2000
+End Year: 2020
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Now open <code class="language-plaintext highlighter-rouge">main.DummyHistoryTextHandler</code>, you’ll see a <code class="language-plaintext highlighter-rouge">handle</code> method. This is called whenever the user clicks the <code class="language-plaintext highlighter-rouge">History (Text)</code> button. The expected behavior should instead be that when the user clicks <code class="language-plaintext highlighter-rouge">History (Text)</code> for the prompt above, the following text should be displayed:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat: {2000=1.71568475416827E-5, 2001=1.6120939684412677E-5, 2002=1.61742010630623E-5, 2003=1.703155141714967E-5, 2004=1.7418408946715716E-5, 2005=1.8042211615010028E-5, 2006=1.8126126955841936E-5, 2007=1.9411504094739293E-5, 2008=1.9999492186117545E-5, 2009=2.1599428349729816E-5, 2010=2.1712564894218663E-5, 2011=2.4857238078766228E-5, 2012=2.4198586699546612E-5, 2013=2.3131865569578688E-5, 2014=2.5344693375481996E-5, 2015=2.5237182007765998E-5, 2016=2.3157514119191215E-5, 2017=2.482102172595473E-5, 2018=2.3556758130732888E-5, 2019=2.4581322086049953E-5}
+dog: {2000=3.127517699525712E-5, 2001=2.99511426723737E-5, 2002=3.0283458650225453E-5, 2003=3.1470761877596034E-5, 2004=3.2890514515432536E-5, 2005=3.753038415155302E-5, 2006=3.74430614362125E-5, 2007=3.987077208249744E-5, 2008=4.267197824115907E-5, 2009=4.81026086549733E-5, 2010=5.30567576173992E-5, 2011=6.048536820577008E-5, 2012=5.179787485962082E-5, 2013=5.0225599367200654E-5, 2014=5.5575537540090384E-5, 2015=5.44261096781696E-5, 2016=4.805214145459557E-5, 2017=5.4171157785607686E-5, 2018=5.206751570646653E-5, 2019=5.5807040409297486E-5}
+</code></pre></div>    </div>
+
+    <p>To pass on the autograder, the formatting of the output must match exactly.</p>
+
+    <p>All lines of text, including the last line, should end in a new line character.</p>
+
+    <p>All whitespace and punctuation (commas, braces, colons) should follow the example above.</p>
+  </li>
+</ol>
+
+<p>These numbers represent the <em>weighted popularity histories</em> of the words cat and dog in the given years. Due to rounding errors, your numbers may not be exactly the same as shown above.</p>
+
+<p>Your format should be exactly as shown above, specifically:</p>
+<ul>
+  <li>The word…</li>
+  <li>…followed by a colon…</li>
+  <li>…followed by a space…</li>
+  <li>…followed by a string representation of the appropriate <code class="language-plaintext highlighter-rouge">TimeSeries</code> where key-value pairs are given as a comma-separated list inside curly braces, with an equals sign between the key and values. Note that you don’t need to write any code to generate the string representation of each <code class="language-plaintext highlighter-rouge">TimeSeries</code>, you can just use the <code class="language-plaintext highlighter-rouge">toString()</code> method.</li>
+</ul>
+
+<p>Now it’s time to implement the HistoryText button!</p>
+
+<blockquote class="TASK">
+  <p>In the <code class="language-plaintext highlighter-rouge">main</code> folder, create a new file called <code class="language-plaintext highlighter-rouge">HistoryTextHandler.java</code> that takes the given <code class="language-plaintext highlighter-rouge">NgordnetQuery</code> and returns a String in the same format as above.</p>
+
+  <p>Then, modify <code class="language-plaintext highlighter-rouge">Main.java</code> so that your <code class="language-plaintext highlighter-rouge">HistoryTextHandler</code> is used when someone clicks <code class="language-plaintext highlighter-rouge">History (Text)</code>. In other words, instead of registering <code class="language-plaintext highlighter-rouge">DummyHistoryTextHandler</code>, you should register your <code class="language-plaintext highlighter-rouge">HistoryTextHandler</code> class instead.</p>
+</blockquote>
+
+<p>Tips:</p>
+<ul>
+  <li>Use the <code class="language-plaintext highlighter-rouge">DummyHistoryTextHandler.java</code> as a guide, pattern matching where appropriate. Being able to tinker with example code and bend it to your will is an incredibly important real world skill. Experiment away, don’t be afraid to break something!</li>
+  <li>For Project 4A, you can ignore the <code class="language-plaintext highlighter-rouge">k</code> instance variable of <code class="language-plaintext highlighter-rouge">NgordnetQuery</code>.</li>
+  <li>Use the <code class="language-plaintext highlighter-rouge">.toString()</code> method built into the <code class="language-plaintext highlighter-rouge">TimeSeries</code> class that gets inherited from <code class="language-plaintext highlighter-rouge">TreeMap</code>.</li>
+  <li>For your <code class="language-plaintext highlighter-rouge">HistoryTextHandler</code> to be able to do something useful, it’s going to need to be able to access the data stored in your <code class="language-plaintext highlighter-rouge">NGramMap</code>. <strong>Do not make the NGramMap into a static variable!</strong> This is known as a “global variable” and is rarely the appropriate solution for any problem. Hint: Your <code class="language-plaintext highlighter-rouge">HistoryTextHandler</code> class can have a constructor like this: <code class="language-plaintext highlighter-rouge">public HistoryTextHandler(NGramMap map)</code>.</li>
+  <li>If a word is invalid, think about how <code class="language-plaintext highlighter-rouge">NGramMap</code> is handling this situation.</li>
+</ul>
+<h2 id="task-4-historyhandler">
+  
+  
+    <a href="proj4a.html#task-4-historyhandler" class="anchor-heading" aria-labelledby="task-4-historyhandler"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 4: HistoryHandler
+  
+  
+</h2>
+    
+
+<p>The text-based history from the previous section is not useful for much other than auto-grading your work. Actually using our tool to discover interesting things will require visualization.</p>
+
+<p><code class="language-plaintext highlighter-rouge">src/demo/PlotDemo.java</code> provides example code that uses your <code class="language-plaintext highlighter-rouge">NGramMap</code> to generate a visual plot showing the weighted popularity history of the words cat and dog between 1900 and 1950. Try running it. If your <code class="language-plaintext highlighter-rouge">NGramMap</code> class is correct, you should see a very long string printed to your console that might look something like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iVBORw0KGg...
+</code></pre></div></div>
+
+<p>This string is a base 64 encoding of an image file. To visualize it, go to <a href="https://codebeautify.org/base64-to-image-converter">codebeautify.org</a>. Copy and paste this entire string into the website, and you should see a plot similar to the one shown below:</p>
+
+<p><img src="../assets/projects/proj4a/1-default-base-64.webp" alt="decoded base 64" /></p>
+
+<p>What’s going on here? The string your code printed IS THE IMAGE. Keep in mind that any data can be represented as a string of bits. This website knows how to decode this string into the corresponding image, using a predefined standard.</p>
+
+<p>If you look at the plotting library, this code relies on the <code class="language-plaintext highlighter-rouge">Plotter.generateTimeSeriesChart</code> method, which takes two arguments. The first is a list of strings, and the second is a <code class="language-plaintext highlighter-rouge">List&lt;TimeSeries&gt;</code>. The <code class="language-plaintext highlighter-rouge">TimeSeries</code> are all plotted in a different color, and each is assigned the label given in the list of strings. Both lists must be of the same length (since the ith string is the label for the ith time series).</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Plotter.generateTimeSeriesChart</code> method returns an object of type <code class="language-plaintext highlighter-rouge">XYChart</code>. This object can in turn either be converted into base-64 by the <code class="language-plaintext highlighter-rouge">Plotter.encodeChartAsString</code> method, or can be displayed to the screen directly by <code class="language-plaintext highlighter-rouge">Plotter.displayChart</code>.</p>
+
+<p>Run <code class="language-plaintext highlighter-rouge">Main.java</code> again, and in your web browser, open up <code class="language-plaintext highlighter-rouge">ngordnet_4a.html</code> (or visit <a href="http://localhost:4567/ngordnet_4a.html">http://localhost:4567/ngordnet_4a.html</a>). Enter “cat, dog” into the “words” box, then click “History”. You’ll see the strange image below:</p>
+
+<p><img src="../assets/projects/proj4a/2-default-history-plot.webp" alt="parabola and sinusoid" /></p>
+
+<p>You’ll note that the code is not plotting the history of cat and dog, but rather a parabola and a sinusoid. If you open <code class="language-plaintext highlighter-rouge">DummyHistoryHandler</code>, you’ll see why.</p>
+
+<blockquote class="WARNING">
+  <p>Seems like the parabola and sinusoid aren’t being scaled properly.
+Feel free to ignore that.</p>
+
+  <p>Update, Oct 10 2025, 4:00 PM: The DummyHistoryHandler demo plot of the parabola and sinusoid has been fixed! 
+Please re-pull from the skeleton <code class="language-plaintext highlighter-rouge">git pull skeleton main</code> to see the new plot.</p>
+</blockquote>
+
+<blockquote class="TASK">
+  <p>In the <code class="language-plaintext highlighter-rouge">main</code> folder, create a new file called <code class="language-plaintext highlighter-rouge">HistoryHandler.java</code> that takes the given <code class="language-plaintext highlighter-rouge">NgordnetQuery</code> and returns a String that contains a base-64 encoded image of the appropriate plot.</p>
+
+  <p>Then, modify the <code class="language-plaintext highlighter-rouge">Main.java</code> so that your <code class="language-plaintext highlighter-rouge">HistoryHandler</code> is called when someone clicks the <code class="language-plaintext highlighter-rouge">History</code> button.</p>
+</blockquote>
+
+<p>Tips:</p>
+<ul>
+  <li>The constructor for <code class="language-plaintext highlighter-rouge">HistoryHandler</code> should be of the following form: <code class="language-plaintext highlighter-rouge">public HistoryHandler(NGramMap map)</code>.</li>
+  <li>Just like before, use <code class="language-plaintext highlighter-rouge">DummyHistoryHandler.java</code> as a guide. As mentioned in the previous section, we really want you to learn the skill of tinkering with complex library code to get the behavior you want.</li>
+</ul>
+<h2 id="submission">
+  
+  
+    <a href="proj4a.html#submission" class="anchor-heading" aria-labelledby="submission"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Submission
+  
+  
+</h2>
+    
+
+<p>Try submitting to the autograder. You may or may not pass everything.</p>
+
+<ul>
+  <li>If you fail a correctness test, this means that there is a case that your local tests did not cover.</li>
+  <li>The autograder will not run unless you fix all your style errors. Reminder that you can check style in IntelliJ as often as you’d like:
+<img src="../assets/resources/style-guide-img/intellij_style_checker.webp" alt="Run style checker in IntelliJ" /></li>
+  <li>You will have a token limit of 8 tokens every 24 hours. We will not reinstate tokens for failing to add/commit/push your code, run style, etc.</li>
+</ul>
+
+<p>Project 4A will be worth 50 points.</p>
+
+<p>Grading breakdown:</p>
+<ul>
+  <li><strong>TimeSeries (30%)</strong>: Correctly implement <code class="language-plaintext highlighter-rouge">TimeSeries.java</code>.</li>
+  <li><strong>NGramMap Count (20%)</strong>: Correctly implement <code class="language-plaintext highlighter-rouge">countHistory()</code> and <code class="language-plaintext highlighter-rouge">totalCountHistory()</code> in <code class="language-plaintext highlighter-rouge">NGramMap.java</code>.</li>
+  <li><strong>NGramMap Weight (30%)</strong>: Correctly implement <code class="language-plaintext highlighter-rouge">weightHistory()</code> and <code class="language-plaintext highlighter-rouge">summedWeightHistory()</code> in <code class="language-plaintext highlighter-rouge">NGramMap.java</code>.</li>
+  <li><strong>HistoryTextHandler (10%)</strong>: Correctly implement <code class="language-plaintext highlighter-rouge">HistoryTextHandler.java</code>.</li>
+  <li><strong>HistoryHandler (10%)</strong>: Correctly implement <code class="language-plaintext highlighter-rouge">HistoryHandler.java</code>.</li>
+</ul>
+
+<p>The score you receive on Gradescope is your final score for this assignment (assuming you followed the <a href="../policies.html#collaboration-policy">collaboration policy</a>).</p>
+
+<blockquote class="ACKNOWLEDGMENT">
+  <p>The WordNet part of this assignment is loosely adapted from Alina Ene and Kevin Wayne’s 
+<a href="http://www.cs.princeton.edu/courses/archive/fall14/cos226/assignments/wordnet.html">Wordnet assignment</a> at Princeton 
+University.</p>
+</blockquote>
+
+  </div>
+</div>
+
+          
+
+          
+            
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="../assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

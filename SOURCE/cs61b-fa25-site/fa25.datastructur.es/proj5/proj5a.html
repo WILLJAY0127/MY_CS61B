@@ -1,0 +1,884 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    .site-nav > ul.nav-list:first-child > li > a,
+    
+    .site-nav > ul.nav-list:first-child > li > ul > li:not(:nth-child(2)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(8) > ul > li:nth-child(2) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(8) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(8) > ul > li:nth-child(2) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(8) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(8) > ul.nav-list > li.nav-list-item:nth-child(2) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="../assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>5A: BYOW (Design) | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="5A: BYOW (Design)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Structures at UC Berkeley" />
+<meta property="og:description" content="Data Structures at UC Berkeley" />
+<link rel="canonical" href="proj5a.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/proj5/proj5a/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="5A: BYOW (Design)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Data Structures at UC Berkeley","headline":"5A: BYOW (Design)","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/proj5/proj5a/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="../assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="../assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="../assets/katex/katex.min.css"
+>
+<script defer src="../assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="../assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="proj5a.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="../index.html" class="site-title lh-tight">
+
+
+  <img src="../assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="../policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="../policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="../policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="../policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="../resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="../resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="../resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="../resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="../resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="../resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="../resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="../resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="../resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="../resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="../resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="../resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="../resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="../staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="../homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="../homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="../homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="../homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="../homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="../homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="../homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="../homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="../homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="../homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="../projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="../projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="../projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="../proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="../proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="../proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="../proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="../proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="../troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="../troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="proj5a.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="index.html">Project 5</a></li>
+    <li class="breadcrumb-nav-list-item"><span>5A: BYOW (Design)</span></li>
+  </ol>
+</nav>
+
+
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item"><a href="proj5a.html#deadlines" class="nav-list-link">Deadlines</a></li><li class="nav-list-item"><a href="proj5a.html#technical-design-doc-refresher" class="nav-list-link">Technical Design Doc Refresher</a><ul class="nav-list"><li class="nav-list-item"><a href="proj5a.html#data" class="nav-list-link">Data</a></li><li class="nav-list-item"><a href="proj5a.html#data-structures" class="nav-list-link">Data Structures</a></li><li class="nav-list-item"><a href="proj5a.html#algorithms" class="nav-list-link">Algorithms</a></li><li class="nav-list-item"><a href="proj5a.html#complexity" class="nav-list-link">Complexity</a></li><li class="nav-list-item"><a href="proj5a.html#questions" class="nav-list-link">Questions</a></li><li class="nav-list-item"><a href="proj5a.html#example" class="nav-list-link">Example</a></li></ul></li><li class="nav-list-item"><a href="proj5a.html#task-1-writing-your-tdd" class="nav-list-link">Task 1: Writing Your TDD</a><ul class="nav-list"><li class="nav-list-item"><a href="proj5a.html#design-tips" class="nav-list-link">Design Tips</a></li></ul></li><li class="nav-list-item"><a href="proj5a.html#submission" class="nav-list-link">Submission</a></li></ul>
+    </nav>
+  <div class="content">
+<h2 id="deadlines">
+  
+  
+    <a href="proj5a.html#deadlines" class="anchor-heading" aria-labelledby="deadlines"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Deadlines
+  
+  
+</h2>
+    
+
+<div>
+
+<style type="text/css">
+
+.proj5-table {
+  all: revert;
+  border-collapse: collapse !important;
+}
+
+.proj5-header-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+}
+
+.proj5a-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+  border-bottom: 2px solid !important;
+  background-color:rgba(114,83,237,0.2);
+}
+
+.proj5b-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+  border-bottom: 2px solid !important;
+  background-color:rgba(44,132,250,0.15);
+}
+
+.proj5c-cell {
+  border: 2px solid;
+  border-left: 2px solid !important;
+  border-bottom: 2px solid !important;
+  background-color:rgba(65,214,147,0.15);
+}
+
+</style>
+
+<!-- how many deadlines??-->
+Warning: There are <b>3 deadlines</b> for this project, and some deadlines require you to submit <b>multiple deliverables</b>. Please double-check that you submitted everything!
+
+<div class="table-wrapper"><table class="proj5-table"><thead>
+  <tr>
+    <th class="proj5-header-cell">Assignment</th>
+    <th class="proj5-header-cell">Tasks</th>
+    <th class="proj5-header-cell">Deliverable</th>
+    <th class="proj5-header-cell">Points</th>
+    <th class="proj5-header-cell">Due Date</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="proj5a-cell" rowspan="2">Project 5A</td>
+    <td class="proj5a-cell" rowspan="2">- Partnerships<br />- Setup<br />- Design Document</td>
+    <td class="proj5a-cell">Pre-Project <b>Google Form</b></td>
+    <td class="proj5a-cell">5</td>
+    <td class="proj5a-cell" rowspan="2">Mon, Nov 17<br />11:59pm PT</td>
+  </tr>
+  <tr>
+    <td class="proj5a-cell">Design Document</td>
+    <td class="proj5a-cell">20</td>
+  </tr>
+  <tr>
+    <td class="proj5b-cell" rowspan="1">Project 5B</td>
+    <td class="proj5b-cell" rowspan="1">- World Generation</td>
+    <td class="proj5b-cell">World Screenshots on <b>Gradescope</b></td>
+    <td class="proj5b-cell">20</td>
+    <td class="proj5b-cell" rowspan="1">Mon, Nov 24<br />11:59pm PT</td>
+  </tr>
+  <tr>
+    <td class="proj5c-cell" rowspan="3">Project 5C</td>
+    <td class="proj5c-cell" rowspan="3">- Task 1: Main Menu<br />- Task 2: Interactivity<br />- Task 3: HUD<br />- Task 4: Saving and Loading<br />- Task 5: Ambition Features</td>
+    <td class="proj5c-cell">Code on <b>Gradescope</b><br />(0 pts, but required for checkoff)<br /></td>
+    <td class="proj5c-cell">0</td>
+    <td class="proj5c-cell" rowspan="3">Mon, Dec 1<br />11:59pm PT</td>
+  </tr>
+  <tr>
+    <td class="proj5c-cell"><b>Live Checkoff</b> with TA<br />(Checkoffs will happen 12/01 – 12/05)</td>
+    <td class="proj5c-cell">150</td>
+  </tr>
+  <tr>
+    <td class="proj5c-cell">Post-Project <b>Google Form</b></td>
+    <td class="proj5c-cell">5</td>
+  </tr>
+</tbody>
+</table></div>
+
+To request extensions on Project 5, <b>both partners</b> need to submit separate extension requests on Beacon.
+
+</div>
+<h1 id="project-5a-byow-design">
+  
+  
+    <a href="proj5a.html#project-5a-byow-design" class="anchor-heading" aria-labelledby="project-5a-byow-design"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 5A: BYOW (Design)
+  
+  
+</h1>
+    
+
+<p>In this project, you’ll design your approach for Build-ing Your Own World (BYOW).</p>
+
+<blockquote class="TASK">
+  <p>Before getting started, please read the <a href="proj5b.html">Project 5B: World Generation</a> and 
+<a href="proj5c.html">Project 5C: Gameplay</a> specs. You won’t be able to begin either task without understanding the 
+BYOW spec first!</p>
+</blockquote>
+<h2 id="technical-design-doc-refresher">
+  
+  
+    <a href="proj5a.html#technical-design-doc-refresher" class="anchor-heading" aria-labelledby="technical-design-doc-refresher"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Technical Design Doc Refresher
+  
+  
+</h2>
+    
+
+<blockquote class="NOTE">
+  <p>Recall from Project 4B: <em>What is a technical design document</em>?</p>
+
+  <p>A <strong>technical design document (TDD)</strong> describes an approach to a specific technical problem. In the context of 
+software engineering, it serves as the blueprint and specification for a software program or feature. TDDs are useful 
+in both communicating and organizing your approach, while also being dynamic drafts that encompass the abstract 
+details of the project.</p>
+
+  <p>TDDs are living documents. Software developers iterate on them as project demands change or new issues present 
+themselves. While you’re only expected to submit a snapshot of your TDD for Project 5A, we encourage you to use 
+this document as a platform for brainstorming high-level ideas for the rest of Project 5B and 5C.</p>
+
+  <p>TDDs are inherently collaborative. They act as a forum for communicating your ideas/solution to others on your team 
+and to yourself, whether to manage complexity or to offload ideas for future reference. While this is an individual 
+project, assume your audience is a group of 61B peers with similar programming knowledge as you.</p>
+</blockquote>
+
+<blockquote class="WARNING">
+  <p>It may be useful to include snippits of psuedocode or other portions of plain-text outlining your ideas. Don’t get 
+too carried away with this. If you find yourself writing every method line-for-line in psuedocode, you’re likely 
+straying away from the high-level brainstorming process that a TDD is meant for.</p>
+</blockquote>
+
+<p>For this class, TDDs will consist of the following components:</p>
+<ol>
+  <li>Data</li>
+  <li>Data Structures</li>
+  <li>Algorithms</li>
+  <li>Complexity</li>
+  <li>Questions</li>
+</ol>
+<h3 id="data">
+  
+  
+    <a href="proj5a.html#data" class="anchor-heading" aria-labelledby="data"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Data
+  
+  
+</h3>
+    
+
+<p>What data will you be using? What does the data consist of and how will you parse it for your program? How will your 
+program use the data? <em>Consider the process of saving/loading. If applicable, discuss how data might be used in your ambition features.</em></p>
+<h3 id="data-structures">
+  
+  
+    <a href="proj5a.html#data-structures" class="anchor-heading" aria-labelledby="data-structures"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Data Structures
+  
+  
+</h3>
+    
+
+<p>What data structures will you be using? How will your data structures use the data? How will your program use the 
+data structures?</p>
+<h3 id="algorithms">
+  
+  
+    <a href="proj5a.html#algorithms" class="anchor-heading" aria-labelledby="algorithms"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Algorithms
+  
+  
+</h3>
+    
+
+<p>What algorithms will you be using? How will your algorithms use the data structures and data? How will your program 
+use the algorithms?</p>
+<h3 id="complexity">
+  
+  
+    <a href="proj5a.html#complexity" class="anchor-heading" aria-labelledby="complexity"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Complexity
+  
+  
+</h3>
+    
+
+<p>What is the input? How does the time and space complexity change with the input? What are the bounds? <em>Consider the runtime of your world generation process and/or any ambition features that may be computationally demanding.</em></p>
+<h3 id="questions">
+  
+  
+    <a href="proj5a.html#questions" class="anchor-heading" aria-labelledby="questions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Questions
+  
+  
+</h3>
+    
+<h4 id="open-questions">
+  
+  
+    <a href="proj5a.html#open-questions" class="anchor-heading" aria-labelledby="open-questions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Open Questions
+  
+  
+</h4>
+    
+
+<p>What questions have come up while brainstorming your design? Consider asking them in assignment section or office 
+hours!</p>
+<h4 id="closed-questions">
+  
+  
+    <a href="proj5a.html#closed-questions" class="anchor-heading" aria-labelledby="closed-questions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Closed Questions
+  
+  
+</h4>
+    
+
+<p>Move questions here once you’ve found an answer. Designing software is a collaborative process. Logging your 
+decision-making process provides essential context for others wishing to understand/contribute to your work.</p>
+
+<blockquote class="NOTE">
+  <p>As mentioned earlier, design docs are living documents. You (the designer) might not understand the entire project 
+scope while drafting, <em>and that’s fine</em>. Including a section for questions can help track your thoughts for future 
+iterations.</p>
+
+  <p>A “Questions” section is useful for collaboration. Your collaborators may want to understand which assumptions you made or questions you had when designing.</p>
+</blockquote>
+<h3 id="example">
+  
+  
+    <a href="proj5a.html#example" class="anchor-heading" aria-labelledby="example"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Example
+  
+  
+</h3>
+    
+
+<p>For an example TDD based on the Percolation mini-Project, see <a href="../resources/example-tdd.html">this example</a>.</p>
+<h2 id="task-1-writing-your-tdd">
+  
+  
+    <a href="proj5a.html#task-1-writing-your-tdd" class="anchor-heading" aria-labelledby="task-1-writing-your-tdd"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 1: Writing Your TDD
+  
+  
+</h2>
+    
+
+<p>We have provided a template for you to use if you’d like. See the <a href="https://docs.google.com/document/d/1uth3hqFfrYP0UUnEmnnxYk88ovKeuDfGCKHrXZ_s5vc/edit?usp=sharing">Project 5A: BYOW Design Template</a>, which is 
+also linked in the assignment below.</p>
+
+<blockquote class="TASK">
+  <p>Write a TDD for BYOW and submit it to the 
+<a href="https://www.gradescope.com/courses/1104518/assignments/7124408/">Project 5A: BYOW Design</a> assignment.</p>
+</blockquote>
+
+<blockquote class="NOTE">
+  <p>For BYOW, the complexity of your program is not as important.</p>
+
+  <p>On the other hand, the data of your program is. What type of data do you expect to save and load?</p>
+</blockquote>
+
+<blockquote class="WARNING">
+  <p>If you expect to work on this project during office hours, we may ask to see your design document to help understand
+your approach. As such, please put effort into this assignment! Grasping project requirements in the design phase
+will help immensely during the later implementation phases.</p>
+</blockquote>
+<h3 id="design-tips">
+  
+  
+    <a href="proj5a.html#design-tips" class="anchor-heading" aria-labelledby="design-tips"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Design Tips
+  
+  
+</h3>
+    
+
+<p>We’ve included below a few questions for you to consider while brainstorming your design:</p>
+<h4 id="general-questions">
+  
+  
+    <a href="proj5a.html#general-questions" class="anchor-heading" aria-labelledby="general-questions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> General Questions
+  
+  
+</h4>
+    
+
+<ul>
+  <li>Look through the provided code:
+    <ul>
+      <li>Notice what’s already built for you. What may be useful for your implementation?</li>
+      <li>Notice what isn’t. What gaps does your implementation need to fill?</li>
+    </ul>
+  </li>
+  <li>Where do tasks overlap? Are there opportunities to reuse methods across different cases? Think about opportunities for helper methods.</li>
+  <li>Can you find groups of data structures and methods that serve a similar, clearly defined purpose? If so, consider moving them to a separate class. Building abstraction barriers may be helpful for managing code complexity.</li>
+</ul>
+<h4 id="world-generation">
+  
+  
+    <a href="proj5a.html#world-generation" class="anchor-heading" aria-labelledby="world-generation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> World Generation
+  
+  
+</h4>
+    
+
+<ul>
+  <li>What are the core components of each world? Does it makes sense to have a separate class for each component?</li>
+  <li>How will you ensure that every generated world is valid?
+    <ul>
+      <li>Will you decide on a layout first, validate it, then build the world after?</li>
+      <li>Or, will you gradually generate the world, ensuring that only valid components are built as you go?</li>
+    </ul>
+  </li>
+  <li>Ultimately, each world is a 2D grid of values, each representing a Tile. What data structures would be helpful for tracking the state of the world on top of this grid? Representing specific aspects of your world with data structures may be helpful for building ambition features later.</li>
+</ul>
+<h4 id="interactivity">
+  
+  
+    <a href="proj5a.html#interactivity" class="anchor-heading" aria-labelledby="interactivity"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Interactivity
+  
+  
+</h4>
+    
+
+<ul>
+  <li>Read through the <a href="https://introcs.cs.princeton.edu/java/stdlib/javadoc/StdDraw.html">StdDraw library documentation</a>. This library acts as the bridge between your implementation and what is outputted on screen (e.g. the <code class="language-plaintext highlighter-rouge">/tileengine</code> implementation uses library methods to draw to the screen).
+    <ul>
+      <li>Can you find methods for drawing on the screen, not specifically for tile drawing?</li>
+      <li>Can you find methods for soliticiting user inputs?</li>
+    </ul>
+  </li>
+  <li>Rendering video is much like a classic film projector, in that by rapidly rendering images, we can create the illusion of motion. Video games are essentially the same, except that user inputs can alter what’s displayed in the next frame. (Read about common paradigms for implementing video games and graphics engines <a href="https://gameprogrammingpatterns.com/game-loop.html">here</a>)
+    <ul>
+      <li>Does your implementation clearly separate the steps of collecting, processing, and displaying the result of user inputs?</li>
+    </ul>
+  </li>
+  <li>Consider that your computer can compute thousands of instructions each second. If your implementation has real-time elements (i.e. timers, slow-motion movement, NPCs moving at user-like speed, etc.), how can you adjust the speed of your event loop to match real-time?</li>
+</ul>
+<h4 id="ambition-features">
+  
+  
+    <a href="proj5a.html#ambition-features" class="anchor-heading" aria-labelledby="ambition-features"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Ambition Features
+  
+  
+</h4>
+    
+
+<ul>
+  <li>Most importantly, <strong>which ambition features are you most excited about building?</strong></li>
+  <li>For each feature, determine <em>where</em> it fits within your current abstraction barriers:
+    <ul>
+      <li>Does it require fundamental changes to the process of generating and representing worlds?</li>
+      <li>Does it alter the process for collecting user input?</li>
+      <li>Does it change the process for rendering the world state?</li>
+    </ul>
+  </li>
+  <li>Do any features span multiple domains of this project? If so, consider creating separate classes to contain their complexity.</li>
+  <li>How could you structure your core project implementation (world generation and interactivity) to make feature integration seamless?</li>
+</ul>
+
+<blockquote class="NOTE">
+  <p><strong>You aren’t bound to the ambition features you choose to write about within your design doc</strong>. That said, certain features (especially primary ones) are better aligned with certain implementation choices in the world generation and interactivity tasks. It’s important to think about this early!</p>
+</blockquote>
+<h2 id="submission">
+  
+  
+    <a href="proj5a.html#submission" class="anchor-heading" aria-labelledby="submission"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Submission
+  
+  
+</h2>
+    
+
+<blockquote class="TASK">
+  <p>Submit your design document on gradescope: <a href="https://www.gradescope.com/courses/1104518/assignments/7124408/">Project 5A: BYOW Design</a> (5 points)</p>
+
+  <p>Don’t forget to add your partner to the submission!</p>
+</blockquote>
+
+<p>The score you receive on Gradescope is your final score for this assignment (assuming you followed the <a href="../policies.html#collaboration-policy">collaboration policy</a>).</p>
+
+<p>While we’re unable to give detailed individual feedback for each TDD, we’ll agregate common mistakes we notice and showcase them (as well as implementation hints…) in assignment section during Week 13 (11/17-11/21). As always, come to office hours if you want specific feedback from 61B staff!</p>
+
+<blockquote class="NOTE">
+  <p>A note on grading, we are looking for thoughtfulness and effort. In other words, you do not have to be correct in
+your design or your complexity analysis, but we expect you to have put in considerable time into designing your
+approach. As long as you attempt to describe your approach for the components in the rubric, you’ll receive full
+credit.</p>
+</blockquote>
+
+<p>For the TDD, we have provided the rubric we’ll be grading submissions on below for your reference.</p>
+
+<ol>
+  <li><strong>Data (10%)</strong>: Describes how the data will be used.</li>
+  <li><strong>Data Structures (40%)</strong>: Describes what data structures will be used with the data.</li>
+  <li><strong>Algorithms (40%)</strong>: Describes what algorithms will be used with the data structures and data.</li>
+  <li><strong>Complexity (10%)</strong>: Describes the expected time and space complexity of the program.</li>
+</ol>
+
+<p class="ACKNOWLEDGMENT">This spec was written by Daniel Wang and Ronnie Beggs as a new assignment in Fall 2025. The provided template was created by Kanav Mittal and Stella Kaval in Spring 2025 and edited by Daniel Wang.</p>
+
+  </div>
+</div>
+
+          
+
+          
+            
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="../assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

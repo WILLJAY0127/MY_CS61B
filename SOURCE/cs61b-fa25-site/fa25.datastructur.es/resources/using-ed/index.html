@@ -1,0 +1,1414 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="../../assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="../../assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    .site-nav > ul.nav-list:first-child > li > a,
+    
+    .site-nav > ul.nav-list:first-child > li > ul > li:not(:nth-child(7)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(3) > ul > li:nth-child(7) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(3) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(3) > ul > li:nth-child(7) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(3) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(3) > ul.nav-list > li.nav-list-item:nth-child(7) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="../../assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="../../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Using Ed | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Using Ed" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Structures at UC Berkeley" />
+<meta property="og:description" content="Data Structures at UC Berkeley" />
+<link rel="canonical" href="index.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/resources/using-ed/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Using Ed" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Data Structures at UC Berkeley","headline":"Using Ed","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/resources/using-ed/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="../../assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="../../assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="../../assets/katex/katex.min.css"
+>
+<script defer src="../../assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="../../assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="index.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="../../index.html" class="site-title lh-tight">
+
+
+  <img src="../../assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="../../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="../../policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="../../policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="../../policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="../../policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="../assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="../style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="../exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="../exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="../example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="../partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="../using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="../using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="../using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="../using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="../using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="../using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="../../staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../homeworks/index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="../../homeworks/hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="../../homeworks/hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="../../homeworks/hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="../../homeworks/hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="../../homeworks/hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="../../homeworks/hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="../../homeworks/hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="../../homeworks/hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="../../homeworks/hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="../../homeworks/hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="../../projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="../../projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="../../projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="../../proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="../../proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="../../proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="../../proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="../../proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../proj5/index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="../../proj5/landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="../../proj5/proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="../../proj5/proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="../../proj5/proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="../../proj5/ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="../../proj5/checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="../../proj5/bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="../../troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="../../troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="index.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="../../resources.html">Resources</a></li>
+    <li class="breadcrumb-nav-list-item"><span>Using Ed</span></li>
+  </ol>
+</nav>
+
+
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item"><a href="index.html#introduction" class="nav-list-link">Introduction</a></li><li class="nav-list-item"><a href="index.html#keeping-ed-inclusive" class="nav-list-link">Keeping Ed Inclusive</a></li><li class="nav-list-item"><a href="index.html#overall-requests" class="nav-list-link">Overall Requests</a></li><li class="nav-list-item"><a href="index.html#why-use-forums" class="nav-list-link">Why Use Forums?</a></li><li class="nav-list-item"><a href="index.html#cs-61b-forum-policies" class="nav-list-link">CS 61B Forum Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="index.html#categories" class="nav-list-link">Categories</a></li><li class="nav-list-item"><a href="index.html#how-to-ask-and-how-to-not-ask-questions" class="nav-list-link">How to Ask, and How to Not Ask Questions</a></li></ul></li><li class="nav-list-item"><a href="index.html#ed-tips-and-tricks" class="nav-list-link">Ed Tips and Tricks</a></li><li class="nav-list-item"><a href="index.html#landing-page" class="nav-list-link">Landing Page</a><ul class="nav-list"><li class="nav-list-item"><a href="index.html#question" class="nav-list-link">Question</a></li><li class="nav-list-item"><a href="index.html#answers" class="nav-list-link">Answers</a></li><li class="nav-list-item"><a href="index.html#follow-ups-and-comments" class="nav-list-link">Follow-ups and Comments</a></li><li class="nav-list-item"><a href="index.html#summary-of-icons" class="nav-list-link">Summary of Icons</a></li></ul></li><li class="nav-list-item"><a href="index.html#creating-an-ed-question" class="nav-list-link">Creating an Ed question</a><ul class="nav-list"><li class="nav-list-item"><a href="index.html#categories-1" class="nav-list-link">Categories</a></li><li class="nav-list-item"><a href="index.html#meta-options" class="nav-list-link">Meta Options</a></li><li class="nav-list-item"><a href="index.html#formatting-options" class="nav-list-link">Formatting Options</a></li></ul></li><li class="nav-list-item"><a href="index.html#ed-megathreads" class="nav-list-link">Ed Megathreads</a></li><li class="nav-list-item"><a href="index.html#search" class="nav-list-link">Search</a><ul class="nav-list"><li class="nav-list-item"><a href="index.html#using-keywords" class="nav-list-link">Using Keywords</a></li><li class="nav-list-item"><a href="index.html#search-filters" class="nav-list-link">Search Filters</a></li><li class="nav-list-item"><a href="index.html#search-categories" class="nav-list-link">Search Categories</a></li><li class="nav-list-item"><a href="index.html#search-date-ranges" class="nav-list-link">Search Date Ranges</a></li></ul></li><li class="nav-list-item"><a href="index.html#closing" class="nav-list-link">Closing</a></li><li class="nav-list-item"><a href="index.html#when-to-make-a-gitbug" class="nav-list-link">When to make a Gitbug</a></li><li class="nav-list-item"><a href="index.html#making-a-gitbug" class="nav-list-link">Making a Gitbug</a></li></ul>
+    </nav>
+  <div class="content">
+    <p>TODO: This is currently 3 separate guides concatenated together (see the h1 headings): “Using Ed”, “Ed Guide for New Users”, and “Gitbugs”. We should clean this up and merge the guides into one coherent guide at some point. ~peyrin, Jun 2025</p>
+<h1 id="using-ed">
+  
+  
+    <a href="index.html#using-ed" class="anchor-heading" aria-labelledby="using-ed"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Using Ed
+  
+  
+</h1>
+    
+
+<p>Authors: Ethan Ordentlich, Jedidiah Tsang</p>
+<h2 id="introduction">
+  
+  
+    <a href="index.html#introduction" class="anchor-heading" aria-labelledby="introduction"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Introduction
+  
+  
+</h2>
+    
+
+<p>We use Ed Discussions as our course forum. If you’re new to
+Ed, please read the <a href="https://fa25.datastructur.es/resources/using-ed/ed-guide.md">Ed guide</a>, which should get you familiar with
+this platform. This post includes a collection of guidelines for etiquette on
+Ed, that we ask you to read entirely so we can all have an enjoyable experience
+this semester!</p>
+<h2 id="keeping-ed-inclusive">
+  
+  
+    <a href="index.html#keeping-ed-inclusive" class="anchor-heading" aria-labelledby="keeping-ed-inclusive"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Keeping Ed Inclusive
+  
+  
+</h2>
+    
+
+<p>Any content on public forums like Ed that targets, excludes, disrespects or
+discriminates against a certain individual or community will be removed and
+the person responsible for the content will face repercussions. Please aim to
+keep the climate inclusive for everyone. If at any point you have felt
+targeted, excluded, disrespected, or discriminated against by a student or
+someone from our course staff, please fill out our
+<a href="https://forms.gle/5Q33zxKXDQmSqU6v5">Incident Report form</a> to report it. If
+you would rather not speak to someone from staff, there are several campus
+offices you may report to instead
+(<a href="https://diversity.berkeley.edu/report-incident">https://diversity.berkeley.edu/report-incident</a>).</p>
+<h2 id="overall-requests">
+  
+  
+    <a href="index.html#overall-requests" class="anchor-heading" aria-labelledby="overall-requests"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Overall Requests
+  
+  
+</h2>
+    
+
+<p>We don’t want to start this with a list of what not to do, but please
+<strong>don’t</strong>:</p>
+
+<dl>
+  <dt>Post unhelpful follow-ups</dt>
+  <dd>Follow-ups like “+1” and “me too” contribute nothing
+but cause annoying emails to be sent to everyone following the post. These
+may be deleted. You can use the heart icon near a post to express “+1”,
+gratitude, etc.</dd>
+  <dt>Use annoying or misrepresentative titles</dt>
+  <dd>These are titles in all caps or with an exorbitant amount of
+punctuation just to capture the attention of users. Please keep titles (and
+content in general) descriptive and professional.</dd>
+  <dt>Post off-topic or speculative content or trolling</dt>
+  <dd>Content that is unrelated to the course and/or non-educational does not
+belong on Ed. Content that is speculative, drama mongering, or intentionally
+misleading prevents effective communication from course staff and other
+students.</dd>
+  <dt>Say “nevermind”, or “fixed” if you figure out the answer to your own question</dt>
+  <dd>The forum is a wonderful source of collective knowledge. Answering your own
+question is valid, and contributes to this collective knowledge.
+Everyone hates when somebody replies to their own question with something like
+<a href="https://www.optipess.com/comic/titsmcgee4782/">“Nevermind, I got it!”</a>, or
+<a href="https://xkcd.com/979/">when they don’t answer at all</a>. Other students can’t
+learn from that if they happen to have the same problem. Instead, add an
+answer or comment with your solution!</dd>
+</dl>
+<h2 id="why-use-forums">
+  
+  
+    <a href="index.html#why-use-forums" class="anchor-heading" aria-labelledby="why-use-forums"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Why Use Forums?
+  
+  
+</h2>
+    
+
+<p><a href="https://dl.acm.org/doi/10.1145/3017680.3017745">Recent research from Duke/NC State/UNC/UF</a>
+has shown that student participation on course forums, like Piazza and Ed, is
+most beneficial when students ask <strong>constructive questions</strong> that reflect their
+reasoning or attempts to solve a problem. By creating and asking these
+constructive questions, students are practicing their <em>metacognitive</em> skills,
+or how they <em>think about approaching problems and learning</em>.</p>
+
+<p>Forums are also an effective way of seeking asynchronous help. Office hours
+and lab aren’t always happening, and it isn’t always possible to speak
+synchronously with a TA. Instead, you can ask a question on Ed, and continue
+working on other things while you wait for a response.</p>
+
+<p>Additionally, forums and other asynchronous methods of asking for help are a
+widely used tool outside in many real-world contexts as well, from
+<a href="https://stackoverflow.com/">StackOverflow</a> to internal company tickets.</p>
+<h2 id="cs-61b-forum-policies">
+  
+  
+    <a href="index.html#cs-61b-forum-policies" class="anchor-heading" aria-labelledby="cs-61b-forum-policies"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> CS 61B Forum Policies
+  
+  
+</h2>
+    
+
+<p>Many of the benefits of forums only apply if we all use it appropriately and
+effectively, and put in the work to maintain its quality.</p>
+<h3 id="categories">
+  
+  
+    <a href="index.html#categories" class="anchor-heading" aria-labelledby="categories"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Categories
+  
+  
+</h3>
+    
+
+<p>We have many students in CS 61B, and will almost certainly have many posts.
+To organize these posts, we use <em>Ed categories</em>. To make a post or ask a
+question on Ed, you <strong>must</strong> select an appropriate category.</p>
+
+<p>An overview of the categories is as follows:</p>
+
+<dl>
+  <dt>Logistics</dt>
+  <dd>General questions about what’s happening in the course.</dd>
+  <dt>Lectures</dt>
+  <dd>Questions about each lecture’s content. This category has a template asking
+for the lecture nubmers.</dd>
+  <dt>Projects, Labs, Homeworks</dt>
+  <dd>Questions and requests for debugging help on the assignments. These
+categoies have subcategories for each assignment in. Each subcategory also
+has subsubcategories, for distinguishing between private debugging questions
+(Gitbugs) and various kinds of public questions. For example,
+<code class="language-plaintext highlighter-rouge">Projects - Project 1 - Gitbugs</code>, and
+<code class="language-plaintext highlighter-rouge">Projects - Project 1 - Conceptual (Circular Buffer)</code>.</dd>
+  <dt>Discussions</dt>
+  <dd>Questions and conceptual clarifications on discussion worksheets. This
+category has a subcategory for each week.</dd>
+  <dt>Exams</dt>
+  <dd>Questions about exam logistics, past exams, and anything related to exams.
+As we get closer to the exam, we will add additional categories for asking
+questions about previous exams.</dd>
+  <dt>Miscellaneous</dt>
+  <dd>Any questions about the course that doesn’t fit into the above categories
+can go in here.</dd>
+  <dt>Social</dt>
+  <dd>Looking to form a study group or hold a study session? Post here.</dd>
+  <dt>External Announcements</dt>
+  <dd>Any postings from external groups not affiliated with CS 61B will be posted
+in this category. Posts in this category must be approved by course staff.</dd>
+</dl>
+<h3 id="how-to-ask-and-how-to-not-ask-questions">
+  
+  
+    <a href="index.html#how-to-ask-and-how-to-not-ask-questions" class="anchor-heading" aria-labelledby="how-to-ask-and-how-to-not-ask-questions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> How to Ask, and How to Not Ask Questions
+  
+  
+</h3>
+    
+
+<p>Asking for help on Ed is unfortunately slower, as we can’t spend all our time
+on the forum. Before you ask for help, you should try to answer your
+question yourself! We also want you to learn how to help yourself, which in
+some cases can be slower than asking staff, but will be more beneficial in the
+long run. Some resources that can help you do that are:</p>
+
+<dl>
+  <dt>Previous questions on Ed.</dt>
+  <dd>You can search within a category with Ed’s search, so that you don’t have to
+look through everything.</dd>
+  <dt>Official course materials</dt>
+  <dd>The assignment spec is a great source of
+information. Additionally, each assignment will have an <strong>FAQ</strong> linked from
+the top of the page. The FAQ will be updated while the assignment runs, so
+check back often! Course staff will also create several supplemental
+materials for assignments while students work on them, as we find where
+students are struggling.</dd>
+  <dt>Google or a search engine of your choice.</dt>
+  <dd>While
+searching Google might not seem like “independent programming”, professional
+programmers often search the web for solutions to problems similar to the one
+they are trying to solve. Learning good search techniques now will pay off
+later in the semester and into your careers. <strong>An exception to this is
+searching for solution code. Don’t do that.</strong></dd>
+</dl>
+
+<p><strong>However, you shouldn’t spend hours on the same problem</strong>, and should ask for
+help, possibly on the forum. When you do ask for help on Ed, here are some
+things that you can do to make sure that the response you receive is more
+likely to resolve your question.</p>
+
+<dl>
+  <dt>Explain what your problem is, and what you think will help you proceed.</dt>
+  <dd>Course staff are not mind-readers. We won’t magically know what’s wrong, or
+what you want answered.</dd>
+</dl>
+
+<p>If your question doesn’t contain enough information for us to be able to
+answer, or doesn’t show us what you’ve tried so far, we will ask. You’ll get a
+slower answer overall, but you’ll also learn how you can improve your future
+questions to get a quicker response.</p>
+
+<p>Similarly, there are some things that you should <strong>not</strong> do to get a response:</p>
+
+<dl>
+  <dt>Asking for “a hint” or “the answer”</dt>
+  <dd>We don’t know what kind of hint you want or what you
+are trying to accomplish. We don’t even know if you’ve worked on the problem,
+or if you saw the error and immediately asked.</dd>
+</dl>
+
+<p>We will not give the answer, and will instead ask a follow-up question to
+clarify what you are asking for.</p>
+
+<dl>
+  <dt>Saying that “I don’t understand anything”</dt>
+  <dd>It’s very hard, often impossible, to give an answer to this. Instead, you
+should try to figure out a starting point for what you don’t understand.
+If you can’t get started, that’s still a valid question to ask – and is very
+different from “anything”.</dd>
+</dl>
+
+<p><cite>Some material here drawn from Adam Blank’s guide on
+<a href="https://countablethoughts.com/documents/HowToAskForHelp.pdf">“How to Ask For Help”</a>.</cite></p>
+<h4 id="conceptual-posts">
+  
+  
+    <a href="index.html#conceptual-posts" class="anchor-heading" aria-labelledby="conceptual-posts"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Conceptual Posts
+  
+  
+</h4>
+    
+
+<p>Often, you’ll have a question about a conceptual idea from lab or a project,
+or a problem on a discussion, past exam, or outside resource. Here are some
+guidelines that you should follow to get a helpful answer more quickly:</p>
+
+<dl>
+  <dt>Don’t ask if your solution “is correct”</dt>
+  <dd>Instead, explain why you think your solution is correct, and point out any
+pieces that you’re not sure about. Reconstructing your argument is a lot of
+work for staff to try to go through, so explaining your train of thought to
+us helps you get a better answer and address any misconceptions you may have.</dd>
+</dl>
+<h4 id="private-debugging-help-or-gitbugs">
+  
+  
+    <a href="index.html#private-debugging-help-or-gitbugs" class="anchor-heading" aria-labelledby="private-debugging-help-or-gitbugs"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Private Debugging Help, or Gitbugs
+  
+  
+</h4>
+    
+
+<p>Sometimes, you may run into a problem where you need to show course staff your
+code. However, per our <a href="../../policies.html#project-collaboration">collaboration policy</a>,
+you may not post code publicly, including on public Ed posts. Instead, you
+can use the Gitbugs category for each assignment to make a private debugging
+post.</p>
+
+<p>Here are some guidelines that apply to asking private debugging questions
+specifically:</p>
+
+<dl>
+  <dt>Link your GitHub repo and push.</dt>
+  <dd>Sometimes (but not always), we will look at your code. This ensures that we
+can easily look at the most up-to-date version.</dd>
+  <dt>Provide a screenshot of the section of your code you have a question about.</dt>
+  <dd>We will require that you provide a screenshot, so that we know what section
+of code you’re looking at.</dd>
+  <dt>When describing your bug, be specific.</dt>
+  <dd>Descriptions like “everything”, “it isn’t working”, “it fails the autograder”,
+“I don’t know”, etc. are not specific. We cannot help without knowing what’s
+wrong. At a <em>minimum</em>, you should tell us what test is failing, or what error
+you’re seeing, though this alone doesn’t guarantee that the first response
+will be helpful.</dd>
+</dl>
+
+<p>If you can identify a smaller piece of code, such as a
+single method or a few lines, that are not behaving as you expect, that’s
+wonderful – tell us what you’ve found, and what you’re confused about!</p>
+
+<dl>
+  <dt>We expect that you’ve tried to debug. Tell us what you’ve learned.</dt>
+  <dd>This goes hand-in-hand with the above guideline! If we can’t tell that you’ve
+tried to debug, we will not debug for you, and instead ask what you’ve tried.
+This can be print debugging, or using the IntelliJ debugger. Screenshots
+can be very helpful here, as long as you explain what we’re looking at!</dd>
+</dl>
+<h2 id="ed-tips-and-tricks">
+  
+  
+    <a href="index.html#ed-tips-and-tricks" class="anchor-heading" aria-labelledby="ed-tips-and-tricks"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Ed Tips and Tricks
+  
+  
+</h2>
+    
+
+<dl>
+  <dt>Change your email settings to receive fewer emails.</dt>
+  <dd>In the upper right corner, click on your avatar, then “Settings”, and then
+hit “Notifications” to adjust the number of emails you receive from Ed.
+Announcement emails will always reach you.</dd>
+  <dt>Follow posts you want to know more about.</dt>
+  <dd>If you see an ongoing question you’d like to keep track of, you can either:</dd>
+</dl>
+
+<ul>
+  <li>Click the “Watch” option at the top right of the question to receive email
+updates, or</li>
+  <li>“Star” the post at the top right of the question to keep it pinned on
+your Ed.</li>
+</ul>
+
+<dl>
+  <dt>Refer to other questions, answers, and comments</dt>
+  <dd>Using #N (for example, #1 or #1c) is a clean way to refer to other threads.
+You can use this to provide an answer to a repeated question, or to point to
+things that you’ve tried but haven’t worked.</dd>
+  <dt>Make code (and stack traces) readable.</dt>
+  <dd>Use the runnable code button in the editor toolbar so that your code looks
+nice. Syntax-highlighted code is much easier to read than code as text.</dd>
+</dl>
+
+<p>If you have a question about a personal matter that you don’t want other
+students to see, please make a private post. Private posts are only seen
+by the course staff. If you want only the head TAs and Josh to see your
+question, please email cs61b@berkeley.edu.</p>
+<h1 id="ed-guide-for-new-users">
+  
+  
+    <a href="index.html#ed-guide-for-new-users" class="anchor-heading" aria-labelledby="ed-guide-for-new-users"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Ed Guide for New Users
+  
+  
+</h1>
+    
+
+<p>Authors: Omar Khan, Shreyas Kompalli</p>
+
+<p>This is a guide for students new to the course forum Ed. It’ll cover how to
+effectively ask questions and how to efficiently search for what you want.</p>
+
+<p>At a high level, Ed is an education-centric forum that allows you to asynchronously collaborate with other students and receive guidance from staff. Ed takes some elements from
+StackOverflow. For those who are unfamiliar, StackOverflow is a public forum
+where people ask questions related to programming and software engineering.
+Full time software engineers use this all the time to get quick and reliable
+answers, so you should feel free to as well!
+Check out <a href="https://stackoverflow.com/questions/3990093/java-inheritance">this</a>
+link for an example question posted to StackOverflow. Now let’s get into Ed.</p>
+
+<p>After reading this guide, you should feel familiar with Ed and able to make the
+most out of it. Let’s get into Ed specifics.</p>
+<h2 id="landing-page">
+  
+  
+    <a href="index.html#landing-page" class="anchor-heading" aria-labelledby="landing-page"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Landing Page
+  
+  
+</h2>
+    
+
+<p>When you first visit Ed, you’ll see a bunch of posts on the left side of your screen. All
+important announcements and index posts will be <strong>pinned</strong> so that you don’t
+need to spend too much time looking for them. That little blue dot on the left
+side of the post means that you haven’t viewed that post, so if you see that
+next to a pinned post you should definitely read it thoroughly. Here is what
+the landing page of CS 61BL looks like (the summer version of the course).</p>
+
+<p><img src="../../assets/resources/using-ed-img/landing-page.webp" alt="image" /></p>
+
+<p>Remember that Ed is the primary point of contact between us, so make sure you
+read it every day, and pay special attention to it during and around due dates
+in the case that any deadlines change or we have any important announcements.</p>
+
+<p>Now we’ll dive into the
+specifics of how Ed works, starting with Questions.</p>
+<h3 id="question">
+  
+  
+    <a href="index.html#question" class="anchor-heading" aria-labelledby="question"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Question
+  
+  
+</h3>
+    
+
+<p>You can create a question or note (called a “post” on Ed) by clicking the big
+blue ‘New Thread’ button in the top left corner and then selecting what you
+want to create.</p>
+
+<p>Here is what an unanswered question on Ed looks like:</p>
+
+<p><img src="../../assets/resources/using-ed-img/unanswered.webp" alt="image" /></p>
+
+<p>You’ll see that Omar has posted a question that he wants help with.</p>
+
+<p>In Ed, there is more distinction between follow-ups under a thread.
+If I had a clarification on the question, I can comment on the question. This is
+<strong>not</strong> answering the question, so instructors and TAs will still see the
+question as unanswered. You can see that Allyson has asked
+for the worksheet Omar’s question is from.</p>
+
+<p>Instructors
+and course staff can endorse questions and answers.
+Only staff and instructors can endorse, so you can have more confidence that the
+answer is correct on this one. If you see an endorsed question, you may want
+to check it out as it may be particularly insightful!</p>
+
+<p><img src="../../assets/resources/using-ed-img/clarified.webp" alt="image" /></p>
+<h3 id="answers">
+  
+  
+    <a href="index.html#answers" class="anchor-heading" aria-labelledby="answers"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Answers
+  
+  
+</h3>
+    
+
+<p><img src="../../assets/resources/using-ed-img/answered.webp" alt="image" /></p>
+
+<p>You can see that Akshit has answered Omar’s question and has even gotten his
+answer endorsed, liked, and has a green check mark. We’ve already talked about
+endorsement, it just means that an instructor or TA has verified this answer
+is trustworthy. Everyone can like a post, comment, or an answer, both students
+and staff. You can think of likes as +1s or a thank you!</p>
+
+<p><strong>Resolving Posts</strong></p>
+
+<p>The green checkmark next to an answer indicates that it has resolved the question. Only one answer can receive the green checkmark, so
+it will be given to the best answer on the post.</p>
+
+<p>When a staff member answers a
+question, it is automatically marked with a green checkmark. The person that made the post can also toggle the checkmarks.</p>
+
+<p>If you post a question on Ed, and get an answer from one of your fellow
+students, be sure to mark it with the green checkmark! Some student answers are
+just as good as ours!</p>
+
+<p>On the other hand, if an answer does not fully resolve your question, feel free to unmark it! Staff filters for unresolved posts when answering Ed questions, so this will allow your question to be discovered again.</p>
+<h3 id="follow-ups-and-comments">
+  
+  
+    <a href="index.html#follow-ups-and-comments" class="anchor-heading" aria-labelledby="follow-ups-and-comments"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Follow-ups and Comments
+  
+  
+</h3>
+    
+
+<p>You can also create a follow-up on an answer in a hierarchical form.
+With these hierarchical comments, it is much easier
+to track what’s going on and answer individual follow-up questions. You can see
+that Omar has asked a follow-up question on Akshit’s answer.</p>
+
+<p>You can use “Reply” to follow up with a nested, hierarchical comment, or
+“Comment” to start a different comment chain.</p>
+<h3 id="summary-of-icons">
+  
+  
+    <a href="index.html#summary-of-icons" class="anchor-heading" aria-labelledby="summary-of-icons"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Summary of Icons
+  
+  
+</h3>
+    
+
+<p>Here is a reference table if you get confused.</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Icon</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/green-check.webp" alt="image" /></td>
+      <td>Given to just one answer on a Question, usually the best answer.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/endoresement.webp" alt="image" /></td>
+      <td>Only given by a TA or instructor that thinks the post/answer is trustworthy.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/like.webp" alt="image" /></td>
+      <td>Given by students or staff, not significant of anything but makes you feel better.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/watch.webp" alt="image" /></td>
+      <td>Sets this post to be watched by you. You’ll receive email updates on any activity on this post.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/star.webp" alt="image" /></td>
+      <td>Stars this post on your account. Allows you to use a filter to see your starred post for quick access. You might consider starring helpful posts so you can easily and quickly find them.</td>
+    </tr>
+  </tbody>
+</table></div>
+<h2 id="creating-an-ed-question">
+  
+  
+    <a href="index.html#creating-an-ed-question" class="anchor-heading" aria-labelledby="creating-an-ed-question"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Creating an Ed question
+  
+  
+</h2>
+    
+
+<p>Now that we’ve talked about how to “read” an Ed post, we’ll talk about how to
+write one.</p>
+<h3 id="categories-1">
+  
+  
+    <a href="index.html#categories-1" class="anchor-heading" aria-labelledby="categories-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Categories
+  
+  
+</h3>
+    
+
+<p>Categories help the forum stay organized. By
+adding a category to your post, you are helping TAs find your post and answer
+it quicker, and also helping other students find your post and learn from
+the answers.</p>
+
+<p>The first thing you’ll do when you create a post is to select the right
+category for it and, if applicable, the right subcategory and subsubcategory.</p>
+
+<p>Here is an example where I will ask a question about Pset (problem set) 2:</p>
+
+<p><img src="../../assets/resources/using-ed-img/categories.webp" alt="image" /></p>
+
+<p>To view only posts in a specific category, subcategory, or subsubcategory,
+click on the category in the left sidebar.</p>
+<h3 id="meta-options">
+  
+  
+    <a href="index.html#meta-options" class="anchor-heading" aria-labelledby="meta-options"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Meta Options
+  
+  
+</h3>
+    
+
+<p>You’ll have some options under your post if you want to ask
+anonymously or make your question private where all staff members can see.
+Feel free to ask anonymously. We do discourage asking private questions, as
+collective knowledge is helpful, but won’t stop you.</p>
+<h3 id="formatting-options">
+  
+  
+    <a href="index.html#formatting-options" class="anchor-heading" aria-labelledby="formatting-options"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Formatting Options
+  
+  
+</h3>
+    
+
+<p>You’ve probably already noticed the generous
+formatting options on Ed. This includes adding pictures, using markdown,
+using LaTeX, and more traditional formatting like bolding/underlining. This
+makes the question much nicer to read, which makes it more obvious and clear
+what you are trying to ask. Here is the bar where all the formatting options
+are located:</p>
+
+<p><img src="../../assets/resources/using-ed-img/ed-format-bar.webp" alt="image" /></p>
+
+<p>And here is a table describing how to use each formatting option.</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Icon</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/ed-text-type.webp" alt="drawing" width="800" /></td>
+      <td>Select this to get a drop-down menu of different text types, including code. There isn’t an explicit markdown option, just use the backticks ` as you normally would.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/bold-italics-underline.webp" alt="image" /></td>
+      <td>These are your typical bold, italics, and underline options.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/code.webp" alt="image" /></td>
+      <td>This is a shortcut to the code text type. Instead of using this, you should use the interactive code block.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/link.webp" alt="image" /></td>
+      <td>You can use this to <a href="https://techterms.com/definition/hyperlink#:~:text=A%20hyperlink%20is%20a%20word,way%20from%20page%20to%20page.">hyperlink</a> text in your post. Highlight the word or words you want to hyperlink, click this button, and paste the link.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/bullets-numbered.webp" alt="image" /></td>
+      <td>Bulleted lists and numbered lists.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/image-icon.webp" alt="image" /></td>
+      <td>Inserts an image into the post.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/video.webp" alt="image" /></td>
+      <td>Embeds a video, you shouldn’t ever have to do this.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/attach-file.webp" alt="image" /></td>
+      <td>Attaches a file to the post. You shouldn’t ever have to do this.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/latex.webp" alt="image" /></td>
+      <td>Click this to insert LaTeX formatted math into your post. Unfortunately, this will create its own line. Luckily, if you know LaTeX, you can just insert your single $ signs and go for it. If you don’t, it’s really simple to learn since the only thing you’ll ever do in LaTeX is easy asymptotics stuff. You can learn this within 20 minutes.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/interactive-code.webp" alt="image" /></td>
+      <td>Insert an interactive code block. Nicer than the normal code block since this has better syntax highlighting and things like automatic curly brace insertions, which is nice for Java. The language (on the right side) should be set to Java by default, but if it isn’t go ahead and change it. You’ll see 2 checkboxes for “Line Numbers” and “Runnable”. There isn’t any reason to not have line numbers, so keep those on. The runnable option allows us to run your code, but unfortunately it really doesn’t work well with Java (you need to define a class with <code class="language-plaintext highlighter-rouge">main</code>), so uncheck this box.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/web-stuff.webp" alt="image" /></td>
+      <td>Not useful for this class. Allows you to display basic website stuff.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/draw.webp" alt="image" /></td>
+      <td>You can draw things with this.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="../../assets/resources/using-ed-img/preview.webp" alt="image" /></td>
+      <td>Used to preview your post to make sure all your fancy elements render properly.</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<p>In the following example, you can see that Omar has asked a question about a
+specific problem from a specific Problem Set and has categorized it properly.
+Now, in the future, if another student is going through Pset 2 and has some
+questions they can simply use the filter to see questions in that subcategory
+and not have to ask duplicate questions.</p>
+
+<p><img src="../../assets/resources/using-ed-img/example-question.webp" alt="image" /></p>
+<h2 id="ed-megathreads">
+  
+  
+    <a href="index.html#ed-megathreads" class="anchor-heading" aria-labelledby="ed-megathreads"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Ed Megathreads
+  
+  
+</h2>
+    
+
+<p>We typically have very long threads (that we called “megathreads”) to
+aggregate all questions and clarifications for a specific topic. Megathreads
+are nice because you can browse through questions other students had on the
+assignment to get a good “birds eye view” of the specific parts your fellow
+students were getting stuck on. There is a megathread for each assignment and
+thus all questions about that assignment exist in one place, and you can
+then use your browser’s search (CMD + F) to find something more specific. Each
+follow-up can be marked as <code class="language-plaintext highlighter-rouge">Resolved</code> or <code class="language-plaintext highlighter-rouge">Unresolved</code> to alert the TAs that a
+question needs answering. This way, your question won’t get lost and we’ll
+always know if the megathread needs our attention.</p>
+
+<p>In CS61B, we will have a megathread for each assignment;
+you’re to post any and all questions you have about the assignment there. These
+megathreads will be monitored closely by staff to ensure that all questions are
+answered and nobody’s question got “lost” in the sea of other student questions.</p>
+
+<p>But we ask that you <strong>please search for your question before asking</strong> to reduce
+the clutter and make Ed as effective as possible for your fellow students and
+TAs.</p>
+
+<p>Here is what a megathread looks like in Ed:</p>
+
+<p><img src="../../assets/resources/using-ed-img/megathread.webp" alt="image" /></p>
+
+<p>You’ll see that the top-level comments have a special flag that says <code class="language-plaintext highlighter-rouge">Resolved</code>
+or <code class="language-plaintext highlighter-rouge">Unresolved</code>: this lets the TA know whether or not this comment needs
+attention. <strong>It’s important to mark your comment as <code class="language-plaintext highlighter-rouge">Unresolved</code> after you add to
+an existing comment, otherwise TAs won’t know that you want that question
+answered!</strong> You can mark a comment as <code class="language-plaintext highlighter-rouge">Unresolved</code>/<code class="language-plaintext highlighter-rouge">Resolved</code> by clicking the
+<code class="language-plaintext highlighter-rouge">Unresolved</code>/<code class="language-plaintext highlighter-rouge">Resolved</code> button which will mark it as the opposite thing.</p>
+
+<p>To add a new comment here, just start typing in the text-box right under the
+post that says “Add comment”:</p>
+
+<p><img src="../../assets/resources/using-ed-img/megathread-comment.webp" alt="image" /></p>
+
+<p>You have the ability to ask your question anonymously: if you do, you’ll be
+given an anonymous animal as your pseudonym (you can see that a student asked
+anonymously and was donned the name “Anonymous Okapi”) that we can use to
+reference you in follow-ups.</p>
+
+<p>By default, when you post your comment it’ll be marked as <code class="language-plaintext highlighter-rouge">Unresolved</code>.</p>
+
+<p>We’ll have our megathreads pinned, so you can find them under the “Pinned Posts”
+section that we talked about above.</p>
+
+<p>You can also sort the comments on a megathread:</p>
+
+<p><img src="../../assets/resources/using-ed-img/megathread-sort.webp" alt="image" /></p>
+
+<p>If you sort by “Top”, you’l get the comments in order of most liked to least
+liked. This will help you find comments that fellow students found most helpful
+in completing the assignment. Don’t forget to like comments you find helpful to
+make this sort even better!</p>
+
+<p>If you sort by “Unresolved”, you’ll get the unresolved comments first and then
+the resolved comments afterwards. This mainly helps TAs answer all the
+comments that need attention, but if you like to help answer questions too
+you’re more than welcome to help us out :)</p>
+<h2 id="search">
+  
+  
+    <a href="index.html#search" class="anchor-heading" aria-labelledby="search"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Search
+  
+  
+</h2>
+    
+
+<p>Remember how we said Ed search was great? Let’s go over how to use all the
+search features as well as good search strategies.</p>
+
+<p>Here is what the results look like for a good search:</p>
+
+<p><img src="../../assets/resources/using-ed-img/ed-search.webp" alt="image" /></p>
+
+<p>Let’s go over how to use all the search features as well as good search
+strategies:</p>
+<h3 id="using-keywords">
+  
+  
+    <a href="index.html#using-keywords" class="anchor-heading" aria-labelledby="using-keywords"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Using Keywords
+  
+  
+</h3>
+    
+
+<p>This is the red (top-left) box on the image above.
+Ed search is a lot like Google search. If you had a general question on how to
+do recursive runtime analysis, you could search “How do I calculate runtime on
+recursive functions?”. Instead, you could also search for the key words in this
+well formatted question, so something like “recursive runtime analysis”, which
+would give you even better results. When you write a well formatted question
+like before, Google actually extracts the keywords for you. While we can’t
+write natural language questions into Ed, given the right keywords it does a
+very good job. Ed is able to search not only for post/question titles,
+but also down to sub comments level. As you type a new post title, it will also
+show you related posts according to what you type. Make sure to check them out,
+as a question you have in mind may have already been posed!</p>
+
+<p>These next two features will definitely help you search, but often times the
+right key words will make the right post jump to the top of the results.</p>
+<h3 id="search-filters">
+  
+  
+    <a href="index.html#search-filters" class="anchor-heading" aria-labelledby="search-filters"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Search Filters
+  
+  
+</h3>
+    
+
+<p>This is the green (top-right) box on the image above.</p>
+
+<p>If you’re looking for a question with an answer you can trust, you might want
+to filter for only endorsed posts. This will limit your search to only posts
+that have been endorsed by staff. Similarly, if you are a helpful student and
+like to answer other student’s questions, you can search for unanswered or
+unresolved questions and help them. Thanks in advance!</p>
+<h3 id="search-categories">
+  
+  
+    <a href="index.html#search-categories" class="anchor-heading" aria-labelledby="search-categories"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Search Categories
+  
+  
+</h3>
+    
+
+<p>This is the purple (center-right) box on the image above.</p>
+
+<p>Like previously mentioned, you can limit your search to just posts in particular
+categories. So if there was an inheritance question on midterm 1 that you had
+questions about you can filter your search to posts with that subcategory.</p>
+<h3 id="search-date-ranges">
+  
+  
+    <a href="index.html#search-date-ranges" class="anchor-heading" aria-labelledby="search-date-ranges"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Search Date Ranges
+  
+  
+</h3>
+    
+
+<p>This is the blue (lower-right) box on the image above.</p>
+
+<p>You can also specify a range of dates that you want to search for. Less useful,
+but it exists if you need it.</p>
+<h2 id="closing">
+  
+  
+    <a href="index.html#closing" class="anchor-heading" aria-labelledby="closing"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Closing
+  
+  
+</h2>
+    
+
+<p>The guide is good for letting you know what things Ed offers, but the best way
+to learn it is to just use the thing! Remember to keep up the Ed etiquette so that all
+students can benefit from the wonderful questions you all ask :)</p>
+
+<p>Ed has some official resources that are subsets of what’s covered in this page:</p>
+
+<ul>
+  <li><a href="https://edstem.org/us/help/student-discussion">https://edstem.org/us/help/student-discussion</a></li>
+  <li><a href="https://edstem.org/quickstart/ed-discussion.pdf">https://edstem.org/quickstart/ed-discussion.pdf</a></li>
+</ul>
+<h1 id="gitbugs">
+  
+  
+    <a href="index.html#gitbugs" class="anchor-heading" aria-labelledby="gitbugs"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Gitbugs
+  
+  
+</h1>
+    
+
+<p>Author: Omar Khan</p>
+
+<p>Gitbugs are your way to get debugging help on your assignments (labs, homeworks,
+projects). Submitting a Gitbug is as simple as you creating a private Ed post,
+following a particular template, and then waiting to get a response. After you
+submit your Gitbug, all staff members will see it and we can clone your GitHub
+repository on our own computers, look for the bug, and then give you a
+hint/explain where you should be looking. We try to get a 24 hour turnaround,
+but please be patient with us the day before or the day of a deadline as we get
+a huge influx during those times.</p>
+<h2 id="when-to-make-a-gitbug">
+  
+  
+    <a href="index.html#when-to-make-a-gitbug" class="anchor-heading" aria-labelledby="when-to-make-a-gitbug"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> When to make a Gitbug
+  
+  
+</h2>
+    
+
+<p>A Gitbug should be the last resort for you. The
+assumption is that you’ve tried to debug your code and even after this you
+couldn’t find the bug. For example, if you’re completing a method in a project
+and failing the provided/graded test for it, do not immediately submit a Gitbug!
+Developing debugging skills is an official part of the course, so we do expect
+you to run into bugs and solve them on your own. On the other side of things, we
+don’t want you to be stuck on a bug for 10 hours, so we have Gitbugs to help you
+get unstuck. We trust that you can make the decision for yourself as to whether
+you’ve put in honest effort looking for the bug, but be warned that if it is
+obvious you haven’t tried debugging your own code, we will reject the Gitbug.</p>
+<h2 id="making-a-gitbug">
+  
+  
+    <a href="index.html#making-a-gitbug" class="anchor-heading" aria-labelledby="making-a-gitbug"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Making a Gitbug
+  
+  
+</h2>
+    
+
+<p>When making a Gitbug, please follow <strong>these exact</strong> steps to
+keep everything organized for us and make sure we don’t reject your Gitbug:</p>
+
+<ol>
+  <li>Select the big blue ‘New Thread’ button in the top left corner</li>
+  <li>Select ‘Question’ as your type of post</li>
+  <li>Give a useful title to your Gitbug post, for example: “Project 1: Array
+upsizing works, but downsizing throws ArrayIndexOutOfBoundException errors”</li>
+  <li>Select the Category as Gitbug and the Subcategory as whichever assignment
+this is</li>
+  <li>Choosing the Gitbug category on Ed should show you a template for the
+question asking you important questions to help us debug your code. If you don’t
+see it, you didn’t do step 2. It should look like the below screenshot.</li>
+  <li>Fill out the questions in <strong>full sentences</strong> and if the questions tell you to
+do something then make sure you do it (i.e. ensuring you’ve pushed your code to
+GitHub). We will automatically reject Gitbugs without thorough explanations.</li>
+  <li>Make sure you’ve made your post <strong>private</strong></li>
+  <li>Post your Gitbug!</li>
+</ol>
+
+<p><img src="../../assets/resources/using-ed-img/gitbug-template.webp" alt="Example templpate" /></p>
+
+<p>It’s important that you fill out the Gitbug template exactly and put in
+reasonable effort here, otherwise we won’t have all the important information to
+help you solve the problem. <strong>We will not be helping with low effort Gitbugs and
+will reject them.</strong> You should be spending anywhere from 5-10 minutes creating
+your Gitbug to ensure it is of high quality. The better your Gitbug is, the
+faster we can solve it and we can reciprocate with a high quality answer too
+since we have all the details neccessary to see tell what errors you
+made/misconceptions you have.</p>
+
+<p><strong>It’s highly unlikely that a screenshot will make your Gitbug better, so please
+don’t add any screenshots unless you truly think it’s useful.</strong> Remember that
+we’ll be able to see your code when we pull your GitHub repository, so no need
+to screenshot IntelliJ or something like that. If you had an error message that
+you think is important to the bug, please copy and paste that error message into
+the post so that it’s easily searchable.</p>
+
+<p>It’s really important that you have a good description of what the bug is and
+what you’ve done to try and solve it so far. Here is an example of Omar doing a
+bad job:</p>
+
+<p><img src="../../assets/resources/using-ed-img/bad-gitbug.webp" alt="Bad Gitbug" /></p>
+
+<p>Notice how Omar doesn’t even address the question. He should add to his response
+the specific test that failed (i.e. number) and maybe even what the error
+message is. Also, it’s clear that Omar didn’t try to debug since he said he just
+looked at the code. Maybe he did try and debug but just didn’t include it: even
+if he thinks his debugging was useless, he should still include it as it can
+give really good insight/hints into what is going on, and it’ll save the TA a
+ton of time. Sorry for Omar, but this Gitbug gets rejected.</p>
+
+<p>Now let’s look at what a good Gitbug looks like:</p>
+
+<p><img src="../../assets/resources/using-ed-img/good-gitbug.webp" alt="Good Gitbug" /></p>
+
+<p>Omar did a great job here! There is a clear test that he is failing and he has
+even provided the error message for us. There is also ample evidence that he has
+tried to debug the code and even some hypothesis that he has plus things he
+already tried. Omar has also provided specific lines he has placed breakpoints
+at as well as what they saw when they debugged. This saves the TA time and Omar
+will get a very clear response on what the bug is since his question is so
+specific. Great job Omar!</p>
+
+<p>After submitting your Gitbug you just sit tight and continue working on
+something else in the meanwhile.</p>
+
+<p>Additionally, if you submit a Gitbug and were able to resolve it before we
+responded, update the post by leaving a comment that the bug is resolved. We
+will not process any of your future Gitbugs if we clone you code and see that
+you have already resolved a bug without updating your Gitbug post.</p>
+
+<p>Once your Gitbug has been answered, do not reply. We won’t be doing any back and
+forth on Gitbugs. If you still have another bug, you should instead make a new
+Gitbug. The one exception is if you want to say “thank you” or something like
+that :)</p>
+
+  </div>
+</div>
+
+          
+
+          
+            
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="../../assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+

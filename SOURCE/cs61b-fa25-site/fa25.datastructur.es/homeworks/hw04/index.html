@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  <link rel="stylesheet" href="../../assets/css/just-the-docs-default.css">
+
+  <link rel="stylesheet" href="../../assets/css/just-the-docs-head-nav.css" id="jtd-head-nav-stylesheet">
+
+  <style id="jtd-nav-activation">
+  
+
+    .site-nav > ul.nav-list:first-child > li > a,
+    
+    .site-nav > ul.nav-list:first-child > li > ul > li:not(:nth-child(4)) > a,
+    .site-nav > ul.nav-list:first-child > li > ul > li > ul > li a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:not(:first-child) a,
+    .site-nav li.external a {
+      background-image: none;
+    }
+
+    .site-nav > ul.nav-list:first-child > li:nth-child(5) > ul > li:nth-child(4) > a {
+      font-weight: 600;
+      text-decoration: none;
+    }.site-nav > ul.nav-list:first-child > li:nth-child(5) > button svg,
+    .site-nav > ul.nav-list:first-child > li:nth-child(5) > ul > li:nth-child(4) > button svg {
+      transform: rotate(-90deg);
+    }.site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(5) > ul.nav-list,
+    .site-nav > ul.nav-list:first-child > li.nav-list-item:nth-child(5) > ul.nav-list > li.nav-list-item:nth-child(4) > ul.nav-list {
+      display: block;
+    }
+  </style>
+
+  
+
+  
+    <script src="../../assets/js/vendor/lunr.min.js"></script>
+  
+
+  <script src="../../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+
+
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>HW04: IntLists | CS 61B Fall 2025</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="HW04: IntLists" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Data Structures at UC Berkeley" />
+<meta property="og:description" content="Data Structures at UC Berkeley" />
+<link rel="canonical" href="../hw04.html" />
+<meta property="og:url" content="https://fa25.datastructur.es/homeworks/hw04/" />
+<meta property="og:site_name" content="CS 61B Fall 2025" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="HW04: IntLists" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Data Structures at UC Berkeley","headline":"HW04: IntLists","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://fa25.datastructur.es/assets/images/bee.webp"}},"url":"https://fa25.datastructur.es/homeworks/hw04/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link
+  rel="preload"
+  href="../../assets/css/just-the-docs-dark.css"
+  as="style"
+>
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link
+  id="jtdThemeCSS"
+  rel="stylesheet"
+  href="../../assets/css/just-the-docs-default.css"
+>
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function () {
+    var cssFileHref = (
+      document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')
+    ).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  };
+
+  jtd.setTheme = function (theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  };
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    document.documentElement.setAttribute('data-theme', setDark ? 'dark' : 'default');
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+
+    if (typeof calendar !== 'undefined') {
+      calendar.setColorScheme(setDark ? 'dark' : 'light');
+    }
+  };
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+
+  // Easter egg: Play audio between 7 PM and 2 AM with 1/20000 chance after user interaction
+  let hasInteracted = false;
+  let easterEggChecked = false;
+
+  function checkEasterEgg() {
+    if (easterEggChecked || !hasInteracted) return;
+    easterEggChecked = true;
+
+    const now = new Date();
+    const hour = now.getHours();
+    
+    // Check if time is between 7 PM (19:00) and 2 AM (2:00)
+    const isNightTime = hour >= 19 || hour < 2;
+    
+    console.log(`[Easter Egg] Time check: ${hour}:${now.getMinutes()}, isNightTime: ${isNightTime}`);
+    
+    const randomValue = Math.random();
+    const threshold = 1/2000;
+    console.log(`[Easter Egg] Random value: ${randomValue}, threshold: ${threshold}, triggered: ${randomValue < threshold}`);
+    
+    if (isNightTime && randomValue < threshold) {
+      console.log('[Easter Egg] Attempting to play audio...');
+      const audioUrl = 'https://joshh.ug/4hxjhb.mp3';
+      const audio = new Audio(audioUrl);
+      audio.volume = 0.3;
+      
+      audio.addEventListener('loadstart', () => console.log('[Easter Egg] Audio loading started'));
+      audio.addEventListener('canplay', () => console.log('[Easter Egg] Audio can play'));
+      audio.addEventListener('play', () => console.log('[Easter Egg] Audio playback started'));
+      audio.addEventListener('ended', () => console.log('[Easter Egg] Audio playback ended'));
+      audio.addEventListener('error', (e) => {
+        console.error('[Easter Egg] Audio error:', e);
+        console.error('[Easter Egg] Audio error details:', {
+          code: e.target?.error?.code,
+          message: e.target?.error?.message,
+          url: audioUrl
+        });
+      });
+      
+      audio.play().catch((error) => {
+        console.error('[Easter Egg] Audio play failed:', error);
+        console.error('[Easter Egg] Play error details:', {
+          name: error.name,
+          message: error.message,
+          url: audioUrl
+        });
+      });
+    }
+  }
+
+  function handleUserInteraction() {
+    if (!hasInteracted) {
+      hasInteracted = true;
+      console.log('[Easter Egg] User interaction detected, checking easter egg...');
+      checkEasterEgg();
+    }
+  }
+
+  // Listen for various user interactions
+  ['click', 'keydown', 'touchstart'].forEach(eventType => {
+    document.addEventListener(eventType, handleUserInteraction, { once: true });
+  });
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link
+  rel="stylesheet"
+  href="../../assets/katex/katex.min.css"
+>
+<script defer src="../../assets/katex/katex.min.js"></script>
+<script>
+  function renderKaTeX() {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true },
+      ],
+    });
+  }
+</script>
+<script
+  defer
+  src="../../assets/katex/contrib/auto-render.min.js"
+  onload="renderKaTeX();"
+></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="../hw04.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="svg-link" viewBox="0 0 24 24">
+  <title>Link</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+  </svg>
+</symbol>
+
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+  <title>Menu</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+    <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</symbol>
+
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+  <title>Expand</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </svg>
+</symbol>
+
+  <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+  <title>Document</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+  </svg>
+</symbol>
+
+    <symbol id="svg-search" viewBox="0 0 24 24">
+  <title>Search</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+    <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</symbol>
+
+  
+  
+    <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md -->
+<symbol id="svg-copy" viewBox="0 0 16 16">
+  <title>Copy</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+  </svg>
+</symbol>
+<symbol id="svg-copied" viewBox="0 0 16 16">
+  <title>Copied</title>
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16">
+    <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/>
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/>
+  </svg>
+</symbol>
+
+  
+</svg>
+
+  
+    <div class="side-bar">
+  <div class="site-header" role="banner">
+    <a href="../../index.html" class="site-title lh-tight">
+
+
+  <img src="../../assets/images/bee.webp" style="height: 100%; width: auto; max-height: 2.25rem;" alt="Course Logo">
+  <span style="margin-left: 0.5em; width: 100%">CS 61B FA25</span>
+
+</a>
+    <button id="menu-button" class="site-button btn-reset" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><use xlink:href="#svg-menu"></use></svg>
+    </button>
+  </div>
+
+  <nav aria-label="Main" id="site-nav" class="site-nav">
+  
+  
+    <ul class="nav-list"><li class="nav-list-item"><a href="../../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Policies submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../policies.html" class="nav-list-link">Policies</a><ul class="nav-list"><li class="nav-list-item"><a href="../../policies/exams.html" class="nav-list-link">Exam Policies</a></li><li class="nav-list-item"><a href="../../policies/extensions.html" class="nav-list-link">Extensions Policy</a></li><li class="nav-list-item"><a href="../../policies/cs47b.html" class="nav-list-link">CS 47B</a></li><li class="nav-list-item"><a href="../../policies/academic-misconduct.html" class="nav-list-link">Academic Misconduct</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Resources submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../resources.html" class="nav-list-link">Resources</a><ul class="nav-list"><li class="nav-list-item"><a href="../../resources/assignment-workflow/index.html" class="nav-list-link">61B Assignment Workflow</a></li><li class="nav-list-item"><a href="../../resources/style-guide.html" class="nav-list-link">61B Style Guide</a></li><li class="nav-list-item"><a href="../../resources/exam-archive.html" class="nav-list-link">Exam Archive</a></li><li class="nav-list-item"><a href="../../resources/exam-study-tips/index.html" class="nav-list-link">Exam Study Tips</a></li><li class="nav-list-item"><a href="../../resources/example-tdd.html" class="nav-list-link">Example TDD</a></li><li class="nav-list-item"><a href="../../resources/partnerships.html" class="nav-list-link">Partnership Guide</a></li><li class="nav-list-item"><a href="../../resources/using-ed/index.html" class="nav-list-link">Using Ed</a></li><li class="nav-list-item"><a href="../../resources/using-git.html" class="nav-list-link">Using Git</a></li><li class="nav-list-item"><a href="../../resources/using-intellij/index.html" class="nav-list-link">Using IntelliJ</a></li><li class="nav-list-item"><a href="../../resources/using-oh/index.html" class="nav-list-link">Using Office Hours</a></li><li class="nav-list-item"><a href="../../resources/using-debugger/index.html" class="nav-list-link">Using the Debugger</a></li><li class="nav-list-item"><a href="../../resources/using-soda-lab-machines/index.html" class="nav-list-link">Using the Soda Lab Machines</a></li><li class="nav-list-item"><a href="../../resources/using-terminal.html" class="nav-list-link">Using the Terminal</a></li></ul></li><li class="nav-list-item"><a href="../../staff.html" class="nav-list-link">Staff</a></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Homeworks submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../index.html" class="nav-list-link">Homeworks</a><ul class="nav-list"><li class="nav-list-item"><a href="../hw01.html" class="nav-list-link">HW01: Setup</a></li><li class="nav-list-item"><a href="../hw02.html" class="nav-list-link">HW02: Java Intro</a></li><li class="nav-list-item"><a href="../hw03.html" class="nav-list-link">HW03: Lists, Sets, Maps, Classes</a></li><li class="nav-list-item"><a href="../hw04.html" class="nav-list-link">HW04: IntLists</a></li><li class="nav-list-item"><a href="../hw05.html" class="nav-list-link">HW05: Stacks</a></li><li class="nav-list-item"><a href="../hw06.html" class="nav-list-link">HW06: Debugging</a></li><li class="nav-list-item"><a href="../hw07.html" class="nav-list-link">HW07: Comparables, Comparators</a></li><li class="nav-list-item"><a href="../hw09.html" class="nav-list-link">HW09: BSTMap</a></li><li class="nav-list-item"><a href="../hw10.html" class="nav-list-link">HW10: LLRBs</a></li><li class="nav-list-item"><a href="../hw12.html" class="nav-list-link">HW12: HashMap</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Mini-Projects submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../projects/index.html" class="nav-list-link">Mini-Projects</a><ul class="nav-list"><li class="nav-list-item"><a href="../../projects/proj1.html" class="nav-list-link">Project 1: LinkedListDeque61B</a></li><li class="nav-list-item"><a href="../../projects/proj2.html" class="nav-list-link">Project 2: ArrayDeque61B</a></li><li class="nav-list-item"><a href="../../projects/proj3.html" class="nav-list-link">Project 3: Percolation</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 4 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../proj4/index.html" class="nav-list-link">Project 4</a><ul class="nav-list"><li class="nav-list-item"><a href="../../proj4/proj4a.html" class="nav-list-link">4A: NGrams</a></li><li class="nav-list-item"><a href="../../proj4/proj4b.html" class="nav-list-link">4B: Wordnet (Design)</a></li><li class="nav-list-item"><a href="../../proj4/proj4c.html" class="nav-list-link">4C: Wordnet (k==0)</a></li><li class="nav-list-item"><a href="../../proj4/proj4d.html" class="nav-list-link">4D: Wordnet (k!=0)</a></li><li class="nav-list-item"><a href="../../proj4/proj4-bonus-features/index.html" class="nav-list-link">Above and Beyond</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Project 5 submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../proj5/index.html" class="nav-list-link">Project 5</a><ul class="nav-list"><li class="nav-list-item"><a href="../../proj5/landing/index.html" class="nav-list-link">BYOW: Partnerships and Setup</a></li><li class="nav-list-item"><a href="../../proj5/proj5a.html" class="nav-list-link">5A: BYOW (Design)</a></li><li class="nav-list-item"><a href="../../proj5/proj5b.html" class="nav-list-link">5B: BYOW (World Generation)</a></li><li class="nav-list-item"><a href="../../proj5/proj5c.html" class="nav-list-link">5C: BYOW (Interactivity)</a></li><li class="nav-list-item"><a href="../../proj5/ambition.html" class="nav-list-link">BYOW: Ambition Features</a></li><li class="nav-list-item"><a href="../../proj5/checkoff.html" class="nav-list-link">BYOW: Checkoffs</a></li><li class="nav-list-item"><a href="../../proj5/bugs/index.html" class="nav-list-link">BYOW: Common Bugs</a></li></ul></li><li class="nav-list-item"><button class="nav-list-expander btn-reset" aria-label="Troubleshooting submenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><use xlink:href="#svg-arrow-right"></use></svg>
+      </button><a href="../../troubleshooting/index.html" class="nav-list-link">Troubleshooting</a><ul class="nav-list"><li class="nav-list-item"><a href="../../troubleshooting/git-wtfs.html" class="nav-list-link">Git WTFS</a></li><li class="nav-list-item"><a href="../../troubleshooting/intellij-wtfs.html" class="nav-list-link">IntelliJ WTFS</a></li></ul></li></ul>
+  
+</nav>
+
+
+
+
+  
+  
+    <div class="site-footer">
+	Report an <a href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue">accessibility issue</a>.
+
+	<br><br>
+
+	This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+</div>
+  
+</div>
+
+  
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+  
+    
+
+<div class="search" role="search">
+  <div class="search-input-wrap">
+    <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 61B Fall 2025" autocomplete="off">
+    <label for="search-input" class="search-label">
+      <span class="sr-only">Search CS 61B Fall 2025</span>
+      <svg viewBox="0 0 24 24" class="search-icon" aria-hidden="true"><use xlink:href="#svg-search"></use></svg>
+    </label>
+  </div>
+  <div id="search-results" class="search-results"></div>
+</div>
+
+  
+  
+  
+    <nav aria-label="Auxiliary" class="aux-nav">
+  <ul class="aux-nav-list">
+    
+      <li class="aux-nav-list-item">
+        <a href="../hw04.html#" class="site-button"
+          
+        >
+          Dark Mode
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://edstem.org/us/courses/83254" class="site-button"
+          
+        >
+          Ed
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://cs61b-oh.eecs.berkeley.edu" class="site-button"
+          
+        >
+          OH Queue
+        </a>
+      </li>
+    
+      <li class="aux-nav-list-item">
+        <a href="https://beacon.datastructur.es/" class="site-button"
+          
+        >
+          Beacon
+        </a>
+      </li>
+    
+  </ul>
+</nav>
+
+  
+</div>
+
+    <div class="main-content-wrap">
+      <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-nav-list">
+    <li class="breadcrumb-nav-list-item"><a href="../index.html">Homeworks</a></li>
+    <li class="breadcrumb-nav-list-item"><span>HW04: IntLists</span></li>
+  </ol>
+</nav>
+
+
+      <div id="main-content" class="main-content">
+        <main>
+          
+            <div class="content-container">
+    <nav class="content-nav nav-list js-toc" aria-label="In-page navigation">
+      <ul class="nav-list"><li class="nav-list-item"><a href="../hw04.html#starter-code" class="nav-list-link">Starter Code</a></li><li class="nav-list-item"><a href="../hw04.html#task-1-increment-recursive-nondestructive" class="nav-list-link">Task 1: Increment (Recursive, Nondestructive)</a></li><li class="nav-list-item"><a href="../hw04.html#task-2-increment-recursive-destructive" class="nav-list-link">Task 2: Increment (Recursive, Destructive)</a></li><li class="nav-list-item"><a href="../hw04.html#task-3-increment-iterative-nondestructive" class="nav-list-link">Task 3: Increment (Iterative, Nondestructive)</a></li><li class="nav-list-item"><a href="../hw04.html#task-4-increment-iterative-destructive" class="nav-list-link">Task 4: Increment (Iterative, Destructive)</a></li><li class="nav-list-item"><a href="../hw04.html#task-5-concatenate" class="nav-list-link">Task 5: Concatenate</a></li><li class="nav-list-item"><a href="../hw04.html#introducing-the-debugger" class="nav-list-link">Introducing the Debugger</a></li><li class="nav-list-item"><a href="../hw04.html#task-6-using-the-debugger" class="nav-list-link">Task 6: Using the Debugger</a></li><li class="nav-list-item"><a href="../hw04.html#task-7-conditional-breakpoints" class="nav-list-link">Task 7: Conditional Breakpoints</a></li><li class="nav-list-item"><a href="../hw04.html#optional-exercises" class="nav-list-link">Optional Exercises</a></li><li class="nav-list-item"><a href="../hw04.html#submission" class="nav-list-link">Submission</a></li></ul>
+    </nav>
+  <div class="content">
+<h1 id="homework-4-intlists">
+  
+  
+    <a href="../hw04.html#homework-4-intlists" class="anchor-heading" aria-labelledby="homework-4-intlists"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Homework 4: IntLists
+  
+  
+</h1>
+    
+
+<p><em>Lectures needed for this homework:</em> Lecture 3 (IntLists), or <a href="https://cs61b-2.gitbook.io/cs61b-textbook-fall-2025/3.-references-recursion-and-lists">Chapter 3</a> of the textbook. Also, make sure you finished the setup in Homework 1.</p>
+
+<p>Follow the <a href="../../resources/assignment-workflow/index.html">Assignment Workflow Guide</a> to get started with this assignment. This starter code is in the <code class="language-plaintext highlighter-rouge">hw04</code> folder.</p>
+
+<p>Reminder that you must follow the <a href="../../resources/style-guide.html">style guide</a>, and that you can check style yourself in IntelliJ as many times as you want.</p>
+<h2 id="starter-code">
+  
+  
+    <a href="../hw04.html#starter-code" class="anchor-heading" aria-labelledby="starter-code"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Starter Code
+  
+  
+</h2>
+    
+
+<p>We’ll start from the <code class="language-plaintext highlighter-rouge">IntList</code> implementation from lecture:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">IntList</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">first</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nc">IntList</span> <span class="n">rest</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">IntList</span><span class="o">(</span><span class="kt">int</span> <span class="n">f</span><span class="o">,</span> <span class="nc">IntList</span> <span class="n">r</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="n">f</span><span class="o">;</span>
+        <span class="n">rest</span> <span class="o">=</span> <span class="n">r</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** Return the size of the list using... recursion! */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">rest</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** Return the size of the list using no recursion! */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">iterativeSize</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">IntList</span> <span class="n">p</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">totalSize</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">p</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">totalSize</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">;</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">rest</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">totalSize</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** Returns the ith item of this IntList. */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">first</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">rest</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>In this assignment, you’ll add some extra methods to this class that all increment the list, but in different ways. We’ve provided tests you can run for each of the methods.</p>
+<h2 id="task-1-increment-recursive-nondestructive">
+  
+  
+    <a href="../hw04.html#task-1-increment-recursive-nondestructive" class="anchor-heading" aria-labelledby="task-1-increment-recursive-nondestructive"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 1: Increment (Recursive, Nondestructive)
+  
+  
+</h2>
+    
+
+<p>Fill in the <code class="language-plaintext highlighter-rouge">incrRecursiveNondestructive</code> method in the provided code. Your solution should use recursion.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/**
+     * Returns an IntList identical to L, but with
+     * each element incremented by x. L is not allowed
+     * to change. Must use recursion. 
+     * 
+     * This method is non-destructive, i.e. it must not modify the original list.
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">IntList</span> <span class="nf">incrRecursiveNondestructive</span><span class="o">(</span><span class="nc">IntList</span> <span class="no">L</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// TODO: Fill in this code</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>“Non-destructive” means that if we run:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">IntList</span> <span class="no">L</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IntList</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="no">L</span><span class="o">.</span><span class="na">rest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IntList</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="no">L</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">rest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IntList</span><span class="o">(</span><span class="mi">9</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+
+<span class="nc">IntList</span> <span class="no">M</span> <span class="o">=</span> <span class="n">incrRecursiveNondestructive</span><span class="o">(</span><span class="no">L</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Then <code class="language-plaintext highlighter-rouge">M</code> should be <code class="language-plaintext highlighter-rouge">8 -&gt; 10 -&gt; 12 -&gt; null</code> and <code class="language-plaintext highlighter-rouge">L</code> should remain <code class="language-plaintext highlighter-rouge">5 -&gt; 7 -&gt; 9 -&gt; null</code>.</p>
+<h2 id="task-2-increment-recursive-destructive">
+  
+  
+    <a href="../hw04.html#task-2-increment-recursive-destructive" class="anchor-heading" aria-labelledby="task-2-increment-recursive-destructive"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 2: Increment (Recursive, Destructive)
+  
+  
+</h2>
+    
+
+<p>Next, fill in the <code class="language-plaintext highlighter-rouge">incrRecursiveDestructive</code> method in the provided code.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/**
+     * Returns an IntList identical to L, but with
+     * each element incremented by x. Modifies the original list.
+     * You are not allowed to use "new" in this method.     
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">IntList</span> <span class="nf">incrRecursiveDestructive</span><span class="o">(</span><span class="nc">IntList</span> <span class="no">L</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// TODO: Fill in this code</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>This method should be <strong>destructive</strong> (also called “mutating” or “in-place”), i.e. it modifies the original list. That is, if you run the code below:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">IntList</span> <span class="no">L</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IntList</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="no">L</span><span class="o">.</span><span class="na">rest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IntList</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="no">L</span><span class="o">.</span><span class="na">rest</span><span class="o">.</span><span class="na">rest</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IntList</span><span class="o">(</span><span class="mi">9</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+
+<span class="nc">IntList</span> <span class="no">M</span> <span class="o">=</span> <span class="n">incrRecursiveDestructive</span><span class="o">(</span><span class="no">L</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Then both L and M should be <code class="language-plaintext highlighter-rouge">8 -&gt; 10 -&gt; 12 -&gt; null</code>.</p>
+<h2 id="task-3-increment-iterative-nondestructive">
+  
+  
+    <a href="../hw04.html#task-3-increment-iterative-nondestructive" class="anchor-heading" aria-labelledby="task-3-increment-iterative-nondestructive"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 3: Increment (Iterative, Nondestructive)
+  
+  
+</h2>
+    
+
+<p>Next you’ll write iterative versions of the two methods you just wrote. This method may be more difficult than the other versions. Feel free to do the later tasks and come back to this if you want!</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/**
+     * Returns an IntList identical to L, but with
+     * each element incremented by x. Not allowed
+     * to use recursion. May not modify the original list.
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">IntList</span> <span class="nf">incrIterativeNondestructive</span><span class="o">(</span><span class="nc">IntList</span> <span class="no">L</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// TODO: Fill in this code</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>To pass our autograder checks, you can’t use the recursive <code class="language-plaintext highlighter-rouge">size</code> and <code class="language-plaintext highlighter-rouge">get</code> methods in the iterative methods (Tasks 3 and 4). Our solutions don’t use <code class="language-plaintext highlighter-rouge">size</code> or <code class="language-plaintext highlighter-rouge">get</code> at all, but if you want to use them, consider using <code class="language-plaintext highlighter-rouge">iterativeSize</code> instead, and/or writing your own <code class="language-plaintext highlighter-rouge">iterativeGet</code> method instead.</p>
+<h2 id="task-4-increment-iterative-destructive">
+  
+  
+    <a href="../hw04.html#task-4-increment-iterative-destructive" class="anchor-heading" aria-labelledby="task-4-increment-iterative-destructive"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 4: Increment (Iterative, Destructive)
+  
+  
+</h2>
+    
+
+<p>Next, fill in <code class="language-plaintext highlighter-rouge">incrIterativeDestructive</code>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/**
+     * Returns an IntList identical to L, but with
+     * each element incremented by x. Not allowed
+     * to use recursion. Modifies the original list.
+     * You are not allowed to use "new" in this method.
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">IntList</span> <span class="nf">incrIterativeDestructive</span><span class="o">(</span><span class="nc">IntList</span> <span class="no">L</span><span class="o">,</span> <span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// TODO: Fill in this code</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+<h2 id="task-5-concatenate">
+  
+  
+    <a href="../hw04.html#task-5-concatenate" class="anchor-heading" aria-labelledby="task-5-concatenate"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 5: Concatenate
+  
+  
+</h2>
+    
+
+<p>Lastly, implement the <code class="language-plaintext highlighter-rouge">concatenate</code> method.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/**
+     * Returns an IntList consisting of the elements of L1 followed by the
+     * elements of L2. 
+     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="nc">IntList</span> <span class="nf">concatenate</span><span class="o">(</span><span class="nc">IntList</span> <span class="no">L1</span><span class="o">,</span> <span class="nc">IntList</span> <span class="no">L2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// TODO: Fill in this code</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>You may write this method using recursion or iteration. Your method may be either destructive or non-destructive.</p>
+<h2 id="introducing-the-debugger">
+  
+  
+    <a href="../hw04.html#introducing-the-debugger" class="anchor-heading" aria-labelledby="introducing-the-debugger"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Introducing the Debugger
+  
+  
+</h2>
+    
+
+<p><strong>Why use the debugger?</strong></p>
+
+<p>In previous classes, you might have used <em>print debugging</em> to debug: adding print statements to see the values of certain variables as a program runs. While print debugging can be very useful, it has a few disadvantages:</p>
+
+<ul>
+  <li>It requires you to modify your code, and clean it up after.</li>
+  <li>It’s tedious to decide and write out exactly what you want to print.
+Printing isn’t always formatted nicely.</li>
+</ul>
+
+<p>In this lab, we’ll show you a new technique, interactive debugging – debugging by using an interactive tool, or a <em>debugger</em>. We’ll focus on IntelliJ’s built-in debugger.</p>
+
+<p><strong>Breakpoints</strong></p>
+
+<p>Before starting the IntelliJ debugger, you should set a few <em>breakpoints</em>. Breakpoints mark places in your code where you can pause the program and see the values of all the variables. This:</p>
+
+<ul>
+  <li>Doesn’t require you to modify your code or clean it up after, since breakpoints are ignored in normal execution.</li>
+  <li>Lets you see all the variables without needing to write print statements.</li>
+  <li>Lets IntelliJ display everything in a structured manner.</li>
+</ul>
+
+<p>To set a breakpoint, click the area just to the right of the line number.</p>
+
+<p><img src="../../assets/homeworks/hw04/1-code-breakpoints.webp" alt="code breakpoints" style="max-height: 500px;" /></p>
+
+<p><strong>Interactive debugging</strong></p>
+
+<p>After setting breakpoints, we can start a debugging session! Click on the green triangle next to the class or test you want to debug (in test files there may be two green triangles). Instead of clicking the green triangle to run, click the <img src="../../assets/homeworks/hw04/debug.webp" alt="debug" class="inline" /> debug option:</p>
+
+<p><img src="../../assets/homeworks/hw04/2-run-debugger.webp" alt="run debugger" style="max-height: 500px;" /></p>
+
+<p>The program will now run until it hits its first breakpoint. A debugger window should also appear on the bottom of the interface, where the console was.</p>
+
+<p><img src="../../assets/homeworks/hw04/3-debugging-session.webp" alt="debugger session" style="max-height: 500px;" /></p>
+
+<p>On the left, you will be able to see all current method calls and on the right, you will be able to see the values of instantiated variables at this point in the program (they will also be shown in gray text in the editor). For instances of classes, you can click the dropdown to expand them and look at their fields.</p>
+
+<p>In the debugger, you have a few options:</p>
+
+<ul>
+  <li>Learn something from the displayed values, identify what’s wrong, and fix your bug! Click <img src="../../assets/homeworks/hw04/stop.webp" alt="stop" class="inline" /> to stop the debug session.</li>
+  <li>Click <img src="../../assets/homeworks/hw04/resume.webp" alt="resume" class="inline" /> to resume the program (until it hits another breakpoint or terminates).</li>
+  <li>Click <img src="../../assets/homeworks/hw04/step-over.webp" alt="step over" class="inline" /> to advance the program by one line of code.
+    <ul>
+      <li><img src="../../assets/homeworks/hw04/step-into.webp" alt="step into" class="inline" /> does something similar, but it will step into any method called in the current line, while <img src="../../assets/homeworks/hw04/step-over.webp" alt="step over" class="inline" /> will step over it.</li>
+      <li><img src="../../assets/homeworks/hw04/step-out.webp" alt="step out" class="inline" /> will advance the program until after it returns from the current method.</li>
+    </ul>
+  </li>
+  <li>If you accidentally step too far and want to start the session over, click <img src="../../assets/homeworks/hw04/rerun.webp" alt="rerun" class="inline" /> (at least right now, there isn’t a good way to directly step back).</li>
+</ul>
+<h2 id="task-6-using-the-debugger">
+  
+  
+    <a href="../hw04.html#task-6-using-the-debugger" class="anchor-heading" aria-labelledby="task-6-using-the-debugger"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 6: Using the Debugger
+  
+  
+</h2>
+    
+
+<p>In <code class="language-plaintext highlighter-rouge">IntListMystery.java</code>, the <code class="language-plaintext highlighter-rouge">mystery</code> function creates an IntList and adds some mystery numbers to it. (You don’t have to understand the code in <code class="language-plaintext highlighter-rouge">mystery</code>.)</p>
+
+<p>Set a breakpoint in the <code class="language-plaintext highlighter-rouge">mystery</code> function. Then, start the debugger, so that the program runs until the first time it reaches your breakpoint. From the debugger, can you figure out the first number added to the IntList?</p>
+
+<p>If you’d like to view a box-and-pointer diagram in the debugger, click “Java Visualizer” in the debugger:</p>
+
+<p><img src="../../assets/homeworks/hw04/4-java-visualizer-debug.webp" alt="Java Visualizer Tab" style="max-height: 500px;" /></p>
+
+<p><strong>Your task:</strong> Use the debugger buttons (described above) to figure out the first 5 numbers added to the mystery IntList. Then, write the numbers in the <code class="language-plaintext highlighter-rouge">firstFiveNumbers</code> method.</p>
+<h2 id="task-7-conditional-breakpoints">
+  
+  
+    <a href="../hw04.html#task-7-conditional-breakpoints" class="anchor-heading" aria-labelledby="task-7-conditional-breakpoints"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Task 7: Conditional Breakpoints
+  
+  
+</h2>
+    
+
+<p>Consider a program that loops 5000 times. Trying to step through each time to find the error wouldn’t be too efficient. Instead, you would want your program to pause on a specific iteration, such as the last one.</p>
+
+<p>In other words, you would want your program to pause on certain conditions. To do so, create a breakpoint at the line of interest and open the “Edit breakpoint” menu by right-clicking the breakpoint icon itself. There, you can enter a boolean condition such that the program will only pause at this breakpoint if the condition is true. It will look something like this:</p>
+
+<p><img src="../../assets/homeworks/hw04/5-conditional-breakpoint.webp" alt="Conditional Breakpoint" style="max-height: 500px;" /></p>
+
+<p><strong>Your task:</strong> Use a conditional breakpoint to figure out the 500th number added to the mystery IntList. Then, write the number in the <code class="language-plaintext highlighter-rouge">middleNumber</code> method.</p>
+
+<p>Hint: The list should have 499 elements just before adding this number, and 500 elements just after adding this number. You can the debugger has an “Evaluate Expression” tool that you can use to type a line of code and see the result. For example, you could type <code class="language-plaintext highlighter-rouge">L.iterativeSize()</code> in the box to see the current size of the IntList!</p>
+
+<p><img src="../../assets/homeworks/hw04/6-expression-box.webp" alt="Expression Box" style="max-height: 500px;" /></p>
+<h2 id="optional-exercises">
+  
+  
+    <a href="../hw04.html#optional-exercises" class="anchor-heading" aria-labelledby="optional-exercises"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Optional Exercises
+  
+  
+</h2>
+    
+
+<p>Discuss with others: Which IntList implementations felt the most natural? What made some of them harder than others?</p>
+
+<p>If you want more practice, we’ve provided a few additional optional methods that you can implement in the IntList class: <code class="language-plaintext highlighter-rouge">sum()</code>, <code class="language-plaintext highlighter-rouge">addLast(int x)</code>, and <code class="language-plaintext highlighter-rouge">addFirst(int x)</code>. These methods are described in the source code.</p>
+<h2 id="submission">
+  
+  
+    <a href="../hw04.html#submission" class="anchor-heading" aria-labelledby="submission"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Submission
+  
+  
+</h2>
+    
+
+<p>Graded files that you need to modify:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">IntList.java</code></li>
+  <li><code class="language-plaintext highlighter-rouge">IntListMystery.java</code></li>
+</ul>
+
+<p>You must follow the <a href="../../resources/style-guide.html">style guide</a> for <code class="language-plaintext highlighter-rouge">IntList.java</code>. (The style checker is turned off for <code class="language-plaintext highlighter-rouge">IntListMystery.java</code>.) You can check style yourself in IntelliJ as many times as you want.</p>
+
+<p>Follow the <a href="../../resources/assignment-workflow/index.html#submitting-to-gradescope">Assignment Workflow Guide</a> to submit. You can submit as many times as you want. The score you see on Gradescope is your final score for this homework.</p>
+
+  </div>
+</div>
+
+          
+
+          
+            
+          
+        </main>
+        
+
+  <hr>
+  <footer>
+    
+
+    
+
+
+
+
+
+
+
+
+
+<script>
+  (function () {
+    var navList = document.querySelector('.aux-nav-list');
+    if (!navList || !navList.firstElementChild) return;
+    var darkToggle = navList.firstElementChild;
+    darkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleDark();
+    });
+  })();
+</script>
+
+<script src="../../assets/js/tocbot.min.js"></script>
+<script>
+  // Tries to mirror the HTML TOC
+  tocbot.init({
+    tocSelector: '.js-toc',
+    contentSelector: '.content',
+    headingSelector: 'h2,h3,h4,h5,h6',
+    ignoreSelector: '.no_toc',
+    hasInnerContainers: true,
+    linkClass: 'nav-list-link',
+    activeLinkClass: 'active',
+    listClass: 'nav-list',
+    listItemClass: 'nav-list-item',
+    activeListItemClass: 'active',
+    collapseDepth: 3,
+    scrollSmooth: false,
+  });
+</script>
+
+
+    
+  </footer>
+
+
+      </div>
+    </div>
+    
+      
+
+<div class="search-overlay"></div>
+
+    
+  </div>
+
+  
+</body>
+</html>
+
